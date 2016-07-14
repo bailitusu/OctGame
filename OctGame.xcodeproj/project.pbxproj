@@ -118,6 +118,7 @@
 		18B62C931D30F89600C49EA3 /* BoomSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B62C921D30F89600C49EA3 /* BoomSystem.swift */; };
 		18BA0D3F1D1B9D6600B0272A /* flash.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BA0D3E1D1B9D6600B0272A /* flash.png */; };
 		18BA0D411D1BB50F00B0272A /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA0D401D1BB50F00B0272A /* Setting.swift */; };
+		18D810E31D37535F00551B00 /* GuanChuanHarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D810E21D37535F00551B00 /* GuanChuanHarm.swift */; };
 		18E7AC101D17B2740040B3B9 /* citie.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 18E7AC0F1D17B2740040B3B9 /* citie.atlas */; };
 		18E7AC141D17BACA0040B3B9 /* wudi.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 18E7AC131D17BACA0040B3B9 /* wudi.atlas */; };
 		18F5B6C61D21580700D28F1F /* Cooldown.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F5B6C51D21580700D28F1F /* Cooldown.png */; };
@@ -358,6 +359,7 @@
 		18B62C921D30F89600C49EA3 /* BoomSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoomSystem.swift; sourceTree = "<group>"; };
 		18BA0D3E1D1B9D6600B0272A /* flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash.png; sourceTree = "<group>"; };
 		18BA0D401D1BB50F00B0272A /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		18D810E21D37535F00551B00 /* GuanChuanHarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuanChuanHarm.swift; sourceTree = "<group>"; };
 		18E7AC0F1D17B2740040B3B9 /* citie.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = citie.atlas; sourceTree = "<group>"; };
 		18E7AC131D17BACA0040B3B9 /* wudi.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = wudi.atlas; sourceTree = "<group>"; };
 		18F5B6C51D21580700D28F1F /* Cooldown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cooldown.png; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 				18070EF71D3651C300A206DF /* SinglePointHarm.swift */,
 				180796D51D2F8A5B0018CABC /* HengPaiHarm.swift */,
 				180796D71D2F999D0018CABC /* HarmObj.swift */,
+				18D810E21D37535F00551B00 /* GuanChuanHarm.swift */,
 			);
 			path = HarmArea;
 			sourceTree = "<group>";
@@ -931,6 +934,7 @@
 				1871DAB51D263C8F002B6479 /* FightScene.swift in Sources */,
 				180262B21D0FC8CA00949B15 /* MovementComponent.swift in Sources */,
 				18BA0D411D1BB50F00B0272A /* Setting.swift in Sources */,
+				18D810E31D37535F00551B00 /* GuanChuanHarm.swift in Sources */,
 				180262C91D11847200949B15 /* FenshenComponent.swift in Sources */,
 				18685DC81D0AD0DE00BCAE10 /* BeginScene.swift in Sources */,
 				1871DACF1D27ABF8002B6479 /* Fire.swift in Sources */,

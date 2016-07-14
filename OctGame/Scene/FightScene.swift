@@ -87,7 +87,7 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: #selector(ballFollowPlayer), name: "playerMove", object: fightPlayer)
         
-      //  NSTimer.scheduledTimerWithTimeInterval(7, target: self, selector: #selector(createBall), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(7, target: self, selector: #selector(createBall), userInfo: nil, repeats: true)
     }
     
     func configBitMask() {

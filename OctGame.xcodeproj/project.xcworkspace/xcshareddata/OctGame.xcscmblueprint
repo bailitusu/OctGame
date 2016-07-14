@@ -1,30 +1,30 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "51003D5609377E9EC006F987FC1260B89F820203",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "BD085C5B84A21DB4B65ACE242C17779BDF896712",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "7BAC67294CE7398ED80DE3C8B17ADA03B85D9FF0" : 0,
-    "51003D5609377E9EC006F987FC1260B89F820203" : 0
+    "BD085C5B84A21DB4B65ACE242C17779BDF896712" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3F98330D-0E61-44A1-978C-0716E4763938",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "7BAC67294CE7398ED80DE3C8B17ADA03B85D9FF0" : "",
-    "51003D5609377E9EC006F987FC1260B89F820203" : "OctGame\/"
+    "BD085C5B84A21DB4B65ACE242C17779BDF896712" : "OctGame\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "OctGame",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "OctGame.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/bailitusu\/OctGame.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "51003D5609377E9EC006F987FC1260B89F820203"
-    },
-    {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/bailitusu\/Pao.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7BAC67294CE7398ED80DE3C8B17ADA03B85D9FF0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/bailitusu\/OctGame.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BD085C5B84A21DB4B65ACE242C17779BDF896712"
     }
   ]
 }
