@@ -13,7 +13,7 @@ import SpriteKit
 class HarmArea {
     var harmcellArray: NSMutableArray?
     
-    func runHarmArea(toHarmPlayer: FightPlayer, originalConterPoint: CGPoint) {
+    func runHarmArea(toHarmPlayer: FightPlayer, originalConterPoint: CGPoint, hitValue: Int) {
         
     }
     

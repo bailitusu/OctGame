@@ -40,14 +40,22 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
         fightPlayer.fightMap = FightMap()
         fightPlayer.fightMap.initMap(5, verticalNum: 4, oneSize: fightMapCellSize, scene: self, originalPointY: screenSize.height*0.299, isEnemy: false)
         fightPlayer.sprite.position = fightPlayer.fightMap.mapArray.objectAtIndex(10).position
+        (fightPlayer.fightMap.mapArray.objectAtIndex(10) as! FTMapCell).obj = fightPlayer
         fightPlayer.configureSkill = ConfigureSkill(scene: self, player: fightPlayer)
         fightPlayer.initConfigureSkillBall()
+        
+        fightPlayer.playerStateUI = FTPlayerStateUI(player: fightPlayer, scene: self)
+        fightPlayer.playerStateUI.hpLabel.position = CGPoint(x: screenSize.width-screenSize.width*0.146, y: screenSize.height*0.359)
         
         fightEnemy = FightPlayer(roleName: "fightEnemy")
         addEntity(fightEnemy)
         fightEnemy.fightMap = FightMap()
         fightEnemy.fightMap.initMap(5, verticalNum: 4, oneSize: fightMapCellSize, scene: self, originalPointY: screenSize.height-screenSize.height*0.299, isEnemy: true)
         fightEnemy.sprite.position = fightEnemy.fightMap.mapArray.objectAtIndex(10).position
+        (fightEnemy.fightMap.mapArray.objectAtIndex(10) as! FTMapCell).obj = fightEnemy
+        
+        fightEnemy.playerStateUI = FTPlayerStateUI(player: fightEnemy, scene: self)
+        fightEnemy.playerStateUI.hpLabel.position = CGPoint(x: screenSize.width*0.146 , y: screenSize.height-screenSize.height*0.375)
         
         fightPlayer.enemy = fightEnemy
         fightEnemy.enemy = fightPlayer
@@ -93,6 +101,7 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
     func configBitMask() {
         self.physicsBody?.categoryBitMask = BitMaskType.background
         self.physicsBody?.restitution = 1
+        self.physicsBody?.friction = 0
         fightPlayer.physicsBody?.categoryBitMask = BitMaskType.fightSelf
         fightPlayer.physicsBody?.collisionBitMask = BitMaskType.fire
         fightPlayer.physicsBody?.contactTestBitMask = BitMaskType.fire

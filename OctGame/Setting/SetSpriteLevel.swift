@@ -16,4 +16,5 @@ enum SpriteLevel : CGFloat {
     case prop = 200
     case dawuyun = 500
     case fightBall = 150
+    case fightStateUI = 300
 }

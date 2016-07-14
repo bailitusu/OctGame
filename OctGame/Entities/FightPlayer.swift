@@ -14,9 +14,9 @@ enum SkillName: String {
     case fire = "fire"
     case boom = "boom"
 }
-class FightPlayer: Entity {
+class FightPlayer: Entity, FTCellStandAbleDelegate {
     var delegate: OnlineGameConvertable?
-   // var fireSys: FireSystem!
+    var playerStateUI: FTPlayerStateUI!
     var roleName: String!
     var fightMap: FightMap!
     var enemy: FightPlayer!
@@ -25,11 +25,12 @@ class FightPlayer: Entity {
   //  var  yidong: Bool!
     var configureSkill: ConfigureSkill!
     
+    var HP: Int!
     var configCurrentBallArray = [Ball]()
     var mapCellIndex: Int! = 4 {
         didSet {
   
-        self.moveToCell(self.fightMap.mapArray.objectAtIndex(self.mapCellIndex) as! SKSpriteNode)
+        self.moveToCell(self.fightMap.mapArray.objectAtIndex(self.mapCellIndex) as! FTMapCell)
             
         }
     }
@@ -67,12 +68,14 @@ class FightPlayer: Entity {
         sprite.physicsBody?.dynamic = false
         self.addComponent(SpriteComponent(sprite: sprite))
         self.roleName = roleName
-
+        self.HP = 10
      
         
         self.initSkillSystemArray(FireSystem())
-        self.skillSystemForClass(FireSystem.self)?.addHarmArea(HengPaiHarm())
+       // self.skillSystemForClass(FireSystem.self)?.addHarmArea(HengPaiHarm())
+        self.skillSystemForClass(FireSystem.self)?.addHarmArea(SinglePointHarm())
         self.initSkillSystemArray(BoomSystem())
+        self.skillSystemForClass(BoomSystem.self)?.addHarmArea(SinglePointHarm())
     
        // self.yidong = false
     }
@@ -103,19 +106,20 @@ class FightPlayer: Entity {
         return nil
     }
     
-    func moveToCell(locationSprite: SKSpriteNode) {
+    func moveToCell(locationSprite: FTMapCell) {
         if abs(locationSprite.position.x - self.sprite.position.x) < locationSprite.size.width+1 && abs(locationSprite.position.y - self.sprite.position.y) < locationSprite.size.height+1 {
+            
+            let beforePlayerStandCell = self.fightMap.mapArray.objectAtIndex(self.fightMap.getCurrentPointMapCell(self.sprite.position)!) as! FTMapCell
+            beforePlayerStandCell.obj = nil
+            
+            locationSprite.obj = self
             let nc = NSNotificationCenter.defaultCenter()
             nc.postNotificationName("playerMove", object: self, userInfo: ["moveToMapCell" : locationSprite])
             let move = SKAction.moveTo(locationSprite.position, duration: 0.3)
-            let block = SKAction.runBlock({ 
-//                self.yidong = false
-//                let formatter = NSDateFormatter()
-//                formatter.dateFormat = "yyy-MM-dd HH:mm:ss:SSS"
-//                let date = formatter.stringFromDate(NSDate())
-//                print("yidong finish \(date)")
-            })
-            self.sprite.runAction(SKAction.sequence([move, block]))
+//            let block = SKAction.runBlock({ 
+//                locationSprite.obj = self
+//            })
+            self.sprite.runAction(SKAction.sequence([move]))
 //            self.yidong = true
 //            let formatter = NSDateFormatter()
 //            formatter.dateFormat = "yyy-MM-dd HH:mm:ss:SSS"
@@ -170,6 +174,11 @@ class FightPlayer: Entity {
         
     }
     
+    func didBeHit(hitValue: Int) {
+        self.HP = self.HP - hitValue
+        self.playerStateUI.changeHpUI(self.HP)
+        print(self.HP)
+    }
 //    func runCurrentSkill<skillSystem: SkillSystem>(skillSystemClass:skillSystem.Type, speed: CGVector) {
 //        let system =  self.skillSystemForClass(skillSystemClass)
 //        system?.throwSkill(speed)
@@ -189,17 +198,13 @@ class FightPlayer: Entity {
     
 }
 
-extension Entity {
-
-}
-
 
 class MyDaili: OnlineGameConvertable {
     func sendMeg() {
         print("")
     }
 }
-
+//var tempBoom : Boom!
 extension FightPlayer: OnlineGameObjectType {
     
     func toDictionary() -> JSON {
@@ -271,7 +276,20 @@ extension FightPlayer: OnlineGameObjectType {
             let percentY = CGFloat(json["percentY"].floatValue)
             
             self.skillSystemForClass(BoomSystem.self)?.currentBoom.position = SkillSystem.reversalPoint(percentX, percentY: percentY)
-            self.skillSystemForClass(BoomSystem.self)?.bogusBoomRun()
+            self.skillSystemForClass(BoomSystem.self)?.currentBoom.isControl = false
+            self.skillSystemForClass(BoomSystem.self)?.currentBoom.physicsBody?.dynamic = true
+            let tempBoom = (self.skillSystemForClass(BoomSystem.self)?.currentBoom)!
+            print("set--\(self.skillSystemForClass(BoomSystem.self)?.currentBoom.BoomID)")
+            self.skillSystemForClass(BoomSystem.self)?.bogusBoomRun({
+                let wait = SKAction.waitForDuration(7)
+                let appear = SKAction.fadeAlphaTo(1, duration: 0.3)
+                let block = SKAction.runBlock({
+                   print("chuxian-----\(tempBoom.BoomID)")
+                })
+                tempBoom.runAction(SKAction.sequence([wait,appear,block]))
+//                
+            })
+            
             //  self.runCurrentSkill(FireSystem.self, speed: )
         }
     }

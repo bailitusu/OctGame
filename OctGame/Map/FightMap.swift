@@ -10,22 +10,21 @@ import UIKit
 import SpriteKit
 
 class FightMap: NSObject{
-    var oneSpriteRect: SKSpriteNode!
+    var oneSpriteRect: FTMapCell!
     var mapArray: NSMutableArray!
     override init() {
         super.init()
         mapArray = NSMutableArray()
     }
     func initFirstSpriteRect(horizontalNum: Int, size: CGSize,originalPointY: CGFloat) {
-        oneSpriteRect = SKSpriteNode(imageNamed: "fangkuai.png")
-        oneSpriteRect.size = size
+        oneSpriteRect = FTMapCell(imageName: "fangkuai.png", size: size)
         oneSpriteRect.position = CGPoint(x: (screenSize.width-oneSpriteRect.size.width * CGFloat(horizontalNum))/2+oneSpriteRect.size.width/2, y: originalPointY)
         
        // return oneSpriteRect
     }
 
     func createOneSpriteRect(size: CGSize) -> SKSpriteNode {
-        let one = SKSpriteNode(imageNamed: "fangkuai.png")
+        let one = FTMapCell(imageName: "fangkuai.png", size: size)
         one.size = size
         return one
     }
@@ -33,7 +32,7 @@ class FightMap: NSObject{
     func getCurrentPointMapCell(currentPoint: CGPoint)->Int? {
         
         for i in 0 ..< mapArray.count {
-            if CGRectContainsPoint((mapArray[i] as! SKSpriteNode).frame, currentPoint) {
+            if CGRectContainsPoint((mapArray[i] as! FTMapCell).frame, currentPoint) {
                 return i
             }
         }

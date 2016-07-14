@@ -15,6 +15,7 @@ class BoomSystem: SkillSystem {
     var currentBoom: Boom!
     var boomID: UInt32!
     var defaluePosition: CGPoint?
+    var hitValue: Int = 3
 //    var bogusBoom: SKSpriteNode!
     override init() {
         super.init()
@@ -45,12 +46,14 @@ class BoomSystem: SkillSystem {
     }
     
     func setBoom() {
-        let xiaoshi = SKAction.fadeAlphaTo(0, duration: 0.4)
+        let xiaoshi = SKAction.fadeAlphaTo(0.3, duration: 0.4)
         let block = SKAction.runBlock { 
-            self.bogusBoomRun()
+            self.bogusBoomRun({ 
+                
+            })
         }
         self.currentBoom.runAction(SKAction.sequence([xiaoshi,block]))
-        print("set boom")
+       // print("set boom")
         
         for temp in self.boomArray {
             if (temp as! Boom).isControl == true {
@@ -59,7 +62,7 @@ class BoomSystem: SkillSystem {
         }
         
     }
-    func bogusBoomRun() {
+    func bogusBoomRun(finish: ()->()) {
         let bogusBoom = SKSpriteNode(imageNamed: "boom.png")
         bogusBoom.size = SkillSize.dilei
         bogusBoom.position = defaluePosition!
@@ -91,6 +94,7 @@ class BoomSystem: SkillSystem {
         let block = SKAction.runBlock {
 //            print("yichu-----jiadilei")
             bogusBoom.removeFromParent()
+            finish()
         }
         bogusBoom.runAction(SKAction.sequence([follow,block]))
     }
@@ -111,7 +115,8 @@ class BoomSystem: SkillSystem {
         self.touchPointArray.removeAllObjects()
         if self.currentBoom != nil {
             if self.currentBoom.isControl == true {
-                if CGRectContainsPoint(self.currentBoom.frame, touchLocation!) {
+                 let rect = CGRect(origin: CGPoint(x: self.currentBoom.position.x-SkillSize.dilei.width, y: self.currentBoom.position.y-SkillSize.dilei.height), size: CGSize(width: self.currentBoom.frame.width*2, height: self.currentBoom.frame.height*2))
+                if CGRectContainsPoint(rect, touchLocation!) {
                     self.touchPointArray.addObject(NSValue.init(CGPoint: touchLocation!))
  
                 }
@@ -150,6 +155,7 @@ class BoomSystem: SkillSystem {
                 self.currentBoom.boomOnMapCellIndex = boomMapCellNum
                 self.currentBoom.isControl = false
                 self.setBoom()
+                self.currentBoom.physicsBody?.dynamic = true
                 var dict = Dictionary<String, AnyObject>()
                 dict.updateValue(SkillName.boom.rawValue, forKey: "initSkill")
                 let percentX = self.currentBoom.position.x / screenSize.width
@@ -161,12 +167,18 @@ class BoomSystem: SkillSystem {
                 self.currentBoom.position = defaluePosition!
             }
         }
-        print("move end")
+      //  print("move end")
 
     }
     
     func newRectWithObj(size:CGSize,point:CGPoint)->CGRect {
         return CGRectMake(point.x-size.width/2,point.y-size.height/2,size.width,size.height);
+    }
+    
+    override func reckonHarmArea(toHarmPlayer: FightPlayer, originalConterPoint: CGPoint) {
+        for temp in self.harmAreas {
+            temp.runHarmArea(toHarmPlayer, originalConterPoint: originalConterPoint, hitValue: self.hitValue)
+        }
     }
     
     override func didContact(contact: SKPhysicsContact) {
@@ -178,14 +190,21 @@ class BoomSystem: SkillSystem {
                 let boom = nodeA.node as! Boom
                 if nodeB.categoryBitMask == BitMaskType.fightEnemy {
                     if boom.entityName == "fightPlayer" {
-                        boom.isRemove = true
+                        if boom.isControl == false {
+                            boom.isRemove = true
+                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: boom.position)
+                        }
+
                     }
                 }
             }else if nodeB.categoryBitMask == BitMaskType.boom {
                 let boom = nodeB.node as! Boom
                 if nodeA.categoryBitMask == BitMaskType.fightEnemy {
                     if boom.entityName == "fightPlayer" {
-                        boom.isRemove = true
+                        if boom.isControl == false {
+                            boom.isRemove = true
+                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: boom.position)
+                        }
                     }
                 }
             }
@@ -194,14 +213,20 @@ class BoomSystem: SkillSystem {
                 let boom = nodeA.node as! Boom
                 if nodeB.categoryBitMask == BitMaskType.fightSelf {
                     if boom.entityName == "fightEnemy" {
-                        boom.isRemove = true
+                        if boom.isControl == false {
+                            boom.isRemove = true
+                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: boom.position)
+                        }
                     }
                 }
             }else if nodeB.categoryBitMask == BitMaskType.boom {
                 let boom = nodeB.node as! Boom
                 if nodeA.categoryBitMask == BitMaskType.fightSelf {
                     if boom.entityName == "fightEnemy" {
-                        boom.isRemove = true
+                        if boom.isControl == false {
+                            boom.isRemove = true
+                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: boom.position)
+                        }
                     }
                 }
             }

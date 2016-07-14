@@ -15,6 +15,7 @@ class FireSystem: SkillSystem {
     var huoqiuArray: NSMutableArray!
     var currentHuoqiu: Fire!
     var fireId: UInt32!
+    var hitValue: Int = 1
     
     override init() {
         super.init()
@@ -108,7 +109,7 @@ class FireSystem: SkillSystem {
     
     override func reckonHarmArea(toHarmPlayer: FightPlayer, originalConterPoint: CGPoint) {
         for temp in self.harmAreas {
-            temp.runHarmArea(toHarmPlayer, originalConterPoint: originalConterPoint)
+            temp.runHarmArea(toHarmPlayer, originalConterPoint: originalConterPoint, hitValue: self.hitValue)
         }
 
     }

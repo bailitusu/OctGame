@@ -10,7 +10,8 @@ import SpriteKit
 import UIKit
 
 class SinglePointHarm: HarmArea {
-    override init() {
-        super.init()
+    
+    override func runHarmArea(toHarmPlayer: FightPlayer, originalConterPoint: CGPoint, hitValue: Int) {
+         (toHarmPlayer.fightMap.mapArray.objectAtIndex(toHarmPlayer.fightMap.getCurrentPointMapCell(originalConterPoint)!) as! FTMapCell).obj?.didBeHit(hitValue)
     }
 }

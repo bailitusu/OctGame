@@ -14,13 +14,14 @@ class HengPaiHarm: HarmArea {
     
     override init() {
         super.init()
-        self.harmcellArray = NSMutableArray()
+       // self.harmcellArray = NSMutableArray()
     }
     override func initHarmArea() {
         
     }
     
-    override func runHarmArea(toHarmPlayer: FightPlayer, originalConterPoint: CGPoint) {
+    override func runHarmArea(toHarmPlayer: FightPlayer, originalConterPoint: CGPoint, hitValue: Int) {
+       // self.harmcellArray?.removeAllObjects()
         var tempPoint:CGPoint
         for i in 0 ..< harmCellCount {
 
@@ -30,11 +31,12 @@ class HengPaiHarm: HarmArea {
                 tempPoint = CGPoint(x: originalConterPoint.x + fightMapCellSize.width * CGFloat((i-harmCellCount/2)), y: originalConterPoint.y)
             }
             if toHarmPlayer.fightMap.getCurrentPointMapCell(tempPoint) != nil {
-                let harmObj = HarmObj()
-                harmObj.harmCellIndex = toHarmPlayer.fightMap.getCurrentPointMapCell(tempPoint)
-                harmObj.harmValue = 5
-                self.harmcellArray?.addObject(harmObj)
-                print("\(toHarmPlayer.roleName)--------\(harmObj.harmCellIndex)")
+//                let harmObj = HarmObj()
+//                harmObj.harmCellIndex = toHarmPlayer.fightMap.getCurrentPointMapCell(tempPoint)
+//                harmObj.harmValue = hitValue
+//                self.harmcellArray?.addObject(harmObj)
+//                print("\(toHarmPlayer.roleName)--------\(harmObj.harmCellIndex)")
+                (toHarmPlayer.fightMap.mapArray.objectAtIndex(toHarmPlayer.fightMap.getCurrentPointMapCell(tempPoint)!) as! FTMapCell).obj?.didBeHit(hitValue)
             }
         }
         

@@ -30,6 +30,7 @@ class Boom: SKSpriteNode {
         self.physicsBody?.contactTestBitMask = collsionBitMask
         self.physicsBody?.linearDamping = 0
         self.physicsBody?.usesPreciseCollisionDetection = true
+        self.physicsBody?.dynamic = false
         self.zPosition = SpriteLevel.sprite.rawValue+1
         self.BoomID = BoomID
         self.isControl = true

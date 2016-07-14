@@ -20,8 +20,8 @@ class GameFightVC: UIViewController {
         skView = self.view as! SKView
         skView.showsFPS = true
        // skView.ignoresSiblingOrder = true
-                skView.showsPhysics = true
-        //        skView.showsNodeCount = true
+       // skView.showsPhysics = true
+        //skView.showsNodeCount = true
         scene.scaleMode = .AspectFill
         scene.size = skView.frame.size
         skView.presentScene(scene)

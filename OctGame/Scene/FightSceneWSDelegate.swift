@@ -34,7 +34,7 @@ class FightSceneWSDelegate: WebSocketDelegate{
     }
     
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-        print(text)
+     //   print(text)
   
         guard let msg = BTMessage(from: text) else {
             print("websocketDidReceiveMessage ERROR \(text)")
