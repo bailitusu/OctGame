@@ -279,18 +279,18 @@ extension FightPlayer: OnlineGameObjectType {
             self.skillSystemForClass(BoomSystem.self)?.currentBoom.isControl = false
             self.skillSystemForClass(BoomSystem.self)?.currentBoom.physicsBody?.dynamic = true
             let tempBoom = (self.skillSystemForClass(BoomSystem.self)?.currentBoom)!
-            print("set--\(self.skillSystemForClass(BoomSystem.self)?.currentBoom.BoomID)")
+          //  print("set--\(self.skillSystemForClass(BoomSystem.self)?.currentBoom.BoomID)")
             self.skillSystemForClass(BoomSystem.self)?.bogusBoomRun({
                 let wait = SKAction.waitForDuration(7)
                 let appear = SKAction.fadeAlphaTo(1, duration: 0.3)
                 let block = SKAction.runBlock({
-                   print("chuxian-----\(tempBoom.BoomID)")
+          //         print("chuxian-----\(tempBoom.BoomID)")
                 })
                 tempBoom.runAction(SKAction.sequence([wait,appear,block]))
 //                
             })
             
-            //  self.runCurrentSkill(FireSystem.self, speed: )
+            
         }
     }
 //    func moveToCell(index: Int) {

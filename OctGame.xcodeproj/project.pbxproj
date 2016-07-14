@@ -66,6 +66,8 @@
 		18685DC81D0AD0DE00BCAE10 /* BeginScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18685DBC1D0AD0DE00BCAE10 /* BeginScene.swift */; };
 		18685DC91D0AD0DE00BCAE10 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18685DBD1D0AD0DE00BCAE10 /* MainScene.swift */; };
 		18685DCC1D0AEDF500BCAE10 /* SetSpriteLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18685DCB1D0AEDF500BCAE10 /* SetSpriteLevel.swift */; };
+		1868E7011D37DD2700C5876F /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1868E7001D37DD2700C5876F /* Wall.swift */; };
+		1868E7031D37DD4D00C5876F /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1868E7021D37DD4D00C5876F /* Building.swift */; };
 		1871DAB31D263908002B6479 /* GameFightVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1871DAB21D263908002B6479 /* GameFightVC.swift */; };
 		1871DAB51D263C8F002B6479 /* FightScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1871DAB41D263C8F002B6479 /* FightScene.swift */; };
 		1871DAB71D264268002B6479 /* fightOne.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1871DAB61D264268002B6479 /* fightOne.jpg */; };
@@ -312,6 +314,8 @@
 		18685DBC1D0AD0DE00BCAE10 /* BeginScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeginScene.swift; sourceTree = "<group>"; };
 		18685DBD1D0AD0DE00BCAE10 /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		18685DCB1D0AEDF500BCAE10 /* SetSpriteLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetSpriteLevel.swift; sourceTree = "<group>"; };
+		1868E7001D37DD2700C5876F /* Wall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
+		1868E7021D37DD4D00C5876F /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
 		1871DAB21D263908002B6479 /* GameFightVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameFightVC.swift; sourceTree = "<group>"; };
 		1871DAB41D263C8F002B6479 /* FightScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FightScene.swift; sourceTree = "<group>"; };
 		1871DAB61D264268002B6479 /* fightOne.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fightOne.jpg; sourceTree = "<group>"; };
@@ -449,6 +453,7 @@
 		18685D951D0AD0A200BCAE10 /* OctGame */ = {
 			isa = PBXGroup;
 			children = (
+				1868E6F41D37DD1400C5876F /* Building */,
 				18D810F31D3786F600551B00 /* PlayerStateUI */,
 				1894EFEF1D34B2B700E7FAA9 /* ConfigureSkill */,
 				180796D21D2F899B0018CABC /* HarmArea */,
@@ -601,6 +606,15 @@
 				18BA0D401D1BB50F00B0272A /* Setting.swift */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		1868E6F41D37DD1400C5876F /* Building */ = {
+			isa = PBXGroup;
+			children = (
+				1868E7001D37DD2700C5876F /* Wall.swift */,
+				1868E7021D37DD4D00C5876F /* Building.swift */,
+			);
+			path = Building;
 			sourceTree = "<group>";
 		};
 		1871DABE1D2675AB002B6479 /* protocol */ = {
@@ -919,6 +933,7 @@
 				180796DA1D2FC5E20018CABC /* SkillSprite.swift in Sources */,
 				180262C71D114BC000949B15 /* BlackCloudComponent;.swift in Sources */,
 				187E306E1D191594008AB0A5 /* Map.swift in Sources */,
+				1868E7031D37DD4D00C5876F /* Building.swift in Sources */,
 				180796DC1D2FD44F0018CABC /* Boom.swift in Sources */,
 				187E30701D192CA6008AB0A5 /* SecondGame.swift in Sources */,
 				1894EFF11D34B2CC00E7FAA9 /* ConfigureSkill.swift in Sources */,
@@ -936,6 +951,7 @@
 				18685DC71D0AD0DE00BCAE10 /* BaseScene.swift in Sources */,
 				1871DACB1D269489002B6479 /* FireSystem.swift in Sources */,
 				180262EF1D1298E100949B15 /* AddResource.swift in Sources */,
+				1868E7011D37DD2700C5876F /* Wall.swift in Sources */,
 				180262AC1D0FC46500949B15 /* Player.swift in Sources */,
 				1894EFFB1D34CE3C00E7FAA9 /* Ball.swift in Sources */,
 				18685DC51D0AD0DE00BCAE10 /* SpriteButton.swift in Sources */,
