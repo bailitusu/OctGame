@@ -31,6 +31,12 @@ class Wall: Building, FTCellStandAbleDelegate {
         self.wallSprite.physicsBody?.contactTestBitMask = collsionBitMask
         self.wallSprite.physicsBody?.usesPreciseCollisionDetection = true
         self.wallSprite.physicsBody?.dynamic = false
+        
+        self.wallSprite.userData?.setObject(self, forKey: "wall")
+        
+        
+        
+        
         self.wallSprite.zPosition = SpriteLevel.sprite.rawValue+1
         self.isControl = true
         self.wallID = wallID

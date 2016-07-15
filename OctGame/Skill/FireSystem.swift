@@ -155,6 +155,17 @@ class FireSystem: SkillSystem {
                         self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: (self.entity as! FightPlayer).enemy.sprite.position)
                     }
                 }
+                
+                if nodeB.categoryBitMask == BitMaskType.ftWall {
+                    let wall = nodeB.node?.userData?.objectForKey("wall") as! Wall
+                    if fire.entityName == "fightPlayer" {
+                        if wall.entityName == "fightEnemy" {
+                            fire.isRemove = true
+                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+                        }
+                    }
+                }
+                
             }else if nodeB.categoryBitMask == BitMaskType.fire {
                 let fire = nodeB.node as! Fire
                 
@@ -162,6 +173,16 @@ class FireSystem: SkillSystem {
                     if fire.entityName == "fightPlayer" {
                         fire.isRemove = true
                         self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: (self.entity as! FightPlayer).enemy.sprite.position)
+                    }
+                }
+                
+                if nodeA.categoryBitMask == BitMaskType.ftWall {
+                    let wall = nodeA.node?.userData?.objectForKey("wall") as! Wall
+                    if fire.entityName == "fightPlayer" {
+                        if wall.entityName == "fightEnemy" {
+                            fire.isRemove = true
+                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+                        }
                     }
                 }
 
@@ -175,6 +196,16 @@ class FireSystem: SkillSystem {
                         self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: (self.entity as! FightPlayer).enemy.sprite.position)
                     }
                 }
+                
+                if nodeB.categoryBitMask == BitMaskType.ftWall {
+                    let wall = nodeB.node?.userData?.objectForKey("wall") as! Wall
+                    if fire.entityName == "fightEnemy" {
+                        if wall.entityName == "fightPlayer" {
+                            fire.isRemove = true
+                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+                        }
+                    }
+                }
             }else if nodeB.categoryBitMask == BitMaskType.fire {
                 let fire = nodeB.node as! Fire
                 
@@ -182,6 +213,16 @@ class FireSystem: SkillSystem {
                     if fire.entityName == "fightEnemy" {
                         fire.isRemove = true
                         self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: (self.entity as! FightPlayer).enemy.sprite.position)
+                    }
+                }
+                
+                if nodeA.categoryBitMask == BitMaskType.ftWall {
+                    let wall = nodeA.node?.userData?.objectForKey("wall") as! Wall
+                    if fire.entityName == "fightEnemy" {
+                        if wall.entityName == "fightPlayer" {
+                            fire.isRemove = true
+                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+                        }
                     }
                 }
                 

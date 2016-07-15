@@ -184,7 +184,7 @@ class BoomSystem: SkillSystem {
     override func didContact(contact: SKPhysicsContact) {
         let nodeA = contact.bodyA
         let nodeB = contact.bodyB
-        
+        //自己监测 自己的地雷与敌人的碰撞  敌人监测 敌人的地雷与我碰撞
         if self.entityName == "fightPlayer" {
             if nodeA.categoryBitMask == BitMaskType.boom {
                 let boom = nodeA.node as! Boom

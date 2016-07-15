@@ -116,6 +116,25 @@ class WallSystem: SkillSystem {
         }
     }
     
+//    override func didContact(contact: SKPhysicsContact) {
+//        let nodeA = contact.bodyA
+//        let nodeB = contact.bodyB
+//        
+//        if self.entityName == "fightPlayer" {
+//            if nodeA.categoryBitMask == BitMaskType.ftWall {
+//                let wall = nodeA.node?.userData?.objectForKey("wall") as! Wall
+//                if nodeB.categoryBitMask == BitMaskType.fire {
+//                    if wall.entityName == "fightPlayer" {
+//                        if (nodeB.node as! Fire).entityName == "fightEnemy" {
+//                            (nodeB.node as! Fire).isRemove = true
+//                            (nodeB.node as! Fire).
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+    
     override func checkState(time: NSTimeInterval) {
         let removeArray = NSMutableArray()
         
