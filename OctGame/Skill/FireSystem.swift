@@ -69,9 +69,9 @@ class FireSystem: SkillSystem {
 
     }
     
-    override func initSkill(initBitmask: UInt32) {
+    override func initSkill() {
         self.fireId = self.fireId+1
-        let fire = Fire(imageName: "huoqiu.jpg", size: SkillSize.huoqiu, entityName: self.entityName, collsionBitMask: initBitmask, fireID: "Fire\(self.fireId)")
+        let fire = Fire(imageName: "huoqiu.jpg", size: SkillSize.huoqiu, entityName: self.entityName, collsionBitMask: ((self.entity as! FightPlayer).enemy.sprite.physicsBody?.categoryBitMask)!, fireID: "Fire\(self.fireId)")
         
         let tempSprite = (self.entity!.componentForClass(SpriteComponent.self)?.sprite)!
       //  let tempPosition = CGPoint(x: .position.x)!, y: <#T##CGFloat#>)

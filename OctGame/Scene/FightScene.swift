@@ -77,12 +77,13 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
         let boomBtn = SpriteButton(titleText: "产生地雷", normalImageName: nil, callBack: { () -> () in
             
 
-            self.fightPlayer.createSkillSprite(BoomSystem.self)
-            var dict = Dictionary<String, AnyObject>()
-            dict.updateValue(SkillName.boom.rawValue, forKey: "initSkill")
-            self.websocket.writeMessage(BTMessage(command: BTCommand.CreateSpell, params: self.fightPlayer.toInitSkill(dict)))
+//            self.fightPlayer.createSkillSprite(BoomSystem.self)
+//            var dict = Dictionary<String, AnyObject>()
+//            dict.updateValue(SkillName.boom.rawValue, forKey: "initSkill")
+//            self.websocket.writeMessage(BTMessage(command: BTCommand.CreateSpell, params: self.fightPlayer.toInitSkill(dict)))
+//            
+            self.fightPlayer.createSkillSprite(WallSystem.self)
             
-
             }, frame:CGRectMake(30, 70, 60, 30))
         boomBtn.setBackGroundColor(UIColor.blackColor())
         boomBtn.zPosition = SpriteLevel.sprite.rawValue

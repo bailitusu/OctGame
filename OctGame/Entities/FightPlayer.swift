@@ -13,6 +13,7 @@ import Starscream
 enum SkillName: String {
     case fire = "fire"
     case boom = "boom"
+    case wall = "wall"
 }
 class FightPlayer: Entity, FTCellStandAbleDelegate {
     var delegate: OnlineGameConvertable?
@@ -76,6 +77,8 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
         self.skillSystemForClass(FireSystem.self)?.addHarmArea(SinglePointHarm())
         self.initSkillSystemArray(BoomSystem())
         self.skillSystemForClass(BoomSystem.self)?.addHarmArea(SinglePointHarm())
+        self.initSkillSystemArray(WallSystem())
+        
     
        // self.yidong = false
     }
@@ -108,18 +111,20 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
     
     func moveToCell(locationSprite: FTMapCell) {
         if abs(locationSprite.position.x - self.sprite.position.x) < locationSprite.size.width+1 && abs(locationSprite.position.y - self.sprite.position.y) < locationSprite.size.height+1 {
-            
-            let beforePlayerStandCell = self.fightMap.mapArray.objectAtIndex(self.fightMap.getCurrentPointMapCell(self.sprite.position)!) as! FTMapCell
-            beforePlayerStandCell.obj = nil
-            
-            locationSprite.obj = self
-            let nc = NSNotificationCenter.defaultCenter()
-            nc.postNotificationName("playerMove", object: self, userInfo: ["moveToMapCell" : locationSprite])
-            let move = SKAction.moveTo(locationSprite.position, duration: 0.3)
-//            let block = SKAction.runBlock({ 
-//                locationSprite.obj = self
-//            })
-            self.sprite.runAction(SKAction.sequence([move]))
+            if locationSprite.obj == nil {
+                let beforePlayerStandCell = self.fightMap.mapArray.objectAtIndex(self.fightMap.getCurrentPointMapCell(self.sprite.position)!) as! FTMapCell
+                beforePlayerStandCell.obj = nil
+                
+                locationSprite.obj = self
+                let nc = NSNotificationCenter.defaultCenter()
+                nc.postNotificationName("playerMove", object: self, userInfo: ["moveToMapCell" : locationSprite])
+                let move = SKAction.moveTo(locationSprite.position, duration: 0.3)
+                //            let block = SKAction.runBlock({
+                //                locationSprite.obj = self
+                //            })
+                self.sprite.runAction(SKAction.sequence([move]))
+            }
+
 //            self.yidong = true
 //            let formatter = NSDateFormatter()
 //            formatter.dateFormat = "yyy-MM-dd HH:mm:ss:SSS"
@@ -168,7 +173,7 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
     
     func createSkillSprite<skillSystem: SkillSystem>(skillSystemClass:skillSystem.Type) {
         let system =  self.skillSystemForClass(skillSystemClass)
-        system?.initSkill((enemy.sprite.physicsBody?.categoryBitMask)!)
+        system?.initSkill()
 //        var dict = Dictionary<String, AnyObject>()
 //        dict.updateValue(SkillName.fire.rawValue, forKey: "skillname")
         

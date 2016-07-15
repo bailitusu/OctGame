@@ -25,9 +25,9 @@ class BoomSystem: SkillSystem {
         self.bollGroup = BallCategory.fireBall.rawValue + BallCategory.waterBall.rawValue + BallCategory.electricBoll.rawValue
     }
     
-    override func initSkill(initBitmask: UInt32) {
+    override func initSkill() {
         self.boomID = self.boomID+1
-        let boom = Boom(imageName: "boom.png", size: SkillSize.dilei, entityName: self.entityName, collsionBitMask: initBitmask, BoomID: "Boom\(self.boomID)")
+        let boom = Boom(imageName: "boom.png", size: SkillSize.dilei, entityName: self.entityName, collsionBitMask: ((self.entity as! FightPlayer).enemy.sprite.physicsBody?.categoryBitMask)!, BoomID: "Boom\(self.boomID)")
         let player = (self.entity as! FightPlayer)
         
 
@@ -154,8 +154,8 @@ class BoomSystem: SkillSystem {
             if boomMapCellNum != nil{
                 self.currentBoom.boomOnMapCellIndex = boomMapCellNum
                 self.currentBoom.isControl = false
-                self.setBoom()
                 self.currentBoom.physicsBody?.dynamic = true
+                self.setBoom()
                 var dict = Dictionary<String, AnyObject>()
                 dict.updateValue(SkillName.boom.rawValue, forKey: "initSkill")
                 let percentX = self.currentBoom.position.x / screenSize.width

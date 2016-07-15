@@ -88,6 +88,7 @@
 		187E30721D192D3C008AB0A5 /* Sheep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E30711D192D3C008AB0A5 /* Sheep.swift */; };
 		187E30741D1986A0008AB0A5 /* MoveComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E30731D1986A0008AB0A5 /* MoveComponent.swift */; };
 		187E30781D1A66E3008AB0A5 /* road.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 187E30771D1A66E3008AB0A5 /* road.jpg */; };
+		1882BCF11D38BFF9003E1312 /* WallSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882BCF01D38BFF9003E1312 /* WallSystem.swift */; };
 		1894EFF11D34B2CC00E7FAA9 /* ConfigureSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894EFF01D34B2CB00E7FAA9 /* ConfigureSkill.swift */; };
 		1894EFF51D34B89700E7FAA9 /* huoqiu.png in Resources */ = {isa = PBXBuildFile; fileRef = 1894EFF21D34B89700E7FAA9 /* huoqiu.png */; };
 		1894EFF61D34B89700E7FAA9 /* shuiqiu.png in Resources */ = {isa = PBXBuildFile; fileRef = 1894EFF31D34B89700E7FAA9 /* shuiqiu.png */; };
@@ -333,6 +334,7 @@
 		187E30711D192D3C008AB0A5 /* Sheep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sheep.swift; sourceTree = "<group>"; };
 		187E30731D1986A0008AB0A5 /* MoveComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveComponent.swift; sourceTree = "<group>"; };
 		187E30771D1A66E3008AB0A5 /* road.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = road.jpg; sourceTree = "<group>"; };
+		1882BCF01D38BFF9003E1312 /* WallSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallSystem.swift; sourceTree = "<group>"; };
 		1894EFF01D34B2CB00E7FAA9 /* ConfigureSkill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigureSkill.swift; sourceTree = "<group>"; };
 		1894EFF21D34B89700E7FAA9 /* huoqiu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = huoqiu.png; sourceTree = "<group>"; };
 		1894EFF31D34B89700E7FAA9 /* shuiqiu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shuiqiu.png; sourceTree = "<group>"; };
@@ -634,6 +636,7 @@
 				180796D91D2FC5E20018CABC /* SkillSprite.swift */,
 				180796DB1D2FD44F0018CABC /* Boom.swift */,
 				18B62C921D30F89600C49EA3 /* BoomSystem.swift */,
+				1882BCF01D38BFF9003E1312 /* WallSystem.swift */,
 			);
 			path = Skill;
 			sourceTree = "<group>";
@@ -930,6 +933,7 @@
 				18685D9B1D0AD0A200BCAE10 /* GameScene.swift in Sources */,
 				18070EF81D3651C300A206DF /* SinglePointHarm.swift in Sources */,
 				187E30741D1986A0008AB0A5 /* MoveComponent.swift in Sources */,
+				1882BCF11D38BFF9003E1312 /* WallSystem.swift in Sources */,
 				180796DA1D2FC5E20018CABC /* SkillSprite.swift in Sources */,
 				180262C71D114BC000949B15 /* BlackCloudComponent;.swift in Sources */,
 				187E306E1D191594008AB0A5 /* Map.swift in Sources */,

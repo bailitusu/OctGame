@@ -56,6 +56,7 @@ struct BuffTime {
 struct SkillSize {
     static let huoqiu = CGSize(width: screenSize.width*0.08, height: screenSize.width*0.08)
     static let dilei = CGSize(width: screenSize.width*0.08, height: screenSize.width*0.08)
+    static let wall = CGSize(width: screenSize.width*0.16, height: screenSize.width*0.16)
 }
 
 struct FightSkillSpeed {

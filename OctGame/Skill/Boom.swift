@@ -12,7 +12,7 @@ import SpriteKit
 class Boom: SKSpriteNode {
     var entityName: String!
     var isControl: Bool!
-    var BoomID:String!
+    var boomID:String!
     var collideCount: UInt32!
     var isRemove: Bool!
     var boomOnMapCellIndex: Int?
@@ -32,7 +32,7 @@ class Boom: SKSpriteNode {
         self.physicsBody?.usesPreciseCollisionDetection = true
         self.physicsBody?.dynamic = false
         self.zPosition = SpriteLevel.sprite.rawValue+1
-        self.BoomID = BoomID
+        self.boomID = BoomID
         self.isControl = true
         self.collideCount = 0
         self.isRemove = false

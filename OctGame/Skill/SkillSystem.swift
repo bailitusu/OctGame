@@ -68,7 +68,7 @@ class SkillSystem {
     
     }
     
-    func initSkill(initBitmask: UInt32)  {
+    func initSkill()  {
         
     }
     
