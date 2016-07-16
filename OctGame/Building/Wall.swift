@@ -15,6 +15,7 @@ class Wall: Building, FTCellStandAbleDelegate {
     var entityName: String!
     var wallID: UInt32!
     var isControl: Bool!
+    var hpLabel: SKLabelNode!
   //  var isRemove: Bool!
     init(entityName: String, collsionBitMask: UInt32, wallID: UInt32) {
         super.init()
@@ -25,17 +26,23 @@ class Wall: Building, FTCellStandAbleDelegate {
         self.wallSprite.physicsBody?.affectedByGravity = false
         self.wallSprite.physicsBody?.mass = 10
         self.wallSprite.physicsBody?.allowsRotation = false
-        
         self.wallSprite.physicsBody?.categoryBitMask = BitMaskType.ftWall
         self.wallSprite.physicsBody?.collisionBitMask = collsionBitMask
         self.wallSprite.physicsBody?.contactTestBitMask = collsionBitMask
         self.wallSprite.physicsBody?.usesPreciseCollisionDetection = true
         self.wallSprite.physicsBody?.dynamic = false
         
-        self.wallSprite.userData?.setObject(self, forKey: "wall")
+        self.wallSprite.userData = NSMutableDictionary()
+        
+        self.wallSprite.userData?.setObject(self, forKey: "wallclass")
         
         
-        
+        self.hpLabel = SKLabelNode(fontNamed: "Arial")
+        self.hpLabel.text = "\(wallHP)"
+        self.hpLabel.fontSize = 12
+        self.hpLabel.fontColor = UIColor.redColor()
+        self.hpLabel.zPosition = SpriteLevel.fightStateUI.rawValue
+        self.wallSprite.addChild(self.hpLabel)
         
         self.wallSprite.zPosition = SpriteLevel.sprite.rawValue+1
         self.isControl = true
@@ -55,5 +62,6 @@ class Wall: Building, FTCellStandAbleDelegate {
     
     func didBeHit(hitValue: Int) {
         self.wallHP  = self.wallHP - hitValue
+        self.hpLabel.text = "\(wallHP)"
     }
 }

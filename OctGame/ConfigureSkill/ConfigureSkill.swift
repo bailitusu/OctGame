@@ -176,6 +176,12 @@ class ConfigureSkill {
             dict.updateValue(SkillName.boom.rawValue, forKey: "initSkill")
             self.scene.websocket.writeMessage(BTMessage(command: BTCommand.CreateSpell, params: self.scene.fightPlayer.toInitSkill(dict)))
             break
+        case BallCategory.fireBall.rawValue + BallCategory.fireBall.rawValue + BallCategory.waterBall.rawValue:
+            self.scene.fightPlayer.createSkillSprite(WallSystem.self)
+            
+            var dict = Dictionary<String, AnyObject>()
+            dict.updateValue(SkillName.wall.rawValue, forKey: "initSkill")
+            self.scene.websocket.writeMessage(BTMessage(command: BTCommand.CreateSpell, params: self.scene.fightPlayer.toInitSkill(dict)))
         default:
             print("configskill  error")
         }

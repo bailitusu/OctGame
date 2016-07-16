@@ -74,20 +74,24 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
 //        beginBtn.zPosition = SpriteLevel.sprite.rawValue
 //        self.addChild(beginBtn)
 //
-        let boomBtn = SpriteButton(titleText: "产生地雷", normalImageName: nil, callBack: { () -> () in
-            
-
-//            self.fightPlayer.createSkillSprite(BoomSystem.self)
+//        let boomBtn = SpriteButton(titleText: "产生地雷", normalImageName: nil, callBack: { () -> () in
+//            
+//
+////            self.fightPlayer.createSkillSprite(BoomSystem.self)
+////            var dict = Dictionary<String, AnyObject>()
+////            dict.updateValue(SkillName.boom.rawValue, forKey: "initSkill")
+////            self.websocket.writeMessage(BTMessage(command: BTCommand.CreateSpell, params: self.fightPlayer.toInitSkill(dict)))
+////            
+//            self.fightPlayer.createSkillSprite(WallSystem.self)
+//            
 //            var dict = Dictionary<String, AnyObject>()
-//            dict.updateValue(SkillName.boom.rawValue, forKey: "initSkill")
+//            dict.updateValue(SkillName.wall.rawValue, forKey: "initSkill")
 //            self.websocket.writeMessage(BTMessage(command: BTCommand.CreateSpell, params: self.fightPlayer.toInitSkill(dict)))
 //            
-            self.fightPlayer.createSkillSprite(WallSystem.self)
-            
-            }, frame:CGRectMake(30, 70, 60, 30))
-        boomBtn.setBackGroundColor(UIColor.blackColor())
-        boomBtn.zPosition = SpriteLevel.sprite.rawValue
-        self.addChild(boomBtn)
+//            }, frame:CGRectMake(30, 70, 60, 30))
+//        boomBtn.setBackGroundColor(UIColor.blackColor())
+//        boomBtn.zPosition = SpriteLevel.sprite.rawValue
+//        self.addChild(boomBtn)
         
         
         wsDelegate = FightSceneWSDelegate(forScene: self)

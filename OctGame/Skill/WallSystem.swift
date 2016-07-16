@@ -26,7 +26,7 @@ class WallSystem: SkillSystem {
     
     override func initSkill() {
         self.wallID = self.wallID+1
-        let wallBitMask = BitMaskType.fire | BitMaskType.boom
+        let wallBitMask = BitMaskType.fire | BitMaskType.boom 
         let wall = Wall(entityName: self.entityName, collsionBitMask: wallBitMask, wallID: self.wallID)
         
         let player = (self.entity as! FightPlayer)
@@ -97,12 +97,9 @@ class WallSystem: SkillSystem {
                 (selfMap.mapArray.objectAtIndex(wallMapCellNum!) as! FTMapCell).obj = self.currentWall
                 self.currentWall.isControl = false
                // self.setBoom()
-                for temp in self.wallArray {
-                    if (temp as! Wall).isControl == true {
-                        self.currentWall = temp as! Wall
-                    }
-                }
-                self.currentWall.wallSprite.physicsBody?.dynamic = true
+                
+                
+//                self.currentWall.wallSprite.physicsBody?.dynamic = true
                 var dict = Dictionary<String, AnyObject>()
                 dict.updateValue(SkillName.wall.rawValue, forKey: "initSkill")
                 let percentX = self.currentWall.wallSprite.position.x / screenSize.width
@@ -110,6 +107,16 @@ class WallSystem: SkillSystem {
                 dict.updateValue(percentX, forKey: "percentX")
                 dict.updateValue(percentY, forKey: "percentY")
                 scene.websocket.writeMessage(BTMessage(command: BTCommand.CastSpell, params: (self.entity as! FightPlayer).toReleaseSkill(dict)))
+                
+                let nc = NSNotificationCenter.defaultCenter()
+                nc.postNotificationName("wallSetRight", object: self, userInfo: ["playerSelfWall" : self.currentWall])
+                
+                
+                for temp in self.wallArray {
+                    if (temp as! Wall).isControl == true {
+                        self.currentWall = temp as! Wall
+                    }
+                }
             }else {
                 self.currentWall.wallSprite.position = defaluePosition!
             }

@@ -197,6 +197,20 @@ class BoomSystem: SkillSystem {
 
                     }
                 }
+                
+                if nodeB.categoryBitMask == BitMaskType.ftWall {
+                    let wall = nodeB.node?.userData?.objectForKey("wallclass") as! Wall
+                    if boom.entityName == "fightPlayer" {
+                        if wall.entityName == "fightEnemy" {
+                            if wall.isControl == false {
+                                boom.isRemove = true
+                                self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+                            }
+                            
+                        }
+                    }
+                }
+
             }else if nodeB.categoryBitMask == BitMaskType.boom {
                 let boom = nodeB.node as! Boom
                 if nodeA.categoryBitMask == BitMaskType.fightEnemy {
@@ -207,6 +221,21 @@ class BoomSystem: SkillSystem {
                         }
                     }
                 }
+                
+                if nodeA.categoryBitMask == BitMaskType.ftWall {
+                    
+                    let wall = nodeA.node?.userData?.objectForKey("wallclass") as! Wall
+                    if boom.entityName == "fightPlayer" {
+                        if wall.entityName == "fightEnemy" {
+                            if wall.isControl == false {
+                                boom.isRemove = true
+                                self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+                            }
+
+                        }
+                    }
+                }
+
             }
         }else if self.entityName == "fightEnemy" {
             if nodeA.categoryBitMask == BitMaskType.boom {
@@ -216,6 +245,19 @@ class BoomSystem: SkillSystem {
                         if boom.isControl == false {
                             boom.isRemove = true
                             self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: boom.position)
+                        }
+                    }
+                }
+                
+                if nodeB.categoryBitMask == BitMaskType.ftWall {
+                    let wall = nodeB.node?.userData?.objectForKey("wallclass") as! Wall
+                    if boom.entityName == "fightEnemy" {
+                        if wall.entityName == "fightPlayer" {
+                            if wall.isControl == false {
+                                boom.isRemove = true
+                                self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+                            }
+
                         }
                     }
                 }
@@ -229,10 +271,43 @@ class BoomSystem: SkillSystem {
                         }
                     }
                 }
+                
+                if nodeA.categoryBitMask == BitMaskType.ftWall {
+                    let wall = nodeA.node?.userData?.objectForKey("wallclass") as! Wall
+                    if boom.entityName == "fightEnemy" {
+                        if wall.entityName == "fightPlayer" {
+                            if wall.isControl == false {
+                                boom.isRemove = true
+                                self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+                            }
+
+                        }
+                    }
+                }
+
             }
         }
     }
     
+    override func addSkillObserver() {
+        if self.entityName == "fightEnemy" {
+            let nc = NSNotificationCenter.defaultCenter()
+            nc.addObserver(self, selector: #selector(boomContactWall), name: "wallSetRight", object: (self.entity as! FightPlayer).enemy)
+        }
+    }
+    @objc func boomContactWall(note: NSNotification) {
+        if let wall = note.userInfo?["playerSelfWall"] as? Wall {
+            for tempBoom in self.boomArray {
+                if (tempBoom as! Boom).isControl == false {
+                    if CommonFunc.fightIsEqualPoint((tempBoom as! Boom).position, pointB: wall.wallSprite.position) == true {
+                        (tempBoom as! Boom).isRemove = true
+                        self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+                    }
+                }
+            }
+        }
+
+    }
     override func checkState(time: NSTimeInterval) {
         let removeArray = NSMutableArray()
         
@@ -247,3 +322,5 @@ class BoomSystem: SkillSystem {
         }
     }
 }
+
+

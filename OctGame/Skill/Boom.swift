@@ -51,3 +51,30 @@ class Boom: SKSpriteNode {
     }
 
 }
+
+
+
+//extension Boom: FTCellStandAbleDelegate {
+//    func didBeHit(hitValue: Int) {
+//        if hitValue == -1 {
+//            
+//        }
+//    }
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

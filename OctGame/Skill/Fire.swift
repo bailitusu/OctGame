@@ -47,6 +47,7 @@ class Fire: SKSpriteNode {
         self.physicsBody?.contactTestBitMask = collsionBitMask
         self.physicsBody?.linearDamping = 0
         self.physicsBody?.usesPreciseCollisionDetection = true
+
         self.zPosition = SpriteLevel.sprite.rawValue+1
         self.fireID = fireID
         self.isControl = true

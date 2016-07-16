@@ -157,7 +157,7 @@ class FireSystem: SkillSystem {
                 }
                 
                 if nodeB.categoryBitMask == BitMaskType.ftWall {
-                    let wall = nodeB.node?.userData?.objectForKey("wall") as! Wall
+                    let wall = nodeB.node?.userData?.objectForKey("wallclass") as! Wall
                     if fire.entityName == "fightPlayer" {
                         if wall.entityName == "fightEnemy" {
                             fire.isRemove = true
@@ -177,11 +177,12 @@ class FireSystem: SkillSystem {
                 }
                 
                 if nodeA.categoryBitMask == BitMaskType.ftWall {
-                    let wall = nodeA.node?.userData?.objectForKey("wall") as! Wall
+
+                    let wall = nodeA.node?.userData?.objectForKey("wallclass")
                     if fire.entityName == "fightPlayer" {
-                        if wall.entityName == "fightEnemy" {
+                        if (wall as! Wall).entityName == "fightEnemy" {
                             fire.isRemove = true
-                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: (wall as! Wall).wallSprite.position)
                         }
                     }
                 }
@@ -198,7 +199,7 @@ class FireSystem: SkillSystem {
                 }
                 
                 if nodeB.categoryBitMask == BitMaskType.ftWall {
-                    let wall = nodeB.node?.userData?.objectForKey("wall") as! Wall
+                    let wall = nodeB.node?.userData?.objectForKey("wallclass") as! Wall
                     if fire.entityName == "fightEnemy" {
                         if wall.entityName == "fightPlayer" {
                             fire.isRemove = true
@@ -217,7 +218,7 @@ class FireSystem: SkillSystem {
                 }
                 
                 if nodeA.categoryBitMask == BitMaskType.ftWall {
-                    let wall = nodeA.node?.userData?.objectForKey("wall") as! Wall
+                    let wall = nodeA.node?.userData?.objectForKey("wallclass") as! Wall
                     if fire.entityName == "fightEnemy" {
                         if wall.entityName == "fightPlayer" {
                             fire.isRemove = true
@@ -261,7 +262,6 @@ class FireSystem: SkillSystem {
             if distance != CGVector(dx: 0, dy: 0) {
                 self.throwSkill(SkillSystem.reckonSkillSpeed(distance))
             }
-            
 
             var dict = Dictionary<String, AnyObject>()
             dict.updateValue(SkillName.fire.rawValue, forKey: "initSkill")

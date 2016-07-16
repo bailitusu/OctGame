@@ -266,6 +266,10 @@ extension FightPlayer: OnlineGameObjectType {
         if json["initSkill"].stringValue == SkillName.boom.rawValue {
             self.createSkillSprite(BoomSystem.self)
         }
+        
+        if json["initSkill"].stringValue == SkillName.wall.rawValue {
+            self.createSkillSprite(WallSystem.self)
+        }
     }
     
     func fromReleaseSkill(json: JSON) {
@@ -294,9 +298,33 @@ extension FightPlayer: OnlineGameObjectType {
                 tempBoom.runAction(SKAction.sequence([wait,appear,block]))
 //                
             })
+ 
+        }
+        
+        if json["initSkill"].stringValue == SkillName.wall.rawValue {
+            let percentX = CGFloat(json["percentX"].floatValue)
+            let percentY = CGFloat(json["percentY"].floatValue)
             
+            self.skillSystemForClass(WallSystem.self)?.currentWall.wallSprite.position = SkillSystem.reversalPoint(percentX, percentY: percentY)
+            self.skillSystemForClass(WallSystem.self)?.currentWall.isControl = false
+
+            let wallMapCellNum = self.fightMap.getCurrentPointMapCell((self.skillSystemForClass(WallSystem.self)?.currentWall.wallSprite.position)!)
+            (self.fightMap.mapArray.objectAtIndex(wallMapCellNum!) as! FTMapCell).obj = self.skillSystemForClass(WallSystem.self)?.currentWall
+//            self.skillSystemForClass(WallSystem.self)?.currentWall.wallSprite.physicsBody?.dynamic = true
+         //   let tempBoom = (self.skillSystemForClass(BoomSystem.self)?.currentBoom)!
+            //  print("set--\(self.skillSystemForClass(BoomSystem.self)?.currentBoom.BoomID)")
+//            self.skillSystemForClass(BoomSystem.self)?.bogusBoomRun({
+//                let wait = SKAction.waitForDuration(7)
+//                let appear = SKAction.fadeAlphaTo(1, duration: 0.3)
+//                let block = SKAction.runBlock({
+//                    //         print("chuxian-----\(tempBoom.BoomID)")
+//                })
+//                tempBoom.runAction(SKAction.sequence([wait,appear,block]))
+//                //
+//            })
             
         }
+
     }
 //    func moveToCell(index: Int) {
 //        
