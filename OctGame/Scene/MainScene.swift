@@ -54,6 +54,11 @@ class MainScene: BaseScene,SKPhysicsContactDelegate {
        chongciNode = CommonFunc.initChongCiCd(self)
        // addTapGesture()
     }
+    
+    
+    
+    
+    
     func addTapGesture() {
         let single:UITapGestureRecognizer  = UITapGestureRecognizer(target: self, action: #selector(MainScene.handleSingle(_:)))
         single.numberOfTapsRequired = 1

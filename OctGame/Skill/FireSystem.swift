@@ -15,7 +15,7 @@ class FireSystem: SkillSystem {
     var huoqiuArray: NSMutableArray!
     var currentHuoqiu: Fire!
     var fireId: UInt32!
-    var hitValue: Int = 1
+    var hitValue: Int = 3
     
     override init() {
         super.init()

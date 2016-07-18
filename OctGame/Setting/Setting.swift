@@ -14,9 +14,18 @@ let fightMapCellSize: CGSize = CGSize(width: screenSize.width/5.5, height: scree
 
 let userID:Int = 123
 
-let screenSize = UIScreen.mainScreen().bounds
+//let screenSize = UIScreen.mainScreen().bounds
 
-let playerSize: CGSize = CGSize(width: screenSize.width*0.105, height: screenSize.width*0.105*10/7)
+
+var screenSize: CGRect {
+    return UIScreen.mainScreen().bounds
+}
+
+let Long = max(screenSize.width, screenSize.height)
+let Short = min(screenSize.width, screenSize.height)
+
+
+let playerSize: CGSize = CGSize(width: screenSize.width * 0.105, height: screenSize.width * 0.105*10/7)
 
 let enemySize: CGSize = CGSize(width: screenSize.width*0.09, height: screenSize.width*0.09)
 

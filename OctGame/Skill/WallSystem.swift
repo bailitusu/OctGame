@@ -148,7 +148,11 @@ class WallSystem: SkillSystem {
         for temp in self.wallArray {
             if (temp as! Wall).removeWall() == true {
                 removeArray.addObject(temp)
+                let tempMap = (self.entity as! FightPlayer).fightMap
+                (tempMap.mapArray.objectAtIndex(tempMap.getCurrentPointMapCell((temp as! Wall).wallSprite.position)!) as! FTMapCell).obj = nil
+                
             }
+            
         }
         
         for removeTemp in removeArray {

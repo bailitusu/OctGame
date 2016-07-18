@@ -61,6 +61,8 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
         fightEnemy.enemy = fightPlayer
         configBitMask()
         
+        
+        
 //        let beginBtn = SpriteButton(titleText: "产生火球", normalImageName: nil, callBack: { () -> () in
 //            
 //

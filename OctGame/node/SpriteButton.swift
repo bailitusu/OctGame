@@ -39,6 +39,7 @@ class SpriteButton: SKNode {
         
         sprite.size = frame.size
         sprite.position = frame.origin
+       // sprite.position = CGPoint(x: frame.origin.x+frame.size.width/2, y:  frame.origin.y-frame.size.height/2)
         self.addChild(sprite)
         if let text = titleText {
             self.titleText = SKLabelNode(fontNamed: "Arial")

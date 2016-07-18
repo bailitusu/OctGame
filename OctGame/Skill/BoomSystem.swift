@@ -15,7 +15,7 @@ class BoomSystem: SkillSystem {
     var currentBoom: Boom!
     var boomID: UInt32!
     var defaluePosition: CGPoint?
-    var hitValue: Int = 3
+    var hitValue: Int = 1
 //    var bogusBoom: SKSpriteNode!
     override init() {
         super.init()
@@ -101,10 +101,13 @@ class BoomSystem: SkillSystem {
     func isSetBoomSuccess(point: CGPoint) -> Int? {
         let enemyMap = (self.entity as! FightPlayer).enemy.fightMap
         for i in 0 ..< enemyMap.mapArray.count {
-            if i >= 5 && i <= 15 && i != 8 && i != 12 && i != enemyMap.getCurrentPointMapCell((self.entity as! FightPlayer).enemy.sprite.position) {
-                if CGRectContainsPoint(enemyMap.mapArray.objectAtIndex(i).frame, point) {
-                    self.currentBoom.position = enemyMap.mapArray.objectAtIndex(i).position
-                    return i
+            if i >= 5 && i <= 15 && i != 8 && i != 12  {
+                
+                if (enemyMap.mapArray.objectAtIndex(i) as! FTMapCell).obj == nil {
+                    if CGRectContainsPoint(enemyMap.mapArray.objectAtIndex(i).frame, point) {
+                        self.currentBoom.position = enemyMap.mapArray.objectAtIndex(i).position
+                        return i
+                    }
                 }
             }
         }

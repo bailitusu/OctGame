@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         self.window = UIWindow.init(frame: UIScreen.mainScreen().bounds)
         self.window?.backgroundColor = UIColor.whiteColor()
-        self.window?.rootViewController = GameFightVC()
+        self.window?.rootViewController = GameStartVC()
         self.window?.makeKeyAndVisible()
         return true
     }

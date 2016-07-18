@@ -10,7 +10,7 @@ import SpriteKit
 import UIKit
 
 class Wall: Building, FTCellStandAbleDelegate {
-    var wallHP: Int = 5
+    var wallHP: Int = 1
     var wallSprite: SKSpriteNode!
     var entityName: String!
     var wallID: UInt32!

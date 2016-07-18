@@ -14,7 +14,7 @@ class GameFightVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let scene = BeginScene()
+        let scene = FTMatchScene()
         let skV = SKView(frame: self.view.frame)
         self.view = skV
         skView = self.view as! SKView

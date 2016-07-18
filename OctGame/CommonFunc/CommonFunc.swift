@@ -51,11 +51,13 @@ class CommonFunc: NSObject {
     }
     static func hasThisProgressNode(thisNodeName: String) -> SKProgressNode? {
        // var hasThisNode = false
-        for i in 0  ..< skillcdArray.count {
-            if (skillcdArray.objectAtIndex(i) as! SKProgressNode).nodeName == thisNodeName {
-               // (skillcdArray.objectAtIndex(i) as! SKProgressNode).progress = 0
-       //         hasThisNode = true
-                return  (skillcdArray.objectAtIndex(i) as! SKProgressNode)
+        if skillcdArray.count != 0 {
+            for i in 0  ..< skillcdArray.count {
+                if (skillcdArray.objectAtIndex(i) as! SKProgressNode).nodeName == thisNodeName {
+                    // (skillcdArray.objectAtIndex(i) as! SKProgressNode).progress = 0
+                    //         hasThisNode = true
+                    return  (skillcdArray.objectAtIndex(i) as! SKProgressNode)
+                }
             }
         }
         return nil
