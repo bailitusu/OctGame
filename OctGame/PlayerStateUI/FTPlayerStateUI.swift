@@ -12,11 +12,11 @@ import UIKit
 class FTPlayerStateUI: NSObject {
     var player: FightPlayer!
     var hpLabel: SKLabelNode!
-    var  scene: SKScene!
-    init(player: FightPlayer, scene: SKScene) {
+   // var  scene: SKScene!
+    init(player: FightPlayer) {
         super.init()
         self.player = player
-        self.scene = scene
+     //   self.scene = scene
         self.initHpUI()
     }
     
@@ -26,7 +26,7 @@ class FTPlayerStateUI: NSObject {
         self.hpLabel.fontSize = 14
         self.hpLabel.fontColor = UIColor.redColor()
         self.hpLabel.zPosition = SpriteLevel.fightStateUI.rawValue
-        self.scene.addChild(self.hpLabel)
+       // self.scene.addChild(self.hpLabel)
     }
     
     func changeHpUI(hp: Int) {

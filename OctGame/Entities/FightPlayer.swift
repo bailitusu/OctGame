@@ -16,7 +16,7 @@ enum SkillName: String {
     case wall = "wall"
 }
 class FightPlayer: Entity, FTCellStandAbleDelegate {
-    var delegate: OnlineGameConvertable?
+  //  var delegate: OnlineGameConvertable?
     var playerStateUI: FTPlayerStateUI!
     var roleName: String!
     var fightMap: FightMap!
@@ -26,7 +26,7 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
   //  var  yidong: Bool!
     var configureSkill: ConfigureSkill!
     
-    var HP: Int!
+    var HP: Int = 10
     var configCurrentBallArray = [Ball]()
     var mapCellIndex: Int! = 4 {
         didSet {
@@ -57,7 +57,7 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
     
     init(roleName: String) {
         super.init()
-        self.delegate = MyDaili()
+     //   self.delegate = MyDaili()
         let sprite = SKSpriteNode(imageNamed: "fightOne.jpg")
         sprite.name = roleName
         sprite.size = fightPlayerSize
@@ -69,7 +69,6 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
         sprite.physicsBody?.dynamic = false
         self.addComponent(SpriteComponent(sprite: sprite))
         self.roleName = roleName
-        self.HP = 10
      
         
         self.initSkillSystemArray(FireSystem())
@@ -204,16 +203,16 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
 }
 
 
-class MyDaili: OnlineGameConvertable {
-    func sendMeg() {
-        print("")
-    }
-}
+//class MyDaili: OnlineGameConvertable {
+//    func sendMeg() {
+//        print("")
+//    }
+//}
 //var tempBoom : Boom!
 extension FightPlayer: OnlineGameObjectType {
     
-    func toDictionary() -> JSON {
-        var dict = Dictionary<String, AnyObject>()
+    func toDictionary() -> [String: AnyObject] {
+        var dict = [String: AnyObject]()
        // dict.updateValue(self.roleName, forKey: "roleName")
         dict.updateValue(self.mapCellIndex, forKey: "mapCellNumber")
 //        dict.updateValue(self.isInitFireBoll, forKey: "isInitFireBoll")
@@ -226,22 +225,21 @@ extension FightPlayer: OnlineGameObjectType {
 //            self.isThrowFire = false
 //        }
 //        self.isInitFireBoll = false
-        let json = JSON(dict)
-        return json
+       // let json = JSON(dict)
+        return dict
         
     }
     
-    func toInitSkill(dict: Dictionary<String, AnyObject>) -> JSON {
-        let json = JSON(dict)
-        return json
+    func toInitSkill(dict: [String: AnyObject]) -> [String: AnyObject] {
+        return dict
     }
     
-    func toReleaseSkill(dict: Dictionary<String, AnyObject>) -> JSON {
+    func toReleaseSkill(dict: [String: AnyObject]) -> [String: AnyObject] {
 
         
         
-        let json = JSON(dict)
-        return json
+//        let json = JSON(dict)
+        return dict
     }
     
     func fromDictionary(json: JSON) {

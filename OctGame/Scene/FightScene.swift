@@ -16,8 +16,16 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
 //    var fightPlayerMap: FightMap!
 //    var fightEnemyMap: FightMap!
     var gameStart: Bool = false
-    var websocket: WebSocket!
-    var wsDelegate: FightSceneWSDelegate!
+ //   var websocket: WebSocket!
+    
+    var sock: SLBattleFieldNet!
+    
+    
+  //  var enemy: SLUser?
+    
+    
+    
+  //  var wsDelegate: FightSceneWSDelegate!
     
     var touchPointArray: NSMutableArray!
     override func didMoveToView(view: SKView) {
@@ -34,34 +42,45 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         
-        
-        fightPlayer = FightPlayer(roleName: "fightPlayer")
+        for mapTemp in fightPlayer.fightMap.mapArray {
+            self.scene?.addChild((mapTemp as! FTMapCell))
+        }
+     //   fightPlayer = FightPlayer(roleName: "fightPlayer")
         addEntity(fightPlayer)
-        fightPlayer.fightMap = FightMap()
-        fightPlayer.fightMap.initMap(5, verticalNum: 4, oneSize: fightMapCellSize, scene: self, originalPointY: screenSize.height*0.299, isEnemy: false)
-        fightPlayer.sprite.position = fightPlayer.fightMap.mapArray.objectAtIndex(10).position
-        (fightPlayer.fightMap.mapArray.objectAtIndex(10) as! FTMapCell).obj = fightPlayer
-        fightPlayer.configureSkill = ConfigureSkill(scene: self, player: fightPlayer)
-        fightPlayer.initConfigureSkillBall()
+//        fightPlayer.fightMap = FightMap()
+//        fightPlayer.fightMap.initMap(5, verticalNum: 4, oneSize: fightMapCellSize, scene: self, originalPointY: screenSize.height*0.299, isEnemy: false)
+//        fightPlayer.sprite.position = fightPlayer.fightMap.mapArray.objectAtIndex(10).position
+//        (fightPlayer.fightMap.mapArray.objectAtIndex(10) as! FTMapCell).obj = fightPlayer
+
+       // fightPlayer.configureSkill = ConfigureSkill(scene: self, player: fightPlayer)
+        fightPlayer.configureSkill.scene = self
+       // fightPlayer.initConfigureSkillBall()
         
-        fightPlayer.playerStateUI = FTPlayerStateUI(player: fightPlayer, scene: self)
-        fightPlayer.playerStateUI.hpLabel.position = CGPoint(x: screenSize.width-screenSize.width*0.146, y: screenSize.height*0.359)
+      //  fightPlayer.playerStateUI = FTPlayerStateUI(player: fightPlayer, scene: self)
+        self.addChild(fightPlayer.playerStateUI.hpLabel)
+      //  fightPlayer.playerStateUI.hpLabel.position = CGPoint(x: screenSize.width-screenSize.width*0.146, y: screenSize.height*0.359)
+
         
-        fightEnemy = FightPlayer(roleName: "fightEnemy")
+        //zc fix!!
+      //  fightEnemy = FightPlayer(roleName: "fightEnemy")
+        for mapTemp in fightEnemy.fightMap.mapArray {
+            self.scene?.addChild((mapTemp as! FTMapCell))
+        }
         addEntity(fightEnemy)
-        fightEnemy.fightMap = FightMap()
-        fightEnemy.fightMap.initMap(5, verticalNum: 4, oneSize: fightMapCellSize, scene: self, originalPointY: screenSize.height-screenSize.height*0.299, isEnemy: true)
-        fightEnemy.sprite.position = fightEnemy.fightMap.mapArray.objectAtIndex(10).position
-        (fightEnemy.fightMap.mapArray.objectAtIndex(10) as! FTMapCell).obj = fightEnemy
+//        fightEnemy.fightMap = FightMap()
+//        fightEnemy.fightMap.initMap(5, verticalNum: 4, oneSize: fightMapCellSize, scene: self, originalPointY: screenSize.height-screenSize.height*0.299, isEnemy: true)
+//        fightEnemy.sprite.position = fightEnemy.fightMap.mapArray.objectAtIndex(10).position
+//        (fightEnemy.fightMap.mapArray.objectAtIndex(10) as! FTMapCell).obj = fightEnemy
         
-        fightEnemy.playerStateUI = FTPlayerStateUI(player: fightEnemy, scene: self)
-        fightEnemy.playerStateUI.hpLabel.position = CGPoint(x: screenSize.width*0.146 , y: screenSize.height-screenSize.height*0.375)
-        
-        fightPlayer.enemy = fightEnemy
-        fightEnemy.enemy = fightPlayer
+//        fightEnemy.playerStateUI = FTPlayerStateUI(player: fightEnemy, scene: self)
+//        fightEnemy.playerStateUI.hpLabel.position = CGPoint(x: screenSize.width*0.146 , y: screenSize.height-screenSize.height*0.375)
+        self.addChild(fightEnemy.playerStateUI.hpLabel)
+//        fightPlayer.enemy = fightEnemy
+//        fightEnemy.enemy = fightPlayer
         configBitMask()
         
         
+        sock.delegate = self
         
 //        let beginBtn = SpriteButton(titleText: "产生火球", normalImageName: nil, callBack: { () -> () in
 //            
@@ -96,13 +115,24 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
 //        self.addChild(boomBtn)
         
         
-        wsDelegate = FightSceneWSDelegate(forScene: self)
-        websocket.delegate = wsDelegate
+//        wsDelegate = FightSceneWSDelegate(forScene: self)
+//        websocket.delegate = wsDelegate
 
+        
+        
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: #selector(ballFollowPlayer), name: "playerMove", object: fightPlayer)
         
         NSTimer.scheduledTimerWithTimeInterval(7, target: self, selector: #selector(createBall), userInfo: nil, repeats: true)
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
     
     func configBitMask() {
@@ -207,7 +237,8 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
                     fightPlayer.mapCellIndex = i
                     
                     // websocket.writeString("battlefield001_\(userID)_castspell_\(fightPlayer.toDictionary())")
-                    websocket.writeMessage(BTMessage(command: BTCommand.PlayerStatus, params: fightPlayer.toDictionary()))
+                    sock.send(BTCommand.CPlayerStatus, withParams: fightPlayer.toDictionary())
+                  
                 }
             }
         }

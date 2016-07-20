@@ -9,14 +9,14 @@
 import Foundation
 import SpriteKit
 
-class Boom: SKSpriteNode {
+class Boom: SKSpriteNode,FTCellStandAbleDelegate {
     var entityName: String!
     var isControl: Bool!
     var boomID:String!
     var collideCount: UInt32!
     var isRemove: Bool!
     var boomOnMapCellIndex: Int?
-    
+    var HP: Int = 1
     init(imageName: String, size: CGSize, entityName: String, collsionBitMask: UInt32, BoomID: String) {
         super.init(texture: SKTexture(imageNamed: imageName), color: UIColor.clearColor(), size: size)
         self.entityName = entityName
@@ -37,7 +37,10 @@ class Boom: SKSpriteNode {
         self.collideCount = 0
         self.isRemove = false
     }
-
+    
+    func didBeHit(hitValue: Int) {
+        self.HP = self.HP-hitValue
+    }
     
     func removeBoom() -> Bool{
         if self.isRemove == true {

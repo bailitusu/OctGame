@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 
 public let KeyID = "id"
@@ -28,44 +29,65 @@ public class SLUser: OCTModel {
     
     
     public init(fromJSON json: JSON) {
-        self.id = json[KeyID]!.string!
-        self.exp = Int(json[KeyExp]!.double!)
+//        self.id = json[KeyID]!.string!
+//        self.exp = Int(json[KeyExp]!.double!)
+//
+//        
+//        self.characters = []
+//        for s in json[KeyCharacters]!.array! {
+//            self.characters.append(s.string!)
+//        }
+//        
+//        self.talent = []
+//        for s in json[KeyTalent]!.array! {
+//            self.talent.append(s.string!)
+//        }
+//        
+//        var dict = [String: AnyObject]()
+//        
 
         
-        self.characters = []
-        for s in json[KeyCharacters]!.array! {
-            self.characters.append(s.string!)
-        }
+        self.id = json[KeyID].string!
+        self.exp = json[KeyExp].int!
+        self.characters = json[KeyCharacters].arrayObject as! [String]
+        self.talent = json[KeyTalent].arrayObject as! [String]
         
-        self.talent = []
-        for s in json[KeyTalent]!.array! {
-            self.talent.append(s.string!)
-        }
+        
     }
     
     
     public func toJSON() -> JSON {
-        let idJSON = JSON([KeyID: JSON(self.id)])
-        let expJSON = JSON([KeyExp: JSON(Double(self.exp))])
+//        let idJSON = JSON([KeyID: JSON(self.id)])
+//        let expJSON = JSON([KeyExp: JSON(Double(self.exp))])
+//        
+//        
+//        var charJSON = [JSON]()
+//        for char in self.characters {
+//            charJSON.append(JSON(char))
+//        }
+//        let charsJSON = JSON(charJSON)
+//        let characterJSON = JSON([KeyCharacters: charsJSON])
+//        
+//        
+//        var talJSON = [JSON]()
+//        for tal in self.talent {
+//            talJSON.append(JSON(tal))
+//        }
+//        let talsJSON = JSON(talJSON)
+//        let talentJSON = JSON([KeyTalent: talsJSON])
+//        
+//        
+//        return JSON([KeyID: JSON(self.id), KeyExp: JSON(Double(self.exp)), KeyCharacters: charsJSON, KeyTalent: talsJSON])
         
+        var dict = [String: AnyObject]()
         
-        var charJSON = [JSON]()
-        for char in self.characters {
-            charJSON.append(JSON(char))
-        }
-        let charsJSON = JSON(charJSON)
-        let characterJSON = JSON([KeyCharacters: charsJSON])
+        dict.updateValue(self.id, forKey: KeyID)
+        dict.updateValue(self.exp, forKey: KeyExp)
+        dict.updateValue(self.characters, forKey: KeyCharacters)
+        dict.updateValue(self.talent, forKey: KeyTalent)
         
+        return JSON(dict)
         
-        var talJSON = [JSON]()
-        for tal in self.talent {
-            talJSON.append(JSON(tal))
-        }
-        let talsJSON = JSON(talJSON)
-        let talentJSON = JSON([KeyTalent: talsJSON])
-        
-        
-        return JSON([KeyID: JSON(self.id), KeyExp: JSON(Double(self.exp)), KeyCharacters: charsJSON, KeyTalent: talsJSON])
         
     }
     

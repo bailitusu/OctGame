@@ -10,7 +10,7 @@ import SpriteKit
 import UIKit
 
 class Wall: Building, FTCellStandAbleDelegate {
-    var wallHP: Int = 1
+    var HP: Int = 1
     var wallSprite: SKSpriteNode!
     var entityName: String!
     var wallID: UInt32!
@@ -38,7 +38,7 @@ class Wall: Building, FTCellStandAbleDelegate {
         
         
         self.hpLabel = SKLabelNode(fontNamed: "Arial")
-        self.hpLabel.text = "\(wallHP)"
+        self.hpLabel.text = "\(HP)"
         self.hpLabel.fontSize = 12
         self.hpLabel.fontColor = UIColor.redColor()
         self.hpLabel.zPosition = SpriteLevel.fightStateUI.rawValue
@@ -53,7 +53,7 @@ class Wall: Building, FTCellStandAbleDelegate {
     }
     
     func removeWall() -> Bool {
-        if self.wallHP <= 0 {
+        if self.HP <= 0 {
             self.wallSprite.removeFromParent()
             return true
         }
@@ -61,7 +61,7 @@ class Wall: Building, FTCellStandAbleDelegate {
     }
     
     func didBeHit(hitValue: Int) {
-        self.wallHP  = self.wallHP - hitValue
-        self.hpLabel.text = "\(wallHP)"
+        self.HP  = self.HP - hitValue
+        self.hpLabel.text = "\(HP)"
     }
 }

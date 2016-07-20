@@ -11,43 +11,63 @@ import Foundation
 import SwiftyJSON
 
 
-let UserID = "user\(Int(arc4random() % 10000) + 1)"
+#if os(iOS)
+    let UserID = NSUserDefaults.standardUserDefaults().objectForKey("userid") as? String ?? "user_\(arc4random() % 1000)"
+#else
+    let UserID = "WebSocketServer"
+#endif
 
 
-struct BTMessage: CustomStringConvertible {
+
+public struct BTMessage: CustomStringConvertible {
     
-    var userID: String = UserID
+    public var userid: String = UserID
     
-    var command: BTCommand
+    public var command: BTCommand
     
-    var params: JSON?
+    public var params: [String: AnyObject]
     
     
-    init?(from string: String) {
+    public init?(from string: String) {
         
-        let strings = string.componentsSeparatedByString("_")
-        self.userID = strings[0]
-        self.command = BTCommand.decode(strings[1])
-        
-        if strings.count > 2 {
-            self.params = JSON.parse(strings[2])
-        }
+            let json = JSON.parse(string)
+            
+            guard let id = json["userid"].string else {
+                return nil
+            }
+            
+            
+            guard let command = json["command"].string else {
+                return nil
+            }
+            
+            
+            guard let params = json["params"].dictionaryObject else {
+                return nil
+            }
+            
+            
+            self.userid = id
+            self.command = BTCommand.decode(command)
+            self.params = params
+            
+            
         
     }
     
     
-    init(command: BTCommand, params: JSON? = nil) {
+    public init(command: BTCommand, params: [String: AnyObject] = [:]) {
+        self.userid = UserID
         self.command = command
         self.params = params
     }
     
 
-    var description: String {
-        if self.params == nil {
-            return "\(userID)_\(command)"
-        } else {
-            return "\(userID)_\(command)_\(params!)"
-        }
+    public var description: String {
+        
+        let dict: [String: AnyObject] = ["userid": self.userid, "command": self.command.description, "params": self.params]
+        return JSON(dict).description
+        
     }
     
     

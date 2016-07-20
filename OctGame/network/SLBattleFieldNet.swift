@@ -9,19 +9,12 @@
 
 import Foundation
 import Starscream
-import SwiftyJSON
 
 
-public protocol SLBattleFieldNetDelegate {
+public protocol SLBattleFieldNetDelegate: NSObjectProtocol {
     func websocketDidConnected(socket: SLBattleFieldNet)
     func websocketDidDisconnected(socket: SLBattleFieldNet, error: NSError?)
-    
-    func doStartFighting(msg: BTMessage)
-    func doEndFighting(msg: BTMessage)
-    func doPlayerDisconnected(msg: BTMessage)
-    func doCreateSpell(msg: BTMessage)
-    func doCastSpell(msg: BTMessage)
-    func doPlayerStatus(msg: BTMessage)
+    func websocketDidReceiveMessage(msg: BTMessage, net: SLBattleFieldNet)
 }
 
 
@@ -35,12 +28,9 @@ public class SLBattleFieldNet: WebSocketDelegate {
     
     let socket: WebSocket
     
-    var delegate: SLBattleFieldNetDelegate
+    weak var delegate: SLBattleFieldNetDelegate?
     
-    init(delegate: SLBattleFieldNetDelegate) {
-        
-        self.delegate = delegate
-        
+    init() {
         self.socket = WebSocket(url: NSURL(string: BTWebSocketURL)!, protocols: BTProtocols)
         self.socket.connect()
         self.socket.delegate = self
@@ -58,45 +48,46 @@ public class SLBattleFieldNet: WebSocketDelegate {
     
     public func websocketDidConnect(socket: WebSocket) {
         self.startHeartTick()
-        self.delegate.websocketDidConnected(self.socket)
+        self.delegate?.websocketDidConnected(self)
     }
     
     
     
     public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-        self.delegate.websocketDidDisconnected(self.socket, error: error)
+        self.delegate?.websocketDidDisconnected(self, error: error)
     }
     
     
     
-    public func websocketDidReceiveData(_ socket: WebSocket, data: Data) {
+    public func websocketDidReceiveData(socket: WebSocket, data: NSData) {
         
     }
     
     
     
-    public func websocketDidReceiveMessage(_ socket: WebSocket, text: String) {
+    public func websocketDidReceiveMessage(socket: WebSocket, text: String) {
         guard let msg = BTMessage(from: text) else {
             return
         }
         
-        
-        switch msg.command {
-        case .SStartFighting:
-            self.delegate.doStartFighting(msg: msg)
-        case .SEndFighting:
-            self.delegate.doEndFighting(msg: msg)
-        case .SPlayerDisconnected:
-            self.delegate.doPlayerDisconnected(msg: msg)
-        case .CCreateSpell:
-            self.delegate.doCastSpell(msg: msg)
-        case .CCastSpell:
-            self.delegate.doCastSpell(msg: msg)
-        case .CPlayerStatus:
-            self.delegate.doPlayerStatus(msg: msg)
-        default:
-            print("unknow command: \(msg.command)")
-        }
+
+        self.delegate?.websocketDidReceiveMessage(msg, net: self)
+//        switch msg.command {
+//        case .SStartFighting:
+//            self.delegate?.doStartFighting(msg: msg)
+//        case .SEndFighting:
+//            self.delegate?.doEndFighting(msg: msg)
+//        case .SPlayerDisconnected:
+//            self.delegate?.doPlayerDisconnected(msg: msg)
+//        case .CCreateSpell:
+//            self.delegate?.doCastSpell(msg: msg)
+//        case .CCastSpell:
+//            self.delegate?.doCastSpell(msg: msg)
+//        case .CPlayerStatus:
+//            self.delegate?.doPlayerStatus(msg: msg)
+//        default:
+//            print("unknow command: \(msg.command)")
+//        }
         
     }
     
@@ -107,10 +98,10 @@ public class SLBattleFieldNet: WebSocketDelegate {
 
 
 extension SLBattleFieldNet {
-    func send(_ command: BTCommand, withParams params: JSON) {
+    func send(command: BTCommand, withParams params: [String: AnyObject] = [:]) {
         let msg = BTMessage(command: command, params: params)
         
-        self.socket.write(string: msg.description)
+        self.socket.writeString(msg.description)
     }
 }
 

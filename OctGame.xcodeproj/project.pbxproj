@@ -40,14 +40,21 @@
 		180852D11D210BE900531183 /* CommonFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180852D01D210BE900531183 /* CommonFunc.swift */; };
 		182301F61D3CB1FB00355935 /* FTMatchScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182301F51D3CB1FB00355935 /* FTMatchScene.swift */; };
 		182302031D3CBD8100355935 /* GameStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182302021D3CBD8100355935 /* GameStartVC.swift */; };
+		182302281D3DF09300355935 /* BTCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1823021B1D3DF09300355935 /* BTCharacter.swift */; };
+		182302291D3DF09300355935 /* BTHeartTick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1823021C1D3DF09300355935 /* BTHeartTick.swift */; };
+		1823022F1D3DF09300355935 /* OCTModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182302221D3DF09300355935 /* OCTModel.swift */; };
+		182302311D3DF09300355935 /* SLBattleFieldNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182302241D3DF09300355935 /* SLBattleFieldNet.swift */; };
+		182302321D3DF09300355935 /* SLDataBaseNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182302251D3DF09300355935 /* SLDataBaseNet.swift */; };
+		182302331D3DF09300355935 /* SLUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182302261D3DF09300355935 /* SLUser.swift */; };
+		182302371D3DF12200355935 /* BTCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182302351D3DF12200355935 /* BTCommand.swift */; };
+		182302381D3DF12200355935 /* BTMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182302361D3DF12200355935 /* BTMessage.swift */; };
 		183003DF1D223B8900F66865 /* TextScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183003DE1D223B8900F66865 /* TextScene.swift */; };
 		183003E11D22404200F66865 /* SKProgressNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183003E01D22404200F66865 /* SKProgressNode.swift */; };
 		184334861D2A9A9800057462 /* FTMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184334851D2A9A9800057462 /* FTMapCell.swift */; };
 		185CDEA91D152A5C00D6499E /* dawuyun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 185CDEA81D152A5C00D6499E /* dawuyun@2x.png */; };
 		185CDEAB1D154A5E00D6499E /* laojiangshi_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 185CDEAA1D154A5E00D6499E /* laojiangshi_left.png */; };
 		185CDEAD1D154A6B00D6499E /* laodaoshi.png in Resources */ = {isa = PBXBuildFile; fileRef = 185CDEAC1D154A6B00D6499E /* laodaoshi.png */; };
-		185D96191D2E1FEC0058636A /* BTCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185D96171D2E1FEC0058636A /* BTCommand.swift */; };
-		185D961A1D2E1FEC0058636A /* BTMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185D96181D2E1FEC0058636A /* BTMessage.swift */; };
+		185EBF3E1D3E367300E55747 /* AttackProtocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185EBF3D1D3E367300E55747 /* AttackProtocal.swift */; };
 		186066A81D2A7010004163D3 /* FightSceneWSDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186066A71D2A7010004163D3 /* FightSceneWSDelegate.swift */; };
 		18685D971D0AD0A200BCAE10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18685D961D0AD0A200BCAE10 /* AppDelegate.swift */; };
 		18685D991D0AD0A200BCAE10 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 18685D981D0AD0A200BCAE10 /* GameScene.sks */; };
@@ -120,6 +127,9 @@
 		18B086C41D229D2900DBFBAD /* huiwudi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B086BD1D229D2900DBFBAD /* huiwudi@2x.png */; };
 		18B086C51D229D2900DBFBAD /* huiwuyun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B086BE1D229D2900DBFBAD /* huiwuyun@2x.png */; };
 		18B086C71D22AADC00DBFBAD /* zuanshi.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B086C61D22AADC00DBFBAD /* zuanshi.png */; };
+		18B1CB831D3F3FEE0065088C /* FTSynchronizingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B1CB821D3F3FEE0065088C /* FTSynchronizingScene.swift */; };
+		18B1CB901D3F48850065088C /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B1CB8F1D3F48850065088C /* loading.png */; };
+		18B1CB921D3F68A90065088C /* SaveSkillProtocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B1CB911D3F68A90065088C /* SaveSkillProtocal.swift */; };
 		18B62C931D30F89600C49EA3 /* BoomSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B62C921D30F89600C49EA3 /* BoomSystem.swift */; };
 		18BA0D3F1D1B9D6600B0272A /* flash.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BA0D3E1D1B9D6600B0272A /* flash.png */; };
 		18BA0D411D1BB50F00B0272A /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA0D401D1BB50F00B0272A /* Setting.swift */; };
@@ -289,14 +299,21 @@
 		180852D01D210BE900531183 /* CommonFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunc.swift; sourceTree = "<group>"; };
 		182301F51D3CB1FB00355935 /* FTMatchScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTMatchScene.swift; sourceTree = "<group>"; };
 		182302021D3CBD8100355935 /* GameStartVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStartVC.swift; sourceTree = "<group>"; };
+		1823021B1D3DF09300355935 /* BTCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTCharacter.swift; sourceTree = "<group>"; };
+		1823021C1D3DF09300355935 /* BTHeartTick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTHeartTick.swift; sourceTree = "<group>"; };
+		182302221D3DF09300355935 /* OCTModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCTModel.swift; sourceTree = "<group>"; };
+		182302241D3DF09300355935 /* SLBattleFieldNet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLBattleFieldNet.swift; sourceTree = "<group>"; };
+		182302251D3DF09300355935 /* SLDataBaseNet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLDataBaseNet.swift; sourceTree = "<group>"; };
+		182302261D3DF09300355935 /* SLUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLUser.swift; sourceTree = "<group>"; };
+		182302351D3DF12200355935 /* BTCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTCommand.swift; sourceTree = "<group>"; };
+		182302361D3DF12200355935 /* BTMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTMessage.swift; sourceTree = "<group>"; };
 		183003DE1D223B8900F66865 /* TextScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextScene.swift; sourceTree = "<group>"; };
 		183003E01D22404200F66865 /* SKProgressNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKProgressNode.swift; sourceTree = "<group>"; };
 		184334851D2A9A9800057462 /* FTMapCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTMapCell.swift; sourceTree = "<group>"; };
 		185CDEA81D152A5C00D6499E /* dawuyun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dawuyun@2x.png"; sourceTree = "<group>"; };
 		185CDEAA1D154A5E00D6499E /* laojiangshi_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laojiangshi_left.png; sourceTree = "<group>"; };
 		185CDEAC1D154A6B00D6499E /* laodaoshi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laodaoshi.png; sourceTree = "<group>"; };
-		185D96171D2E1FEC0058636A /* BTCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTCommand.swift; sourceTree = "<group>"; };
-		185D96181D2E1FEC0058636A /* BTMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTMessage.swift; sourceTree = "<group>"; };
+		185EBF3D1D3E367300E55747 /* AttackProtocal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttackProtocal.swift; sourceTree = "<group>"; };
 		186066A71D2A7010004163D3 /* FightSceneWSDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FightSceneWSDelegate.swift; sourceTree = "<group>"; };
 		18685D931D0AD0A200BCAE10 /* OctGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OctGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18685D961D0AD0A200BCAE10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
@@ -369,11 +386,14 @@
 		18B086BD1D229D2900DBFBAD /* huiwudi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "huiwudi@2x.png"; sourceTree = "<group>"; };
 		18B086BE1D229D2900DBFBAD /* huiwuyun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "huiwuyun@2x.png"; sourceTree = "<group>"; };
 		18B086C61D22AADC00DBFBAD /* zuanshi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zuanshi.png; sourceTree = "<group>"; };
+		18B1CB821D3F3FEE0065088C /* FTSynchronizingScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTSynchronizingScene.swift; sourceTree = "<group>"; };
+		18B1CB8F1D3F48850065088C /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
+		18B1CB911D3F68A90065088C /* SaveSkillProtocal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveSkillProtocal.swift; sourceTree = "<group>"; };
 		18B62C921D30F89600C49EA3 /* BoomSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoomSystem.swift; sourceTree = "<group>"; };
 		18BA0D3E1D1B9D6600B0272A /* flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash.png; sourceTree = "<group>"; };
 		18BA0D401D1BB50F00B0272A /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		18D810E21D37535F00551B00 /* GuanChuanHarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuanChuanHarm.swift; sourceTree = "<group>"; };
-		18D810EF1D37654900551B00 /* FTCellStandAbleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTCellStandAbleDelegate.swift; sourceTree = "<group>"; };
+		18D810EF1D37654900551B00 /* FTCellStandAbleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FTCellStandAbleDelegate.swift; path = ../Map/FTCellStandAbleDelegate.swift; sourceTree = "<group>"; };
 		18D810F11D37857E00551B00 /* wall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wall.jpg; sourceTree = "<group>"; };
 		18D810F61D378B7400551B00 /* FTPlayerStateUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTPlayerStateUI.swift; sourceTree = "<group>"; };
 		18E7AC0F1D17B2740040B3B9 /* citie.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = citie.atlas; sourceTree = "<group>"; };
@@ -432,8 +452,14 @@
 		185D96071D2E1F3A0058636A /* network */ = {
 			isa = PBXGroup;
 			children = (
-				185D96171D2E1FEC0058636A /* BTCommand.swift */,
-				185D96181D2E1FEC0058636A /* BTMessage.swift */,
+				182302351D3DF12200355935 /* BTCommand.swift */,
+				182302361D3DF12200355935 /* BTMessage.swift */,
+				1823021C1D3DF09300355935 /* BTHeartTick.swift */,
+				182302241D3DF09300355935 /* SLBattleFieldNet.swift */,
+				182302251D3DF09300355935 /* SLDataBaseNet.swift */,
+				182302221D3DF09300355935 /* OCTModel.swift */,
+				182302261D3DF09300355935 /* SLUser.swift */,
+				1823021B1D3DF09300355935 /* BTCharacter.swift */,
 			);
 			path = network;
 			sourceTree = "<group>";
@@ -520,6 +546,7 @@
 		18685DB11D0AD0DE00BCAE10 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				18B1CB8F1D3F48850065088C /* loading.png */,
 				18D810F11D37857E00551B00 /* wall.jpg */,
 				1894EFF21D34B89700E7FAA9 /* huoqiu.png */,
 				1894EFF31D34B89700E7FAA9 /* shuiqiu.png */,
@@ -603,6 +630,7 @@
 				1871DAB41D263C8F002B6479 /* FightScene.swift */,
 				186066A71D2A7010004163D3 /* FightSceneWSDelegate.swift */,
 				182301F51D3CB1FB00355935 /* FTMatchScene.swift */,
+				18B1CB821D3F3FEE0065088C /* FTSynchronizingScene.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -629,6 +657,9 @@
 			isa = PBXGroup;
 			children = (
 				1871DABF1D267657002B6479 /* OnlineGameConvertable.swift */,
+				185EBF3D1D3E367300E55747 /* AttackProtocal.swift */,
+				18D810EF1D37654900551B00 /* FTCellStandAbleDelegate.swift */,
+				18B1CB911D3F68A90065088C /* SaveSkillProtocal.swift */,
 			);
 			path = protocol;
 			sourceTree = "<group>";
@@ -666,7 +697,6 @@
 				187E306D1D191594008AB0A5 /* Map.swift */,
 				1871DAB81D2642C3002B6479 /* FightMap.swift */,
 				184334851D2A9A9800057462 /* FTMapCell.swift */,
-				18D810EF1D37654900551B00 /* FTCellStandAbleDelegate.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -899,6 +929,7 @@
 				18B086B01D229D1300DBFBAD /* jiasu@2x.png in Resources */,
 				18685DC21D0AD0DE00BCAE10 /* jjc.jpg in Resources */,
 				180262ED1D12853800949B15 /* boom.png in Resources */,
+				18B1CB901D3F48850065088C /* loading.png in Resources */,
 				18E7AC101D17B2740040B3B9 /* citie.atlas in Resources */,
 				1871DAB71D264268002B6479 /* fightOne.jpg in Resources */,
 				18B086C11D229D2900DBFBAD /* huicitie@2x.png in Resources */,
@@ -956,10 +987,14 @@
 				18685DCC1D0AEDF500BCAE10 /* SetSpriteLevel.swift in Sources */,
 				187E30721D192D3C008AB0A5 /* Sheep.swift in Sources */,
 				18685DC91D0AD0DE00BCAE10 /* MainScene.swift in Sources */,
+				182302331D3DF09300355935 /* SLUser.swift in Sources */,
 				180262F11D13C77A00949B15 /* AnimationComponent.swift in Sources */,
 				1871DABD1D2659BE002B6479 /* FightPlayer.swift in Sources */,
 				18685DC71D0AD0DE00BCAE10 /* BaseScene.swift in Sources */,
 				182301F61D3CB1FB00355935 /* FTMatchScene.swift in Sources */,
+				182302371D3DF12200355935 /* BTCommand.swift in Sources */,
+				182302321D3DF09300355935 /* SLDataBaseNet.swift in Sources */,
+				18B1CB921D3F68A90065088C /* SaveSkillProtocal.swift in Sources */,
 				1871DACB1D269489002B6479 /* FireSystem.swift in Sources */,
 				180262EF1D1298E100949B15 /* AddResource.swift in Sources */,
 				1868E7011D37DD2700C5876F /* Wall.swift in Sources */,
@@ -971,10 +1006,12 @@
 				180262BD1D1124DF00949B15 /* LargenMinifyComponent.swift in Sources */,
 				1871DAB91D2642C3002B6479 /* FightMap.swift in Sources */,
 				180796D61D2F8A5B0018CABC /* HengPaiHarm.swift in Sources */,
+				18B1CB831D3F3FEE0065088C /* FTSynchronizingScene.swift in Sources */,
 				180852CF1D20F4C900531183 /* Enemy.swift in Sources */,
 				183003DF1D223B8900F66865 /* TextScene.swift in Sources */,
+				185EBF3E1D3E367300E55747 /* AttackProtocal.swift in Sources */,
+				182302311D3DF09300355935 /* SLBattleFieldNet.swift in Sources */,
 				18D810F71D378B7400551B00 /* FTPlayerStateUI.swift in Sources */,
-				185D96191D2E1FEC0058636A /* BTCommand.swift in Sources */,
 				18685DC01D0AD0DE00BCAE10 /* Entity.swift in Sources */,
 				18685DC61D0AD0DE00BCAE10 /* GameGlodVC.swift in Sources */,
 				1871DAB51D263C8F002B6479 /* FightScene.swift in Sources */,
@@ -982,6 +1019,8 @@
 				18BA0D411D1BB50F00B0272A /* Setting.swift in Sources */,
 				18D810E31D37535F00551B00 /* GuanChuanHarm.swift in Sources */,
 				180262C91D11847200949B15 /* FenshenComponent.swift in Sources */,
+				182302381D3DF12200355935 /* BTMessage.swift in Sources */,
+				1823022F1D3DF09300355935 /* OCTModel.swift in Sources */,
 				18685DC81D0AD0DE00BCAE10 /* BeginScene.swift in Sources */,
 				1871DACF1D27ABF8002B6479 /* Fire.swift in Sources */,
 				180262BF1D11377A00949B15 /* HaltComponent.swift in Sources */,
@@ -991,9 +1030,10 @@
 				180262B41D0FDB5900949B15 /* Zombie.swift in Sources */,
 				180262C51D11418B00949B15 /* DashComponent.swift in Sources */,
 				180262B71D0FE10100949B15 /* CreateProduct.swift in Sources */,
+				182302291D3DF09300355935 /* BTHeartTick.swift in Sources */,
 				1871DAC91D269463002B6479 /* SkillSystem.swift in Sources */,
 				18D810F01D37654900551B00 /* FTCellStandAbleDelegate.swift in Sources */,
-				185D961A1D2E1FEC0058636A /* BTMessage.swift in Sources */,
+				182302281D3DF09300355935 /* BTCharacter.swift in Sources */,
 				182302031D3CBD8100355935 /* GameStartVC.swift in Sources */,
 				180262B91D111D5100949B15 /* MagnetComponent.swift in Sources */,
 				180796D81D2F999D0018CABC /* HarmObj.swift in Sources */,

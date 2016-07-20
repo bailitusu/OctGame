@@ -17,10 +17,10 @@ protocol OnlineGameConvertable {
 
 
 protocol OnlineGameObjectType {
-    func toDictionary() -> JSON
+    func toDictionary() -> [String: AnyObject]
     
-    func toInitSkill(dict: Dictionary<String, AnyObject>)-> JSON
-    func toReleaseSkill(dict: Dictionary<String, AnyObject>) -> JSON
+    func toInitSkill(dict: [String: AnyObject])-> [String: AnyObject]
+    func toReleaseSkill(dict: [String: AnyObject]) -> [String: AnyObject]
    // func fromDictionary(dict: JSON)
 }
 

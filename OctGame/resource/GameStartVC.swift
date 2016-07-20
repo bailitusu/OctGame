@@ -59,7 +59,22 @@ class GameStartVC: UIViewController {
         }
     }
     
+    
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
+
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        //        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+        //            return .Portrait
+        //        }else {
+        //            return .All
+        //        }
+        return .Portrait
+    }
+
 }

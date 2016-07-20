@@ -84,8 +84,8 @@ class ConfigureSkill {
         takeBallArray.append(ball)
     }
     
-    init(scene: FightScene, player: FightPlayer) {
-        self.scene = scene
+    init(player: FightPlayer) {
+      //  self.scene = scene
         self.player = player
         self.isConfigOK = false
     }
@@ -166,22 +166,27 @@ class ConfigureSkill {
         case BallCategory.fireBall.rawValue + BallCategory.electricBoll.rawValue + BallCategory.fireBall.rawValue:
             self.scene.fightPlayer.createSkillSprite(FireSystem.self)
             
-            var dict = Dictionary<String, AnyObject>()
+            var dict = [String: AnyObject]()
             dict.updateValue(SkillName.fire.rawValue, forKey: "initSkill")
-            self.scene.websocket.writeMessage(BTMessage(command: BTCommand.CreateSpell, params: self.scene.fightPlayer.toInitSkill(dict)))
+           // self.scene.websocket.writeMessage(BTMessage(command: BTCommand.CreateSpell, params: self.scene.fightPlayer.toInitSkill(dict)))
+            self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
             break
         case BallCategory.fireBall.rawValue + BallCategory.waterBall.rawValue + BallCategory.electricBoll.rawValue:
             self.scene.fightPlayer.createSkillSprite(BoomSystem.self)
-            var dict = Dictionary<String, AnyObject>()
+            //var dict = Dictionary<String, AnyObject>()
+            var dict = [String: AnyObject]()
             dict.updateValue(SkillName.boom.rawValue, forKey: "initSkill")
-            self.scene.websocket.writeMessage(BTMessage(command: BTCommand.CreateSpell, params: self.scene.fightPlayer.toInitSkill(dict)))
+          //  self.scene.websocket.writeMessage(BTMessage(command: BTCommand.CreateSpell, params: self.scene.fightPlayer.toInitSkill(dict)))
+            self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
             break
         case BallCategory.fireBall.rawValue + BallCategory.fireBall.rawValue + BallCategory.waterBall.rawValue:
             self.scene.fightPlayer.createSkillSprite(WallSystem.self)
             
-            var dict = Dictionary<String, AnyObject>()
+//            var dict = Dictionary<String, AnyObject>()
+            var dict = [String: AnyObject]()
             dict.updateValue(SkillName.wall.rawValue, forKey: "initSkill")
-            self.scene.websocket.writeMessage(BTMessage(command: BTCommand.CreateSpell, params: self.scene.fightPlayer.toInitSkill(dict)))
+            //self.scene.websocket.writeMessage(BTMessage(command: BTCommand.CreateSpell, params: self.scene.fightPlayer.toInitSkill(dict)))
+            self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
         default:
             print("configskill  error")
         }

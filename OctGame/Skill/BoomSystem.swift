@@ -9,7 +9,7 @@
 import SpriteKit
 import UIKit
 
-class BoomSystem: SkillSystem {
+class BoomSystem: SkillSystem, AttackProtocal {
     
     var boomArray: NSMutableArray!
     var currentBoom: Boom!
@@ -106,6 +106,7 @@ class BoomSystem: SkillSystem {
                 if (enemyMap.mapArray.objectAtIndex(i) as! FTMapCell).obj == nil {
                     if CGRectContainsPoint(enemyMap.mapArray.objectAtIndex(i).frame, point) {
                         self.currentBoom.position = enemyMap.mapArray.objectAtIndex(i).position
+                        (enemyMap.mapArray.objectAtIndex(i) as! FTMapCell).obj = self.currentBoom
                         return i
                     }
                 }
@@ -159,13 +160,15 @@ class BoomSystem: SkillSystem {
                 self.currentBoom.isControl = false
                 self.currentBoom.physicsBody?.dynamic = true
                 self.setBoom()
-                var dict = Dictionary<String, AnyObject>()
+               // var dict = Dictionary<String, AnyObject>()
+                var dict = [String: AnyObject]()
                 dict.updateValue(SkillName.boom.rawValue, forKey: "initSkill")
                 let percentX = self.currentBoom.position.x / screenSize.width
                 let percentY = self.currentBoom.position.y / screenSize.height
                 dict.updateValue(percentX, forKey: "percentX")
                 dict.updateValue(percentY, forKey: "percentY")
-                scene.websocket.writeMessage(BTMessage(command: BTCommand.CastSpell, params: (self.entity as! FightPlayer).toReleaseSkill(dict)))
+               // scene.websocket.writeMessage(BTMessage(command: BTCommand.CastSpell, params: (self.entity as! FightPlayer).toReleaseSkill(dict)))
+                scene.sock.send(BTCommand.CCastSpell, withParams: (self.entity as! FightPlayer).toReleaseSkill(dict))
             }else {
                 self.currentBoom.position = defaluePosition!
             }
@@ -252,18 +255,18 @@ class BoomSystem: SkillSystem {
                     }
                 }
                 
-                if nodeB.categoryBitMask == BitMaskType.ftWall {
-                    let wall = nodeB.node?.userData?.objectForKey("wallclass") as! Wall
-                    if boom.entityName == "fightEnemy" {
-                        if wall.entityName == "fightPlayer" {
-                            if wall.isControl == false {
-                                boom.isRemove = true
-                                self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
-                            }
-
-                        }
-                    }
-                }
+//                if nodeB.categoryBitMask == BitMaskType.ftWall {
+//                    let wall = nodeB.node?.userData?.objectForKey("wallclass") as! Wall
+//                    if boom.entityName == "fightEnemy" {
+//                        if wall.entityName == "fightPlayer" {
+//                            if wall.isControl == false {
+//                                boom.isRemove = true
+//                                self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+//                            }
+//
+//                        }
+//                    }
+//                }
             }else if nodeB.categoryBitMask == BitMaskType.boom {
                 let boom = nodeB.node as! Boom
                 if nodeA.categoryBitMask == BitMaskType.fightSelf {
@@ -275,18 +278,18 @@ class BoomSystem: SkillSystem {
                     }
                 }
                 
-                if nodeA.categoryBitMask == BitMaskType.ftWall {
-                    let wall = nodeA.node?.userData?.objectForKey("wallclass") as! Wall
-                    if boom.entityName == "fightEnemy" {
-                        if wall.entityName == "fightPlayer" {
-                            if wall.isControl == false {
-                                boom.isRemove = true
-                                self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
-                            }
-
-                        }
-                    }
-                }
+//                if nodeA.categoryBitMask == BitMaskType.ftWall {
+//                    let wall = nodeA.node?.userData?.objectForKey("wallclass") as! Wall
+//                    if boom.entityName == "fightEnemy" {
+//                        if wall.entityName == "fightPlayer" {
+//                            if wall.isControl == false {
+//                                boom.isRemove = true
+//                                self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+//                            }
+//
+//                        }
+//                    }
+//                }
 
             }
         }

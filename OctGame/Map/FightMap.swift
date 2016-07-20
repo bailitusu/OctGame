@@ -39,7 +39,7 @@ class FightMap: NSObject{
         return nil
     }
     
-    func initMap(horizontalNum: Int, verticalNum: Int, oneSize: CGSize, scene: SKScene, originalPointY: CGFloat,isEnemy: Bool) {
+    func initMap(horizontalNum: Int, verticalNum: Int, oneSize: CGSize, originalPointY: CGFloat,isEnemy: Bool) {
         self.initFirstSpriteRect(horizontalNum, size: oneSize, originalPointY: originalPointY)
         for i in 0 ..< horizontalNum {
             for j in 0 ..< verticalNum {
@@ -50,7 +50,7 @@ class FightMap: NSObject{
                     newSpriteRect.position = CGPoint(x: oneSpriteRect.position.x+CGFloat(i)*oneSize.width, y: oneSpriteRect.position.y-CGFloat(j)*oneSize.height)
                 }
                 newSpriteRect.zPosition = SpriteLevel.map.rawValue
-                scene.addChild(newSpriteRect)
+              //  scene.addChild(newSpriteRect)
                 mapArray.addObject(newSpriteRect)
             }
         }

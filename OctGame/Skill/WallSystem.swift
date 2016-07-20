@@ -48,7 +48,7 @@ class WallSystem: SkillSystem {
         let selfMap = (self.entity as! FightPlayer).fightMap
         
         for i in 0 ..< selfMap.mapArray.count {
-            if (selfMap.mapArray.objectAtIndex(i) as! FTMapCell).obj == nil {
+            if ((selfMap.mapArray.objectAtIndex(i) as! FTMapCell).obj == nil || ((selfMap.mapArray.objectAtIndex(i) as! FTMapCell).obj as? Boom) != nil) {
                 if CGRectContainsPoint(selfMap.mapArray.objectAtIndex(i).frame, point) {
                     self.currentWall.wallSprite.position = selfMap.mapArray.objectAtIndex(i).position
                     return i
@@ -100,14 +100,16 @@ class WallSystem: SkillSystem {
                 
                 
 //                self.currentWall.wallSprite.physicsBody?.dynamic = true
-                var dict = Dictionary<String, AnyObject>()
+//                var dict = Dictionary<String, AnyObject>()
+                var dict = [String: AnyObject]()
                 dict.updateValue(SkillName.wall.rawValue, forKey: "initSkill")
                 let percentX = self.currentWall.wallSprite.position.x / screenSize.width
                 let percentY = self.currentWall.wallSprite.position.y / screenSize.height
                 dict.updateValue(percentX, forKey: "percentX")
                 dict.updateValue(percentY, forKey: "percentY")
-                scene.websocket.writeMessage(BTMessage(command: BTCommand.CastSpell, params: (self.entity as! FightPlayer).toReleaseSkill(dict)))
                 
+            //    scene.websocket.writeMessage(BTMessage(command: BTCommand.CCastSpell, params: (self.entity as! FightPlayer).toReleaseSkill(dict)))
+                scene.sock.send(BTCommand.CCastSpell, withParams: (self.entity as! FightPlayer).toReleaseSkill(dict))
                 let nc = NSNotificationCenter.defaultCenter()
                 nc.postNotificationName("wallSetRight", object: self, userInfo: ["playerSelfWall" : self.currentWall])
                 

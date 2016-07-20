@@ -10,7 +10,7 @@
 import SpriteKit
 import UIKit
 
-class FireSystem: SkillSystem {
+class FireSystem: SkillSystem,AttackProtocal {
 
     var huoqiuArray: NSMutableArray!
     var currentHuoqiu: Fire!
@@ -23,7 +23,6 @@ class FireSystem: SkillSystem {
         self.fireId = 0
         self.touchPointArray = NSMutableArray()
         self.bollGroup = BallCategory.fireBall.rawValue + BallCategory.electricBoll.rawValue + BallCategory.fireBall.rawValue
-   
     }
     
     override func addSkillObserver() {
@@ -263,14 +262,14 @@ class FireSystem: SkillSystem {
                 self.throwSkill(SkillSystem.reckonSkillSpeed(distance))
             }
 
-            var dict = Dictionary<String, AnyObject>()
+            var dict = [String: AnyObject]()
             dict.updateValue(SkillName.fire.rawValue, forKey: "initSkill")
             let percentX = SkillSystem.reckonSkillSpeed(distance).dx / screenSize.width
             let percentY = SkillSystem.reckonSkillSpeed(distance).dy / screenSize.height
             dict.updateValue(percentX, forKey: "percentX")
             dict.updateValue(percentY, forKey: "percentY")
-            scene.websocket.writeMessage(BTMessage(command: BTCommand.CastSpell, params: (self.entity as! FightPlayer).toReleaseSkill(dict)))
-            
+           // scene.websocket.writeMessage(BTMessage(command: BTCommand.CCastSpell, params: (self.entity as! FightPlayer).toReleaseSkill(dict)))
+            scene.sock.send(BTCommand.CCastSpell, withParams: (self.entity as! FightPlayer).toReleaseSkill(dict))
             
         }
 
