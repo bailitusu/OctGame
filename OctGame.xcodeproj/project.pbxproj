@@ -133,6 +133,8 @@
 		18B62C931D30F89600C49EA3 /* BoomSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B62C921D30F89600C49EA3 /* BoomSystem.swift */; };
 		18BA0D3F1D1B9D6600B0272A /* flash.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BA0D3E1D1B9D6600B0272A /* flash.png */; };
 		18BA0D411D1BB50F00B0272A /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA0D401D1BB50F00B0272A /* Setting.swift */; };
+		18CA050C1D40FC6800C78B8B /* SmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CA050B1D40FC6800C78B8B /* SmallView.swift */; };
+		18CA050E1D40FC6800C78B8B /* finishBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18CA050D1D40FC6800C78B8B /* finishBackground.jpg */; };
 		18D810E31D37535F00551B00 /* GuanChuanHarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D810E21D37535F00551B00 /* GuanChuanHarm.swift */; };
 		18D810F01D37654900551B00 /* FTCellStandAbleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D810EF1D37654900551B00 /* FTCellStandAbleDelegate.swift */; };
 		18D810F21D37857E00551B00 /* wall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18D810F11D37857E00551B00 /* wall.jpg */; };
@@ -392,6 +394,8 @@
 		18B62C921D30F89600C49EA3 /* BoomSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoomSystem.swift; sourceTree = "<group>"; };
 		18BA0D3E1D1B9D6600B0272A /* flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash.png; sourceTree = "<group>"; };
 		18BA0D401D1BB50F00B0272A /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		18CA050B1D40FC6800C78B8B /* SmallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallView.swift; sourceTree = "<group>"; };
+		18CA050D1D40FC6800C78B8B /* finishBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = finishBackground.jpg; sourceTree = "<group>"; };
 		18D810E21D37535F00551B00 /* GuanChuanHarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuanChuanHarm.swift; sourceTree = "<group>"; };
 		18D810EF1D37654900551B00 /* FTCellStandAbleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FTCellStandAbleDelegate.swift; path = ../Map/FTCellStandAbleDelegate.swift; sourceTree = "<group>"; };
 		18D810F11D37857E00551B00 /* wall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wall.jpg; sourceTree = "<group>"; };
@@ -485,6 +489,7 @@
 		18685D951D0AD0A200BCAE10 /* OctGame */ = {
 			isa = PBXGroup;
 			children = (
+				18CA04FF1D40FC6800C78B8B /* SmallView */,
 				1868E6F41D37DD1400C5876F /* Building */,
 				18D810F31D3786F600551B00 /* PlayerStateUI */,
 				1894EFEF1D34B2B700E7FAA9 /* ConfigureSkill */,
@@ -546,6 +551,7 @@
 		18685DB11D0AD0DE00BCAE10 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				18CA050D1D40FC6800C78B8B /* finishBackground.jpg */,
 				18B1CB8F1D3F48850065088C /* loading.png */,
 				18D810F11D37857E00551B00 /* wall.jpg */,
 				1894EFF21D34B89700E7FAA9 /* huoqiu.png */,
@@ -722,6 +728,14 @@
 				18A617A41D365F8C006581B4 /* SwiftyJSON tvOS Tests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		18CA04FF1D40FC6800C78B8B /* SmallView */ = {
+			isa = PBXGroup;
+			children = (
+				18CA050B1D40FC6800C78B8B /* SmallView.swift */,
+			);
+			path = SmallView;
 			sourceTree = "<group>";
 		};
 		18D810F31D3786F600551B00 /* PlayerStateUI */ = {
@@ -919,6 +933,7 @@
 				18B086B11D229D1300DBFBAD /* jiasu@3x.png in Resources */,
 				18B086B21D229D1300DBFBAD /* wudi@2x.png in Resources */,
 				180263051D13FF2500949B15 /* frozenRight.atlas in Resources */,
+				18CA050E1D40FC6800C78B8B /* finishBackground.jpg in Resources */,
 				1802630B1D1400C100949B15 /* walkRight.atlas in Resources */,
 				18B086C31D229D2900DBFBAD /* huijiasu@2x.png in Resources */,
 				18B086B41D229D1300DBFBAD /* wuyun@2x.png in Resources */,
@@ -1031,6 +1046,7 @@
 				180262C51D11418B00949B15 /* DashComponent.swift in Sources */,
 				180262B71D0FE10100949B15 /* CreateProduct.swift in Sources */,
 				182302291D3DF09300355935 /* BTHeartTick.swift in Sources */,
+				18CA050C1D40FC6800C78B8B /* SmallView.swift in Sources */,
 				1871DAC91D269463002B6479 /* SkillSystem.swift in Sources */,
 				18D810F01D37654900551B00 /* FTCellStandAbleDelegate.swift in Sources */,
 				182302281D3DF09300355935 /* BTCharacter.swift in Sources */,

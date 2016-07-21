@@ -21,12 +21,34 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
     var roleName: String!
     var fightMap: FightMap!
     var enemy: FightPlayer!
-  //  var fireBools:NSMutableArray!
+    var scene: FightScene?
     var skillSystemArray = [SkillSystem]()
-  //  var  yidong: Bool!
+
     var configureSkill: ConfigureSkill!
     
-    var HP: Int = 10
+    var HP: Int = 10 {
+        didSet {
+            if self.HP <= 0 {
+                var temp: Bool?
+                if self.roleName == "fightPlayer" {
+                    
+                        // self.scene!.sock.send(BTCommand.CStatusEnding)
+                   temp = false
+                   
+                }
+                if self.roleName == "fightEnemy" {
+                    
+                        // self.scene!.sock.send(BTCommand.CStatusEnding)
+                   temp = true
+                    
+                }
+                self.scene?.sock.send(BTCommand.CStatusEnding, withParams: self.toResult(temp!))
+                SuccessView.gameOver((self.scene?.view)!, isSuccess: nil)
+            }
+            
+
+        }
+    }
     var configCurrentBallArray = [Ball]()
     var mapCellIndex: Int! = 4 {
         didSet {
@@ -110,7 +132,7 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
     
     func moveToCell(locationSprite: FTMapCell) {
         if abs(locationSprite.position.x - self.sprite.position.x) < locationSprite.size.width+1 && abs(locationSprite.position.y - self.sprite.position.y) < locationSprite.size.height+1 {
-            if locationSprite.obj == nil {
+            if locationSprite.obj == nil || ((locationSprite.obj as? Boom) != nil)  {
                 let beforePlayerStandCell = self.fightMap.mapArray.objectAtIndex(self.fightMap.getCurrentPointMapCell(self.sprite.position)!) as! FTMapCell
                 beforePlayerStandCell.obj = nil
                 
@@ -181,7 +203,7 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
     func didBeHit(hitValue: Int) {
         self.HP = self.HP - hitValue
         self.playerStateUI.changeHpUI(self.HP)
-        print(self.HP)
+       // print(self.HP)
     }
 //    func runCurrentSkill<skillSystem: SkillSystem>(skillSystemClass:skillSystem.Type, speed: CGVector) {
 //        let system =  self.skillSystemForClass(skillSystemClass)
@@ -242,6 +264,12 @@ extension FightPlayer: OnlineGameObjectType {
         return dict
     }
     
+    func toResult(isSuccess: Bool) -> [String: AnyObject] {
+        var dict = [String: AnyObject]()
+        dict.updateValue(isSuccess, forKey: "result")
+        return dict
+    }
+    
     func fromDictionary(json: JSON) {
        // self.roleName = json["rolename"].stringValue
         self.mapCellIndex = json["mapCellNumber"].intValue
@@ -282,18 +310,21 @@ extension FightPlayer: OnlineGameObjectType {
             let percentX = CGFloat(json["percentX"].floatValue)
             let percentY = CGFloat(json["percentY"].floatValue)
             
-            self.skillSystemForClass(BoomSystem.self)?.currentBoom.position = SkillSystem.reversalPoint(percentX, percentY: percentY)
-            self.skillSystemForClass(BoomSystem.self)?.currentBoom.isControl = false
-            self.skillSystemForClass(BoomSystem.self)?.currentBoom.physicsBody?.dynamic = true
-            let tempBoom = (self.skillSystemForClass(BoomSystem.self)?.currentBoom)!
+            self.skillSystemForClass(BoomSystem.self)?.noLaunchBoom!.position = SkillSystem.reversalPoint(percentX, percentY: percentY)
+            self.skillSystemForClass(BoomSystem.self)?.noLaunchBoom!.isControl = false
+            self.skillSystemForClass(BoomSystem.self)?.noLaunchBoom!.physicsBody?.dynamic = true
+            let tempBoom = (self.skillSystemForClass(BoomSystem.self)?.noLaunchBoom)!
+            self.skillSystemForClass(BoomSystem.self)?.boomArray.addObject((self.skillSystemForClass(BoomSystem.self)?.noLaunchBoom)!)
+            self.skillSystemForClass(BoomSystem.self)?.noLaunchBoom = nil
+            
           //  print("set--\(self.skillSystemForClass(BoomSystem.self)?.currentBoom.BoomID)")
             self.skillSystemForClass(BoomSystem.self)?.bogusBoomRun({
                 let wait = SKAction.waitForDuration(7)
                 let appear = SKAction.fadeAlphaTo(1, duration: 0.3)
-                let block = SKAction.runBlock({
-          //         print("chuxian-----\(tempBoom.BoomID)")
-                })
-                tempBoom.runAction(SKAction.sequence([wait,appear,block]))
+//                let block = SKAction.runBlock({
+//          //         print("chuxian-----\(tempBoom.BoomID)")
+//                })
+                tempBoom.runAction(SKAction.sequence([wait,appear]))
 //                
             })
  

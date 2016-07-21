@@ -12,7 +12,7 @@ import UIKit
 class BoomSystem: SkillSystem, AttackProtocal {
     
     var boomArray: NSMutableArray!
-    var currentBoom: Boom!
+    var noLaunchBoom: Boom?
     var boomID: UInt32!
     var defaluePosition: CGPoint?
     var hitValue: Int = 1
@@ -41,8 +41,11 @@ class BoomSystem: SkillSystem, AttackProtocal {
         }
         defaluePosition = boom.position
         player.sprite.parent?.addChild(boom)
-        self.boomArray.addObject(boom)
-        self.currentBoom = boom
+        if self.noLaunchBoom != nil {
+            self.noLaunchBoom!.removeFromParent()
+        }
+      //  self.boomArray.addObject(boom)
+        self.noLaunchBoom = boom
     }
     
     func setBoom() {
@@ -52,14 +55,14 @@ class BoomSystem: SkillSystem, AttackProtocal {
                 
             })
         }
-        self.currentBoom.runAction(SKAction.sequence([xiaoshi,block]))
+        self.noLaunchBoom!.runAction(SKAction.sequence([xiaoshi,block]))
        // print("set boom")
+//        for temp in self.boomArray {
+//            if (temp as! Boom).isControl == true {
+//                self.currentBoom = temp as! Boom
+//            }
+//        }
         
-        for temp in self.boomArray {
-            if (temp as! Boom).isControl == true {
-                self.currentBoom = temp as! Boom
-            }
-        }
         
     }
     func bogusBoomRun(finish: ()->()) {
@@ -105,8 +108,8 @@ class BoomSystem: SkillSystem, AttackProtocal {
                 
                 if (enemyMap.mapArray.objectAtIndex(i) as! FTMapCell).obj == nil {
                     if CGRectContainsPoint(enemyMap.mapArray.objectAtIndex(i).frame, point) {
-                        self.currentBoom.position = enemyMap.mapArray.objectAtIndex(i).position
-                        (enemyMap.mapArray.objectAtIndex(i) as! FTMapCell).obj = self.currentBoom
+                        self.noLaunchBoom!.position = enemyMap.mapArray.objectAtIndex(i).position
+                        (enemyMap.mapArray.objectAtIndex(i) as! FTMapCell).obj = self.noLaunchBoom!
                         return i
                     }
                 }
@@ -117,21 +120,21 @@ class BoomSystem: SkillSystem, AttackProtocal {
     override func toucheBegan(touches: Set<UITouch>, withEvent event: UIEvent?, scene: FightScene) {
         let touchLocation = touches.first?.locationInNode(scene)
         self.touchPointArray.removeAllObjects()
-        if self.currentBoom != nil {
-            if self.currentBoom.isControl == true {
-                 let rect = CGRect(origin: CGPoint(x: self.currentBoom.position.x-SkillSize.dilei.width, y: self.currentBoom.position.y-SkillSize.dilei.height), size: CGSize(width: self.currentBoom.frame.width*2, height: self.currentBoom.frame.height*2))
-                if CGRectContainsPoint(rect, touchLocation!) {
-                    self.touchPointArray.addObject(NSValue.init(CGPoint: touchLocation!))
- 
-                }
+        if self.noLaunchBoom != nil {
+            //if self.noLaunchBoom!.isControl == true {
+            let rect = CGRect(origin: CGPoint(x: self.noLaunchBoom!.position.x-SkillSize.dilei.width, y: self.noLaunchBoom!.position.y-SkillSize.dilei.height), size: CGSize(width: self.noLaunchBoom!.frame.width*2, height: self.noLaunchBoom!.frame.height*2))
+            if CGRectContainsPoint(rect, touchLocation!) {
+                self.touchPointArray.addObject(NSValue.init(CGPoint: touchLocation!))
+
             }
+           // }
         }
 
     }
     
     override func toucheMoved(touches: Set<UITouch>, withEvent event: UIEvent?, scene: FightScene) {
-        if self.currentBoom != nil {
-            if self.currentBoom.isControl == true {
+        if self.noLaunchBoom != nil {
+            if self.noLaunchBoom!.isControl == true {
                 if self.touchPointArray.count != 0 {
                     let point = (touches.first?.locationInNode(scene))!
                     self.touchPointArray.addObject(NSValue.init(CGPoint: point))
@@ -140,9 +143,9 @@ class BoomSystem: SkillSystem, AttackProtocal {
                     let distance = CGPoint(x: point.x-oldPoint.x, y: point.y-oldPoint.y)
                     //   let rect = CGRect(origin: self.currentBoom.frame.origin, size: CGSize(width: 80, height: 80))
                     // if CGRectContainsPoint(rect, point) {
-                    let newPoint = CGPoint(x: self.currentBoom.position.x+distance.x, y: self.currentBoom.position.y+distance.y)
+                    let newPoint = CGPoint(x: self.noLaunchBoom!.position.x+distance.x, y: self.noLaunchBoom!.position.y+distance.y)
                     //                if CGRectContainsRect(CGRectMake(0, 0, screenSize.width, screenSize.height), self.newRectWithObj(SkillSize.dilei, point: newPoint)) {
-                    self.currentBoom.position = newPoint
+                    self.noLaunchBoom!.position = newPoint
                     //   }
                     //  }
                 }
@@ -156,21 +159,23 @@ class BoomSystem: SkillSystem, AttackProtocal {
             let endPoint = (self.touchPointArray.lastObject!.CGPointValue)!
             let boomMapCellNum = isSetBoomSuccess(endPoint)
             if boomMapCellNum != nil{
-                self.currentBoom.boomOnMapCellIndex = boomMapCellNum
-                self.currentBoom.isControl = false
-                self.currentBoom.physicsBody?.dynamic = true
+                self.noLaunchBoom!.boomOnMapCellIndex = boomMapCellNum
+                self.noLaunchBoom!.isControl = false
+                self.noLaunchBoom!.physicsBody?.dynamic = true
                 self.setBoom()
                // var dict = Dictionary<String, AnyObject>()
                 var dict = [String: AnyObject]()
                 dict.updateValue(SkillName.boom.rawValue, forKey: "initSkill")
-                let percentX = self.currentBoom.position.x / screenSize.width
-                let percentY = self.currentBoom.position.y / screenSize.height
+                let percentX = self.noLaunchBoom!.position.x / screenSize.width
+                let percentY = self.noLaunchBoom!.position.y / screenSize.height
                 dict.updateValue(percentX, forKey: "percentX")
                 dict.updateValue(percentY, forKey: "percentY")
                // scene.websocket.writeMessage(BTMessage(command: BTCommand.CastSpell, params: (self.entity as! FightPlayer).toReleaseSkill(dict)))
                 scene.sock.send(BTCommand.CCastSpell, withParams: (self.entity as! FightPlayer).toReleaseSkill(dict))
+                self.boomArray.addObject(self.noLaunchBoom!)
+                self.noLaunchBoom = nil
             }else {
-                self.currentBoom.position = defaluePosition!
+                self.noLaunchBoom!.position = defaluePosition!
             }
         }
       //  print("move end")

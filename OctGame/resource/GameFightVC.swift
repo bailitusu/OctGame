@@ -25,7 +25,10 @@ class GameFightVC: UIViewController {
         scene.scaleMode = .AspectFill
         scene.size = skView.frame.size
         skView.presentScene(scene)
+        
+       
     }
+
     
     override func shouldAutorotate() -> Bool {
         return true
@@ -42,4 +45,8 @@ class GameFightVC: UIViewController {
 //        }
         return .Portrait
     }
+    
+    
+    
+    
 }

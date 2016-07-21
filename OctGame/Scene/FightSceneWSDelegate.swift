@@ -89,29 +89,50 @@ extension FightScene: SLBattleFieldNetDelegate {
     }
     
     func websocketDidReceiveMessage(msg: BTMessage, net: SLBattleFieldNet) {
+        print(msg.command)
+        
         switch msg.command {
             
         case .SEndFighting:
-            self.sock.send(BTCommand.CStatusEnding)
+            self.doEndFighting(msg)
+            break
         case .SPlayerDisconnected:
-            self.sock.send(BTCommand.CStatusEnding)
+            self.doDisconnect(msg)
             
+            break
         case .CCastSpell:
             self.doCastSpell(msg)
+            break
         case .CCreateSpell:
             self.doCreateSpell(msg)
+            break
         case .CPlayerStatus:
             self.doPlayerStatus(msg)
-            
-            
-            
-            
-            default:
+            break
+        default:
             return
         }
 
     }
     
+    func doEndFighting(msg: BTMessage) {
+        let json = JSON(msg.params)
+        if json["winner"].stringValue == UserID {
+            SuccessView.instance.isSuccess = true
+            SuccessView.instance.rightBtn.userInteractionEnabled = true
+            SuccessView.instance.rightBtn.hidden = false
+        }else if json["loser"].stringValue == UserID {
+            SuccessView.instance.isSuccess = false
+            SuccessView.instance.rightBtn.userInteractionEnabled = true
+            SuccessView.instance.rightBtn.hidden = false
+        }
+
+    }
+    
+    func doDisconnect(msg: BTMessage) {
+        SuccessView.gameOver(self.view!, isSuccess: true)
+        self.sock.send(BTCommand.CStatusEnding)
+    }
     
     func doPlayerStatus(msg: BTMessage) {
         let json = JSON(msg.params)

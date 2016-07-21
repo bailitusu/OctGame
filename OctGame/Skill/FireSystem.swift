@@ -13,10 +13,11 @@ import UIKit
 class FireSystem: SkillSystem,AttackProtocal {
 
     var huoqiuArray: NSMutableArray!
-    var currentHuoqiu: Fire!
+    var noLaunchHuoqiu: Fire?
     var fireId: UInt32!
-    var hitValue: Int = 3
-    
+    var hitValue: Int = 10
+    var isSaveAble: Bool = false
+
     override init() {
         super.init()
         self.huoqiuArray = NSMutableArray()
@@ -31,38 +32,21 @@ class FireSystem: SkillSystem,AttackProtocal {
     }
     
     @objc func fireFollowPlayer(note: NSNotification) {
-//        let moveToPoint = note.userInfo!["moveToMapCell"]
-//
-//        
-//        
-//        
-//        if moveToPoint!.position != (self.entity as! FightPlayer).sprite.position {
-//            print("\(moveToPoint!.position)")
-//            for temp in self.huoqiuArray {
-//                if (temp as! Fire).isControl == true {
-//                    // (temp as! Fire).position = (self.entity as! FightPlayer).sprite.position
-//                    let move = SKAction.moveTo((moveToPoint?.position)!, duration: 0.3)
-//                    (temp as! Fire).runAction(move)
-//                }
-//            }
-//        }
+
+    if let moveToPoint = note.userInfo?["moveToMapCell"] as? SKSpriteNode {
+       // print(moveToPoint.position)
         
-        
-        
-        if let moveToPoint = note.userInfo?["moveToMapCell"] as? SKSpriteNode {
-           // print(moveToPoint.position)
-            
-            if CommonFunc.fightIsEqualPoint(moveToPoint.position, pointB: (self.entity as! FightPlayer).sprite.position)  == false {
-                for temp in self.huoqiuArray {
-                    if (temp as! Fire).isControl == true {
-                        // (temp as! Fire).position = (self.entity as! FightPlayer).sprite.position
-                        let move = SKAction.moveTo(moveToPoint.position, duration: 0.3)
-                        (temp as! Fire).runAction(move)
-                    }
+        if CommonFunc.fightIsEqualPoint(moveToPoint.position, pointB: (self.entity as! FightPlayer).sprite.position)  == false {
+            for temp in self.huoqiuArray {
+                if (temp as! Fire).isControl == true {
+                    // (temp as! Fire).position = (self.entity as! FightPlayer).sprite.position
+                    let move = SKAction.moveTo(moveToPoint.position, duration: 0.3)
+                    (temp as! Fire).runAction(move)
                 }
             }
-
         }
+
+    }
         
         
 
@@ -77,8 +61,11 @@ class FireSystem: SkillSystem,AttackProtocal {
         fire.position = CGPoint(x: tempSprite.position.x, y: tempSprite.position.y)
 
         tempSprite.parent?.addChild(fire)
-        self.huoqiuArray.addObject(fire)
-        self.currentHuoqiu = fire
+       // self.huoqiuArray.addObject(fire)
+        if self.noLaunchHuoqiu != nil {
+            self.noLaunchHuoqiu?.removeFromParent()
+        }
+        self.noLaunchHuoqiu = fire
     }
     
 //    func initHarmArea(harmArea: HarmArea) {
@@ -87,22 +74,24 @@ class FireSystem: SkillSystem,AttackProtocal {
     
     func throwSkill(speed: CGVector) {
 
-        if self.currentHuoqiu.isControl == true {
+        if self.noLaunchHuoqiu!.isControl == true {
             if speed != CGVector(dx: 0, dy: 0) {
-                self.currentHuoqiu.dircspeed = speed
-                self.currentHuoqiu.isControl = false
+                self.noLaunchHuoqiu!.dircspeed = speed
+                self.noLaunchHuoqiu!.isControl = false
+                self.huoqiuArray.addObject(self.noLaunchHuoqiu!)
+                self.noLaunchHuoqiu = nil
             }
 
         }
 //        whoPlayer.currentHuoqiu = self.getCurrentTouchFire(whoPlayer)
 //        whoPlayer.currentHuoqiu.dircspeed = speed
 //        whoPlayer.currentHuoqiu.isControl = false
-        for temp in huoqiuArray {
-            if (temp as! Fire).isControl == true{
-                self.currentHuoqiu = (temp as! Fire)
-                break
-            }
-        }
+//        for temp in huoqiuArray {
+//            if (temp as! Fire).isControl == true{
+//                self.currentHuoqiu = (temp as! Fire)
+//                break
+//            }
+//        }
         
     }
     
@@ -235,9 +224,9 @@ class FireSystem: SkillSystem,AttackProtocal {
         let touchLocation = touches.first?.locationInNode(scene)
         
         self.touchPointArray.removeAllObjects()
-        if self.currentHuoqiu != nil {
+        if self.noLaunchHuoqiu != nil {
             
-            let rect = CGRect(origin: CGPoint(x: self.currentHuoqiu.position.x-SkillSize.huoqiu.width, y: self.currentHuoqiu.position.y-SkillSize.huoqiu.height), size: CGSize(width: self.currentHuoqiu.frame.width*2, height: self.currentHuoqiu.frame.height*2))
+            let rect = CGRect(origin: CGPoint(x: self.noLaunchHuoqiu!.position.x-SkillSize.huoqiu.width, y: self.noLaunchHuoqiu!.position.y-SkillSize.huoqiu.height), size: CGSize(width: self.noLaunchHuoqiu!.frame.width*2, height: self.noLaunchHuoqiu!.frame.height*2))
             if CGRectContainsPoint(rect, touchLocation!) {
                 self.touchPointArray.addObject(NSValue.init(CGPoint: touchLocation!))
             }

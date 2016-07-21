@@ -47,6 +47,7 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
         }
      //   fightPlayer = FightPlayer(roleName: "fightPlayer")
         addEntity(fightPlayer)
+        fightPlayer.scene = self
 //        fightPlayer.fightMap = FightMap()
 //        fightPlayer.fightMap.initMap(5, verticalNum: 4, oneSize: fightMapCellSize, scene: self, originalPointY: screenSize.height*0.299, isEnemy: false)
 //        fightPlayer.sprite.position = fightPlayer.fightMap.mapArray.objectAtIndex(10).position
@@ -55,7 +56,6 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
        // fightPlayer.configureSkill = ConfigureSkill(scene: self, player: fightPlayer)
         fightPlayer.configureSkill.scene = self
        // fightPlayer.initConfigureSkillBall()
-        
       //  fightPlayer.playerStateUI = FTPlayerStateUI(player: fightPlayer, scene: self)
         self.addChild(fightPlayer.playerStateUI.hpLabel)
       //  fightPlayer.playerStateUI.hpLabel.position = CGPoint(x: screenSize.width-screenSize.width*0.146, y: screenSize.height*0.359)
@@ -67,6 +67,7 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
             self.scene?.addChild((mapTemp as! FTMapCell))
         }
         addEntity(fightEnemy)
+        fightEnemy.scene = self
 //        fightEnemy.fightMap = FightMap()
 //        fightEnemy.fightMap.initMap(5, verticalNum: 4, oneSize: fightMapCellSize, scene: self, originalPointY: screenSize.height-screenSize.height*0.299, isEnemy: true)
 //        fightEnemy.sprite.position = fightEnemy.fightMap.mapArray.objectAtIndex(10).position
@@ -124,12 +125,6 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
         nc.addObserver(self, selector: #selector(ballFollowPlayer), name: "playerMove", object: fightPlayer)
         
         NSTimer.scheduledTimerWithTimeInterval(7, target: self, selector: #selector(createBall), userInfo: nil, repeats: true)
-        
-        
-        
-        
-        
-        
         
         
         
@@ -211,6 +206,7 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
         }
         
     }
+    
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
