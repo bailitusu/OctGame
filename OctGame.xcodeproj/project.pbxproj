@@ -139,6 +139,11 @@
 		18D810F01D37654900551B00 /* FTCellStandAbleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D810EF1D37654900551B00 /* FTCellStandAbleDelegate.swift */; };
 		18D810F21D37857E00551B00 /* wall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18D810F11D37857E00551B00 /* wall.jpg */; };
 		18D810F71D378B7400551B00 /* FTPlayerStateUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D810F61D378B7400551B00 /* FTPlayerStateUI.swift */; };
+		18E6D8DA1D41EBB70032F399 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6D8D91D41EBB70032F399 /* Animation.swift */; };
+		18E6D8DD1D4215820032F399 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6D8DC1D4215820032F399 /* StateMachine.swift */; };
+		18E6D8DF1D42199C0032F399 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6D8DE1D42199C0032F399 /* State.swift */; };
+		18E6D8E11D4230690032F399 /* FTSceneStartState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6D8E01D4230690032F399 /* FTSceneStartState.swift */; };
+		18E6D8E31D4230B80032F399 /* FTSceneFinishState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6D8E21D4230B80032F399 /* FTSceneFinishState.swift */; };
 		18E7AC101D17B2740040B3B9 /* citie.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 18E7AC0F1D17B2740040B3B9 /* citie.atlas */; };
 		18E7AC141D17BACA0040B3B9 /* wudi.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 18E7AC131D17BACA0040B3B9 /* wudi.atlas */; };
 		18F5B6C61D21580700D28F1F /* Cooldown.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F5B6C51D21580700D28F1F /* Cooldown.png */; };
@@ -400,6 +405,11 @@
 		18D810EF1D37654900551B00 /* FTCellStandAbleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FTCellStandAbleDelegate.swift; path = ../Map/FTCellStandAbleDelegate.swift; sourceTree = "<group>"; };
 		18D810F11D37857E00551B00 /* wall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wall.jpg; sourceTree = "<group>"; };
 		18D810F61D378B7400551B00 /* FTPlayerStateUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTPlayerStateUI.swift; sourceTree = "<group>"; };
+		18E6D8D91D41EBB70032F399 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
+		18E6D8DC1D4215820032F399 /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
+		18E6D8DE1D42199C0032F399 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		18E6D8E01D4230690032F399 /* FTSceneStartState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTSceneStartState.swift; sourceTree = "<group>"; };
+		18E6D8E21D4230B80032F399 /* FTSceneFinishState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTSceneFinishState.swift; sourceTree = "<group>"; };
 		18E7AC0F1D17B2740040B3B9 /* citie.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = citie.atlas; sourceTree = "<group>"; };
 		18E7AC131D17BACA0040B3B9 /* wudi.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = wudi.atlas; sourceTree = "<group>"; };
 		18F5B6C51D21580700D28F1F /* Cooldown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cooldown.png; sourceTree = "<group>"; };
@@ -489,6 +499,8 @@
 		18685D951D0AD0A200BCAE10 /* OctGame */ = {
 			isa = PBXGroup;
 			children = (
+				18E6D8DB1D4215390032F399 /* StateMachine */,
+				18E6D8CD1D41EB980032F399 /* Animation */,
 				18CA04FF1D40FC6800C78B8B /* SmallView */,
 				1868E6F41D37DD1400C5876F /* Building */,
 				18D810F31D3786F600551B00 /* PlayerStateUI */,
@@ -746,6 +758,25 @@
 			path = PlayerStateUI;
 			sourceTree = "<group>";
 		};
+		18E6D8CD1D41EB980032F399 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				18E6D8D91D41EBB70032F399 /* Animation.swift */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
+		18E6D8DB1D4215390032F399 /* StateMachine */ = {
+			isa = PBXGroup;
+			children = (
+				18E6D8DC1D4215820032F399 /* StateMachine.swift */,
+				18E6D8DE1D42199C0032F399 /* State.swift */,
+				18E6D8E01D4230690032F399 /* FTSceneStartState.swift */,
+				18E6D8E21D4230B80032F399 /* FTSceneFinishState.swift */,
+			);
+			path = StateMachine;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1000,6 +1031,7 @@
 				180796D41D2F89AE0018CABC /* HarmArea.swift in Sources */,
 				184334861D2A9A9800057462 /* FTMapCell.swift in Sources */,
 				18685DCC1D0AEDF500BCAE10 /* SetSpriteLevel.swift in Sources */,
+				18E6D8E31D4230B80032F399 /* FTSceneFinishState.swift in Sources */,
 				187E30721D192D3C008AB0A5 /* Sheep.swift in Sources */,
 				18685DC91D0AD0DE00BCAE10 /* MainScene.swift in Sources */,
 				182302331D3DF09300355935 /* SLUser.swift in Sources */,
@@ -1007,6 +1039,7 @@
 				1871DABD1D2659BE002B6479 /* FightPlayer.swift in Sources */,
 				18685DC71D0AD0DE00BCAE10 /* BaseScene.swift in Sources */,
 				182301F61D3CB1FB00355935 /* FTMatchScene.swift in Sources */,
+				18E6D8E11D4230690032F399 /* FTSceneStartState.swift in Sources */,
 				182302371D3DF12200355935 /* BTCommand.swift in Sources */,
 				182302321D3DF09300355935 /* SLDataBaseNet.swift in Sources */,
 				18B1CB921D3F68A90065088C /* SaveSkillProtocal.swift in Sources */,
@@ -1048,11 +1081,14 @@
 				182302291D3DF09300355935 /* BTHeartTick.swift in Sources */,
 				18CA050C1D40FC6800C78B8B /* SmallView.swift in Sources */,
 				1871DAC91D269463002B6479 /* SkillSystem.swift in Sources */,
+				18E6D8DF1D42199C0032F399 /* State.swift in Sources */,
 				18D810F01D37654900551B00 /* FTCellStandAbleDelegate.swift in Sources */,
+				18E6D8DA1D41EBB70032F399 /* Animation.swift in Sources */,
 				182302281D3DF09300355935 /* BTCharacter.swift in Sources */,
 				182302031D3CBD8100355935 /* GameStartVC.swift in Sources */,
 				180262B91D111D5100949B15 /* MagnetComponent.swift in Sources */,
 				180796D81D2F999D0018CABC /* HarmObj.swift in Sources */,
+				18E6D8DD1D4215820032F399 /* StateMachine.swift in Sources */,
 				1871DAB31D263908002B6479 /* GameFightVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

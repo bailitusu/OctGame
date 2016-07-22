@@ -117,21 +117,23 @@ extension FightScene: SLBattleFieldNetDelegate {
     
     func doEndFighting(msg: BTMessage) {
         let json = JSON(msg.params)
-        if json["winner"].stringValue == UserID {
+        print(msg)
+        if json[UserID].stringValue == "winner" {
             SuccessView.instance.isSuccess = true
-            SuccessView.instance.rightBtn.userInteractionEnabled = true
-            SuccessView.instance.rightBtn.hidden = false
-        }else if json["loser"].stringValue == UserID {
+        }else if json[UserID].stringValue == "loser" {
             SuccessView.instance.isSuccess = false
-            SuccessView.instance.rightBtn.userInteractionEnabled = true
-            SuccessView.instance.rightBtn.hidden = false
+           
         }
-
+        SuccessView.instance.rightBtn.userInteractionEnabled = true
+        SuccessView.instance.rightBtn.hidden = false
     }
     
     func doDisconnect(msg: BTMessage) {
         SuccessView.gameOver(self.view!, isSuccess: true)
-        self.sock.send(BTCommand.CStatusEnding)
+        
+        SuccessView.instance.rightBtn.userInteractionEnabled = true
+        SuccessView.instance.rightBtn.hidden = false
+        self.sock.send(BTCommand.CStatusEnding, withParams: ["result": "winner"])
     }
     
     func doPlayerStatus(msg: BTMessage) {

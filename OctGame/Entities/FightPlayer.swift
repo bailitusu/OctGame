@@ -29,20 +29,20 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
     var HP: Int = 10 {
         didSet {
             if self.HP <= 0 {
-                var temp: Bool?
+                var temp: String = "loser"
                 if self.roleName == "fightPlayer" {
                     
                         // self.scene!.sock.send(BTCommand.CStatusEnding)
-                   temp = false
+                   temp = "loser"
                    
                 }
                 if self.roleName == "fightEnemy" {
                     
                         // self.scene!.sock.send(BTCommand.CStatusEnding)
-                   temp = true
+                   temp = "winner"
                     
                 }
-                self.scene?.sock.send(BTCommand.CStatusEnding, withParams: self.toResult(temp!))
+                self.scene?.sock.send(BTCommand.CStatusEnding, withParams: self.toResult(temp))
                 SuccessView.gameOver((self.scene?.view)!, isSuccess: nil)
             }
             
@@ -264,9 +264,10 @@ extension FightPlayer: OnlineGameObjectType {
         return dict
     }
     
-    func toResult(isSuccess: Bool) -> [String: AnyObject] {
+    func toResult(result: String) -> [String: AnyObject] {
         var dict = [String: AnyObject]()
-        dict.updateValue(isSuccess, forKey: "result")
+        
+        dict.updateValue(result, forKey: "result")
         return dict
     }
     
