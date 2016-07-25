@@ -15,17 +15,19 @@ class StateMachine {
     
     var stateArray = [State]()
     
-    init(stateArray: [State]) {
+    init(_ stateArray: [State]) {
         self.stateArray = stateArray.map {
             $0.stateMachine = self
             return $0
         }
-        
+        self.currentState = stateArray[0]
+        self.currentState?.didEnterWithPreviousState(nil)
     }
     
     func enterState(state: State) -> Bool {
         if self.currentState != nil {
             self.currentState?.willExitWithNextState(state)
+            
         }
         
         if (self.currentState?.canEnterNextState(state))! == true {

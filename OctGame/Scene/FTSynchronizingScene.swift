@@ -37,6 +37,13 @@ class FTSynchronizingScene: BaseScene {
         
         fightPlayer.playerStateUI = FTPlayerStateUI(player: fightPlayer)
         fightPlayer.playerStateUI.hpLabel.position = CGPoint(x: screenSize.width-screenSize.width*0.146, y: screenSize.height*0.359)
+        FTAnimation.addPlayerFTAnimationResource(nil)
+        
+        fightPlayer.stateMachine = StateMachine([FTFightPlayerRestState(player: fightPlayer),
+                                                FTFightPlayerWalkState(player: fightPlayer),
+                                                FTFightPlayerInjuredState(player: fightPlayer)])
+        
+        
         
         
         //zc fix!!

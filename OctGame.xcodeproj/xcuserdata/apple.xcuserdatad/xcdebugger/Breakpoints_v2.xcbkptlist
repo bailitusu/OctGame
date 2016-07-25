@@ -888,12 +888,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OctGame/Entities/FightPlayer.swift"
-            timestampString = "490791654.349188"
+            timestampString = "491117144.080084"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
-            landmarkName = "createSkillSprite(_:)"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "updateWithDeltaTime(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1096,11 +1096,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OctGame/Entities/FightPlayer.swift"
-            timestampString = "490791654.349188"
+            timestampString = "490964456.496926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "moveToCell(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1128,12 +1128,12 @@
                   moduleName = "OctGame"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/github/OctGame/OctGame/Skill/BoomSystem.swift"
-                  timestampString = "490862497.105069"
+                  timestampString = "491117145.461259"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "213"
                   endingLineNumber = "213"
-                  offsetFromSymbolStart = "2136">
+                  offsetFromSymbolStart = "1708">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1143,12 +1143,12 @@
                   moduleName = "OctGame"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/github/OctGame/OctGame/Skill/BoomSystem.swift"
-                  timestampString = "490862497.105172"
+                  timestampString = "491117145.46137"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "213"
                   endingLineNumber = "213"
-                  offsetFromSymbolStart = "11872">
+                  offsetFromSymbolStart = "9264">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1288,11 +1288,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OctGame/Entities/FightPlayer.swift"
-            timestampString = "490791654.349188"
+            timestampString = "490964456.496926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "skillSystemForClass(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1310,6 +1310,54 @@
             startingLineNumber = "33"
             endingLineNumber = "33"
             landmarkName = "init(from:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OctGame/Animation/Animation.swift"
+            timestampString = "490962852.671424"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "addPlayerFTAnimationResource(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OctGame/Entities/FightPlayer.swift"
+            timestampString = "491117101.470716"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "moveToCell(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OctGame/StateMachine/FTFightPlayerWalkState.swift"
+            timestampString = "491117337.607901"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "didEnterWithPreviousState(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

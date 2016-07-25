@@ -135,6 +135,16 @@
 		18BA0D411D1BB50F00B0272A /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA0D401D1BB50F00B0272A /* Setting.swift */; };
 		18CA050C1D40FC6800C78B8B /* SmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CA050B1D40FC6800C78B8B /* SmallView.swift */; };
 		18CA050E1D40FC6800C78B8B /* finishBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18CA050D1D40FC6800C78B8B /* finishBackground.jpg */; };
+		18CE59771D437EDC009D7930 /* huangdi_dead_none.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 18CE59701D437EDC009D7930 /* huangdi_dead_none.atlas */; };
+		18CE59781D437EDC009D7930 /* huangdi_injured_none.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 18CE59711D437EDC009D7930 /* huangdi_injured_none.atlas */; };
+		18CE59791D437EDC009D7930 /* huangdi_rest_none.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 18CE59721D437EDC009D7930 /* huangdi_rest_none.atlas */; };
+		18CE597A1D437EDC009D7930 /* huangdi_walk_down.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 18CE59731D437EDC009D7930 /* huangdi_walk_down.atlas */; };
+		18CE597B1D437EDC009D7930 /* huangdi_walk_left.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 18CE59741D437EDC009D7930 /* huangdi_walk_left.atlas */; };
+		18CE597C1D437EDC009D7930 /* huangdi_walk_right.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 18CE59751D437EDC009D7930 /* huangdi_walk_right.atlas */; };
+		18CE597D1D437EDC009D7930 /* huangdi_walk_up.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 18CE59761D437EDC009D7930 /* huangdi_walk_up.atlas */; };
+		18CE598A1D438174009D7930 /* FTFightPlayerRestState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE59891D438174009D7930 /* FTFightPlayerRestState.swift */; };
+		18CE598C1D43828C009D7930 /* FTFightPlayerWalkState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE598B1D43828C009D7930 /* FTFightPlayerWalkState.swift */; };
+		18CE598E1D4382B0009D7930 /* FTFightPlayerInjuredState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE598D1D4382B0009D7930 /* FTFightPlayerInjuredState.swift */; };
 		18D810E31D37535F00551B00 /* GuanChuanHarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D810E21D37535F00551B00 /* GuanChuanHarm.swift */; };
 		18D810F01D37654900551B00 /* FTCellStandAbleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D810EF1D37654900551B00 /* FTCellStandAbleDelegate.swift */; };
 		18D810F21D37857E00551B00 /* wall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18D810F11D37857E00551B00 /* wall.jpg */; };
@@ -401,6 +411,16 @@
 		18BA0D401D1BB50F00B0272A /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		18CA050B1D40FC6800C78B8B /* SmallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallView.swift; sourceTree = "<group>"; };
 		18CA050D1D40FC6800C78B8B /* finishBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = finishBackground.jpg; sourceTree = "<group>"; };
+		18CE59701D437EDC009D7930 /* huangdi_dead_none.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = huangdi_dead_none.atlas; sourceTree = "<group>"; };
+		18CE59711D437EDC009D7930 /* huangdi_injured_none.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = huangdi_injured_none.atlas; sourceTree = "<group>"; };
+		18CE59721D437EDC009D7930 /* huangdi_rest_none.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = huangdi_rest_none.atlas; sourceTree = "<group>"; };
+		18CE59731D437EDC009D7930 /* huangdi_walk_down.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = huangdi_walk_down.atlas; sourceTree = "<group>"; };
+		18CE59741D437EDC009D7930 /* huangdi_walk_left.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = huangdi_walk_left.atlas; sourceTree = "<group>"; };
+		18CE59751D437EDC009D7930 /* huangdi_walk_right.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = huangdi_walk_right.atlas; sourceTree = "<group>"; };
+		18CE59761D437EDC009D7930 /* huangdi_walk_up.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = huangdi_walk_up.atlas; sourceTree = "<group>"; };
+		18CE59891D438174009D7930 /* FTFightPlayerRestState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTFightPlayerRestState.swift; sourceTree = "<group>"; };
+		18CE598B1D43828C009D7930 /* FTFightPlayerWalkState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTFightPlayerWalkState.swift; sourceTree = "<group>"; };
+		18CE598D1D4382B0009D7930 /* FTFightPlayerInjuredState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTFightPlayerInjuredState.swift; sourceTree = "<group>"; };
 		18D810E21D37535F00551B00 /* GuanChuanHarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuanChuanHarm.swift; sourceTree = "<group>"; };
 		18D810EF1D37654900551B00 /* FTCellStandAbleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FTCellStandAbleDelegate.swift; path = ../Map/FTCellStandAbleDelegate.swift; sourceTree = "<group>"; };
 		18D810F11D37857E00551B00 /* wall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wall.jpg; sourceTree = "<group>"; };
@@ -441,6 +461,13 @@
 		180262F21D13CBCE00949B15 /* AnimationResource */ = {
 			isa = PBXGroup;
 			children = (
+				18CE59701D437EDC009D7930 /* huangdi_dead_none.atlas */,
+				18CE59711D437EDC009D7930 /* huangdi_injured_none.atlas */,
+				18CE59721D437EDC009D7930 /* huangdi_rest_none.atlas */,
+				18CE59731D437EDC009D7930 /* huangdi_walk_down.atlas */,
+				18CE59741D437EDC009D7930 /* huangdi_walk_left.atlas */,
+				18CE59751D437EDC009D7930 /* huangdi_walk_right.atlas */,
+				18CE59761D437EDC009D7930 /* huangdi_walk_up.atlas */,
 				18E7AC131D17BACA0040B3B9 /* wudi.atlas */,
 				18E7AC0F1D17B2740040B3B9 /* citie.atlas */,
 				180263081D1400C100949B15 /* walkLeft.atlas */,
@@ -773,6 +800,9 @@
 				18E6D8DE1D42199C0032F399 /* State.swift */,
 				18E6D8E01D4230690032F399 /* FTSceneStartState.swift */,
 				18E6D8E21D4230B80032F399 /* FTSceneFinishState.swift */,
+				18CE59891D438174009D7930 /* FTFightPlayerRestState.swift */,
+				18CE598B1D43828C009D7930 /* FTFightPlayerWalkState.swift */,
+				18CE598D1D4382B0009D7930 /* FTFightPlayerInjuredState.swift */,
 			);
 			path = StateMachine;
 			sourceTree = "<group>";
@@ -950,6 +980,7 @@
 				180852CD1D20F48C00531183 /* enemy.jpg in Resources */,
 				18B086AC1D229D1300DBFBAD /* dingshen@2x.png in Resources */,
 				18B086B71D229D1300DBFBAD /* xitieshi@3x.png in Resources */,
+				18CE597C1D437EDC009D7930 /* huangdi_walk_right.atlas in Resources */,
 				18B086C41D229D2900DBFBAD /* huiwudi@2x.png in Resources */,
 				18B086BF1D229D2900DBFBAD /* huibianda@2x.png in Resources */,
 				180262AF1D0FC4A700949B15 /* qian.png in Resources */,
@@ -974,6 +1005,7 @@
 				1894EFF61D34B89700E7FAA9 /* shuiqiu.png in Resources */,
 				18B086B01D229D1300DBFBAD /* jiasu@2x.png in Resources */,
 				18685DC21D0AD0DE00BCAE10 /* jjc.jpg in Resources */,
+				18CE59791D437EDC009D7930 /* huangdi_rest_none.atlas in Resources */,
 				180262ED1D12853800949B15 /* boom.png in Resources */,
 				18B1CB901D3F48850065088C /* loading.png in Resources */,
 				18E7AC101D17B2740040B3B9 /* citie.atlas in Resources */,
@@ -985,7 +1017,9 @@
 				18E7AC141D17BACA0040B3B9 /* wudi.atlas in Resources */,
 				18B086C01D229D2900DBFBAD /* huibianxiao@2x.png in Resources */,
 				18B086AE1D229D1300DBFBAD /* fenshen@2x.png in Resources */,
+				18CE597D1D437EDC009D7930 /* huangdi_walk_up.atlas in Resources */,
 				1871DABB1D265365002B6479 /* fangkuai.png in Resources */,
+				18CE597B1D437EDC009D7930 /* huangdi_walk_left.atlas in Resources */,
 				18685DA01D0AD0A200BCAE10 /* Main.storyboard in Resources */,
 				180796D01D2F890C0018CABC /* fangkuai2.png in Resources */,
 				185CDEA91D152A5C00D6499E /* dawuyun@2x.png in Resources */,
@@ -996,12 +1030,15 @@
 				180263041D13FF2500949B15 /* frozenLeft.atlas in Resources */,
 				18685DC31D0AD0DE00BCAE10 /* 嘟嘟.png in Resources */,
 				180262B01D0FC4A700949B15 /* zhujiao.png in Resources */,
+				18CE597A1D437EDC009D7930 /* huangdi_walk_down.atlas in Resources */,
 				18F5B6C61D21580700D28F1F /* Cooldown.png in Resources */,
 				18B086A81D229D1300DBFBAD /* bianda@2x.png in Resources */,
 				18B086B31D229D1300DBFBAD /* wudi@3x.png in Resources */,
 				18B086B51D229D1300DBFBAD /* wuyun@3x.png in Resources */,
+				18CE59781D437EDC009D7930 /* huangdi_injured_none.atlas in Resources */,
 				18685DC11D0AD0DE00BCAE10 /* begin.jpg in Resources */,
 				18D810F21D37857E00551B00 /* wall.jpg in Resources */,
+				18CE59771D437EDC009D7930 /* huangdi_dead_none.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1025,6 +1062,7 @@
 				187E30701D192CA6008AB0A5 /* SecondGame.swift in Sources */,
 				1894EFF11D34B2CC00E7FAA9 /* ConfigureSkill.swift in Sources */,
 				180262CB1D1273C900949B15 /* FenShen.swift in Sources */,
+				18CE598E1D4382B0009D7930 /* FTFightPlayerInjuredState.swift in Sources */,
 				186066A81D2A7010004163D3 /* FightSceneWSDelegate.swift in Sources */,
 				180262BB1D1123DD00949B15 /* InvincibleComponent.swift in Sources */,
 				183003E11D22404200F66865 /* SKProgressNode.swift in Sources */,
@@ -1057,6 +1095,7 @@
 				18B1CB831D3F3FEE0065088C /* FTSynchronizingScene.swift in Sources */,
 				180852CF1D20F4C900531183 /* Enemy.swift in Sources */,
 				183003DF1D223B8900F66865 /* TextScene.swift in Sources */,
+				18CE598C1D43828C009D7930 /* FTFightPlayerWalkState.swift in Sources */,
 				185EBF3E1D3E367300E55747 /* AttackProtocal.swift in Sources */,
 				182302311D3DF09300355935 /* SLBattleFieldNet.swift in Sources */,
 				18D810F71D378B7400551B00 /* FTPlayerStateUI.swift in Sources */,
@@ -1087,6 +1126,7 @@
 				182302281D3DF09300355935 /* BTCharacter.swift in Sources */,
 				182302031D3CBD8100355935 /* GameStartVC.swift in Sources */,
 				180262B91D111D5100949B15 /* MagnetComponent.swift in Sources */,
+				18CE598A1D438174009D7930 /* FTFightPlayerRestState.swift in Sources */,
 				180796D81D2F999D0018CABC /* HarmObj.swift in Sources */,
 				18E6D8DD1D4215820032F399 /* StateMachine.swift in Sources */,
 				1871DAB31D263908002B6479 /* GameFightVC.swift in Sources */,

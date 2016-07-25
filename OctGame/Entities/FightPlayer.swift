@@ -25,7 +25,7 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
     var skillSystemArray = [SkillSystem]()
 
     var configureSkill: ConfigureSkill!
-    
+    var fangxiang: FTDirection = FTDirection.none
     var HP: Int = 10 {
         didSet {
             if self.HP <= 0 {
@@ -77,10 +77,12 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
         return (self.componentForClass(SpriteComponent.self)?.sprite)!
     }
     
+    var stateMachine: StateMachine!
+    
     init(roleName: String) {
         super.init()
      //   self.delegate = MyDaili()
-        let sprite = SKSpriteNode(imageNamed: "fightOne.jpg")
+        let sprite = SKSpriteNode(imageNamed: "huangdi_rest_none0.png")
         sprite.name = roleName
         sprite.size = fightPlayerSize
         sprite.zPosition = SpriteLevel.sprite.rawValue
@@ -137,13 +139,27 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
                 beforePlayerStandCell.obj = nil
                 
                 locationSprite.obj = self
+                
+                if locationSprite.position.x - self.sprite.position.x > 0 {
+                    self.fangxiang = FTDirection.right
+                    self.stateMachine.enterState(self.stateMachine.getState(FTFightPlayerWalkState.self)!)
+                }else if locationSprite.position.x - self.sprite.position.x < 0 {
+                    self.fangxiang = FTDirection.left
+                    self.stateMachine.enterState(self.stateMachine.getState(FTFightPlayerWalkState.self)!)
+                }else if locationSprite.position.y - self.sprite.position.y > 0 {
+                    self.fangxiang = FTDirection.up
+                    self.stateMachine.enterState(self.stateMachine.getState(FTFightPlayerWalkState.self)!)
+                }else if locationSprite.position.y - self.sprite.position.y < 0 {
+                    self.fangxiang = FTDirection.down
+                    self.stateMachine.enterState(self.stateMachine.getState(FTFightPlayerWalkState.self)!)
+                }
                 let nc = NSNotificationCenter.defaultCenter()
                 nc.postNotificationName("playerMove", object: self, userInfo: ["moveToMapCell" : locationSprite])
                 let move = SKAction.moveTo(locationSprite.position, duration: 0.3)
-                //            let block = SKAction.runBlock({
-                //                locationSprite.obj = self
-                //            })
-                self.sprite.runAction(SKAction.sequence([move]))
+                let block = SKAction.runBlock({
+                     self.stateMachine.enterState(self.stateMachine.getState(FTFightPlayerRestState.self)!)
+                })
+                self.sprite.runAction(SKAction.sequence([move,block]))
             }
 
 //            self.yidong = true

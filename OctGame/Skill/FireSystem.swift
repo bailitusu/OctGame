@@ -15,7 +15,7 @@ class FireSystem: SkillSystem,AttackProtocal {
     var huoqiuArray: NSMutableArray!
     var noLaunchHuoqiu: Fire?
     var fireId: UInt32!
-    var hitValue: Int = 10
+    var hitValue: Int = 3
     var isSaveAble: Bool = false
 
     override init() {
@@ -244,7 +244,7 @@ class FireSystem: SkillSystem,AttackProtocal {
     
     override func toucheEnded(touches: Set<UITouch>, withEvent event: UIEvent?, scene: FightScene) {
         if self.touchPointArray.count != 0 {
-            let firstPoint = (self.touchPointArray.firstObject?.CGPointValue)!
+            let firstPoint = (self.noLaunchHuoqiu?.position)!
             let endPoint = (self.touchPointArray.objectAtIndex(self.touchPointArray.count/2).CGPointValue)!
             let distance = CGVector(dx: endPoint.x-firstPoint.x, dy: endPoint.y-firstPoint.y)
             if distance != CGVector(dx: 0, dy: 0) {
@@ -259,7 +259,9 @@ class FireSystem: SkillSystem,AttackProtocal {
             dict.updateValue(percentY, forKey: "percentY")
            // scene.websocket.writeMessage(BTMessage(command: BTCommand.CCastSpell, params: (self.entity as! FightPlayer).toReleaseSkill(dict)))
             scene.sock.send(BTCommand.CCastSpell, withParams: (self.entity as! FightPlayer).toReleaseSkill(dict))
-            
+            for i in 0 ..< self.touchPointArray.count {
+                print("\(i)-----\(self.touchPointArray.objectAtIndex(i).CGPointValue)")
+            }
         }
 
     }
