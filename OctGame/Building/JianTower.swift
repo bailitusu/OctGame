@@ -1,32 +1,28 @@
 //
-//  Wall.swift
+//  JianTower.swift
 //  OctGame
 //
-//  Created by zc on 16/7/14.
+//  Created by zc on 16/7/25.
 //  Copyright © 2016年 oct. All rights reserved.
 //
 
 import SpriteKit
 import UIKit
 
-class Wall: Building, FTCellStandAbleDelegate {
-    var HP: Int = 5
-//    var wallSprite: SKSpriteNode!
-//    var entityName: String!
-//    var wallID: UInt32!
-//    var isControl: Bool!
-    var hpLabel: SKLabelNode!
-  //  var isRemove: Bool!
-    init(entityName: String, collsionBitMask: UInt32, wallID: UInt32) {
-        super.init()
+class  JianTower: Building, FTCellStandAbleDelegate {
+    var HP: Int = 3
 
-        self.buildSprite = SKSpriteNode(imageNamed: "wall.jpg")
+    var hpLabel: SKLabelNode!
+    init(entityName: String, collsionBitMask: UInt32, buildID: UInt32) {
+        super.init()
+        
+        self.buildSprite = SKSpriteNode(imageNamed: "jianTower.png")
         self.buildSprite.size = SkillSize.building
         self.buildSprite.physicsBody = SKPhysicsBody(rectangleOfSize: SkillSize.building, center: CGPoint(x: 0.5, y: 0.5))
         self.buildSprite.physicsBody?.affectedByGravity = false
         self.buildSprite.physicsBody?.mass = 10
         self.buildSprite.physicsBody?.allowsRotation = false
-        self.buildSprite.physicsBody?.categoryBitMask = BitMaskType.ftWall
+        self.buildSprite.physicsBody?.categoryBitMask = BitMaskType.ftJianTower
         self.buildSprite.physicsBody?.collisionBitMask = collsionBitMask
         self.buildSprite.physicsBody?.contactTestBitMask = collsionBitMask
         self.buildSprite.physicsBody?.usesPreciseCollisionDetection = true
@@ -34,7 +30,7 @@ class Wall: Building, FTCellStandAbleDelegate {
         
         self.buildSprite.userData = NSMutableDictionary()
         
-        self.buildSprite.userData?.setObject(self, forKey: "wallclass")
+        self.buildSprite.userData?.setObject(self, forKey: "towerclass")
         
         
         self.hpLabel = SKLabelNode(fontNamed: "Arial")
@@ -46,15 +42,32 @@ class Wall: Building, FTCellStandAbleDelegate {
         
         self.buildSprite.zPosition = SpriteLevel.sprite.rawValue+1
         self.isControl = true
-        self.buildID = wallID
+        self.buildID = buildID
         self.entityName = entityName
-      //  self.isRemove = false
+        //  self.isRemove = false
         
     }
-    
-    func removeWall() -> Bool {
+    func createZidan() -> SKSpriteNode {
+        let zidan = SKSpriteNode(imageNamed: "bullet.png")
+        zidan.size = SkillSize.zidan
+        zidan.physicsBody = SKPhysicsBody(rectangleOfSize: SkillSize.zidan, center: CGPoint(x: 0.5, y: 0.5))
+        zidan.physicsBody?.affectedByGravity = false
+        zidan.physicsBody?.mass = 1
+        zidan.physicsBody?.allowsRotation = false
+        zidan.physicsBody?.categoryBitMask = BitMaskType.bullet
+        zidan.physicsBody?.collisionBitMask = BitMaskType.ftWall | BitMaskType.ftJianTower | BitMaskType.fightEnemy | BitMaskType.fightSelf
+        zidan.physicsBody?.contactTestBitMask = BitMaskType.ftWall | BitMaskType.ftJianTower | BitMaskType.fightEnemy | BitMaskType.fightSelf
+        zidan.physicsBody?.usesPreciseCollisionDetection = true
+        zidan.zPosition = SpriteLevel.bullte.rawValue
+       // zidan.physicsBody?.dynamic = true
+        zidan.name = entityName
+        return zidan
+    }
+    func removeTower() -> Bool {
         if self.HP <= 0 {
+            self.buildSprite.removeActionForKey("zidan")
             self.buildSprite.removeFromParent()
+            
             return true
         }
         return false

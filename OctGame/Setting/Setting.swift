@@ -65,11 +65,19 @@ struct BuffTime {
 struct SkillSize {
     static let huoqiu = CGSize(width: screenSize.width*0.08, height: screenSize.width*0.08)
     static let dilei = CGSize(width: screenSize.width*0.08, height: screenSize.width*0.08)
-    static let wall = CGSize(width: screenSize.width*0.16, height: screenSize.width*0.16)
+    static let building = CGSize(width: screenSize.width*0.16, height: screenSize.width*0.16)
+    static let zidan = CGSize(width: screenSize.width*0.053/4, height: screenSize.width*0.053/2)
+    static let fog = CGSize(width: screenSize.width*0.16, height: screenSize.width*0.16)
 }
 
-struct FightSkillSpeed {
-    static let huoqiu: CGFloat = 400.0
+//enum FightSkillSpeed {
+//    static let huoqiu: CGFloat = 500.0
+//    static let bullet: CGFloat = 600.0
+//}
+
+enum FightSkillSpeed: CGFloat {
+    case huoqiu = 500.0
+    case bullet = 600.0
 }
 
 struct FightSkillCollideMaxCount {

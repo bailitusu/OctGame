@@ -49,6 +49,8 @@ class Boom: SKSpriteNode,FTCellStandAbleDelegate {
         }
         return false
     }
+    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -59,7 +59,9 @@ class FTSynchronizingScene: BaseScene {
         
         fightPlayer.enemy = fightEnemy
         fightEnemy.enemy = fightPlayer
-        
+        fightEnemy.stateMachine = StateMachine([FTFightPlayerRestState(player: fightEnemy),
+            FTFightPlayerWalkState(player: fightEnemy),
+            FTFightPlayerInjuredState(player: fightEnemy)])
         let sleepThread: NSThread = NSThread(target: self, selector: "sendCommand", object: nil)
         sleepThread.start()
         self.sock.delegate = self

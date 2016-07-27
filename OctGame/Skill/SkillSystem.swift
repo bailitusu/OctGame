@@ -17,6 +17,8 @@ class SkillSystem {
     var touchPointArray: NSMutableArray!
     var harmAreas = [HarmArea]()
     var bollGroup: Int!
+    var isSilent: Bool!
+   // var isSaveSkillItem: Bool = true
 //    init() {
 //    //    super.init()
 ////        self.entity = entity
@@ -92,11 +94,11 @@ class SkillSystem {
         
     }
     
-    static func reckonSkillSpeed(speed: CGVector)->CGVector {
+    static func reckonSkillSpeed(speed: CGVector, skillSpeed: FightSkillSpeed)->CGVector {
         let mo = sqrt( speed.dx*speed.dx+speed.dy*speed.dy)
         let unitX = speed.dx/mo
         let unitY = speed.dy/mo
-        return CGVector(dx:unitX*FightSkillSpeed.huoqiu, dy:unitY*FightSkillSpeed.huoqiu)
+        return CGVector(dx:unitX*skillSpeed.rawValue, dy:unitY*skillSpeed.rawValue)
     }
     
     static func reversalVector(percentX:CGFloat,percentY:CGFloat) -> CGVector {

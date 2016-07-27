@@ -50,6 +50,10 @@
 		182302381D3DF12200355935 /* BTMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182302361D3DF12200355935 /* BTMessage.swift */; };
 		183003DF1D223B8900F66865 /* TextScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183003DE1D223B8900F66865 /* TextScene.swift */; };
 		183003E11D22404200F66865 /* SKProgressNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183003E01D22404200F66865 /* SKProgressNode.swift */; };
+		184301EE1D45EA5300F1CD24 /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 184301ED1D45EA5300F1CD24 /* bullet.png */; };
+		184301FB1D45EA9B00F1CD24 /* JianTower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184301FA1D45EA9B00F1CD24 /* JianTower.swift */; };
+		184301FD1D45EB8300F1CD24 /* jianTower.png in Resources */ = {isa = PBXBuildFile; fileRef = 184301FC1D45EB8300F1CD24 /* jianTower.png */; };
+		184301FF1D45FCD700F1CD24 /* JianTowerSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184301FE1D45FCD700F1CD24 /* JianTowerSystem.swift */; };
 		184334861D2A9A9800057462 /* FTMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184334851D2A9A9800057462 /* FTMapCell.swift */; };
 		185CDEA91D152A5C00D6499E /* dawuyun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 185CDEA81D152A5C00D6499E /* dawuyun@2x.png */; };
 		185CDEAB1D154A5E00D6499E /* laojiangshi_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 185CDEAA1D154A5E00D6499E /* laojiangshi_left.png */; };
@@ -103,6 +107,9 @@
 		1894EFF61D34B89700E7FAA9 /* shuiqiu.png in Resources */ = {isa = PBXBuildFile; fileRef = 1894EFF31D34B89700E7FAA9 /* shuiqiu.png */; };
 		1894EFF71D34B89700E7FAA9 /* dianqiu.png in Resources */ = {isa = PBXBuildFile; fileRef = 1894EFF41D34B89700E7FAA9 /* dianqiu.png */; };
 		1894EFFB1D34CE3C00E7FAA9 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894EFFA1D34CE3C00E7FAA9 /* Ball.swift */; };
+		1899F4731D47432B0086D3B1 /* wu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1899F4721D47432B0086D3B1 /* wu.jpg */; };
+		1899F4801D4745AD0086D3B1 /* FogSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1899F47F1D4745AD0086D3B1 /* FogSystem.swift */; };
+		1899F4821D4746320086D3B1 /* Fog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1899F4811D4746320086D3B1 /* Fog.swift */; };
 		18B086A81D229D1300DBFBAD /* bianda@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B086981D229D1300DBFBAD /* bianda@2x.png */; };
 		18B086A91D229D1300DBFBAD /* bianda@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B086991D229D1300DBFBAD /* bianda@3x.png */; };
 		18B086AA1D229D1300DBFBAD /* bianxiao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B0869A1D229D1300DBFBAD /* bianxiao@2x.png */; };
@@ -326,6 +333,10 @@
 		182302361D3DF12200355935 /* BTMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTMessage.swift; sourceTree = "<group>"; };
 		183003DE1D223B8900F66865 /* TextScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextScene.swift; sourceTree = "<group>"; };
 		183003E01D22404200F66865 /* SKProgressNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKProgressNode.swift; sourceTree = "<group>"; };
+		184301ED1D45EA5300F1CD24 /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
+		184301FA1D45EA9B00F1CD24 /* JianTower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JianTower.swift; sourceTree = "<group>"; };
+		184301FC1D45EB8300F1CD24 /* jianTower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jianTower.png; sourceTree = "<group>"; };
+		184301FE1D45FCD700F1CD24 /* JianTowerSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JianTowerSystem.swift; sourceTree = "<group>"; };
 		184334851D2A9A9800057462 /* FTMapCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTMapCell.swift; sourceTree = "<group>"; };
 		185CDEA81D152A5C00D6499E /* dawuyun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dawuyun@2x.png"; sourceTree = "<group>"; };
 		185CDEAA1D154A5E00D6499E /* laojiangshi_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laojiangshi_left.png; sourceTree = "<group>"; };
@@ -378,6 +389,9 @@
 		1894EFF31D34B89700E7FAA9 /* shuiqiu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shuiqiu.png; sourceTree = "<group>"; };
 		1894EFF41D34B89700E7FAA9 /* dianqiu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dianqiu.png; sourceTree = "<group>"; };
 		1894EFFA1D34CE3C00E7FAA9 /* Ball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
+		1899F4721D47432B0086D3B1 /* wu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wu.jpg; sourceTree = "<group>"; };
+		1899F47F1D4745AD0086D3B1 /* FogSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FogSystem.swift; sourceTree = "<group>"; };
+		1899F4811D4746320086D3B1 /* Fog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fog.swift; sourceTree = "<group>"; };
 		18A6178D1D365F8C006581B4 /* SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyJSON.xcodeproj; path = "SwiftyJSON-master/SwiftyJSON.xcodeproj"; sourceTree = "<group>"; };
 		18B086981D229D1300DBFBAD /* bianda@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bianda@2x.png"; sourceTree = "<group>"; };
 		18B086991D229D1300DBFBAD /* bianda@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bianda@3x.png"; sourceTree = "<group>"; };
@@ -529,16 +543,16 @@
 				18E6D8DB1D4215390032F399 /* StateMachine */,
 				18E6D8CD1D41EB980032F399 /* Animation */,
 				18CA04FF1D40FC6800C78B8B /* SmallView */,
+				1871DAC71D269456002B6479 /* Skill */,
 				1868E6F41D37DD1400C5876F /* Building */,
 				18D810F31D3786F600551B00 /* PlayerStateUI */,
 				1894EFEF1D34B2B700E7FAA9 /* ConfigureSkill */,
 				180796D21D2F899B0018CABC /* HarmArea */,
 				18685DAF1D0AD0DE00BCAE10 /* Entities */,
-				185D96071D2E1F3A0058636A /* network */,
-				1871DAC71D269456002B6479 /* Skill */,
 				1871DABE1D2675AB002B6479 /* protocol */,
 				18685DBA1D0AD0DE00BCAE10 /* Scene */,
 				187E306C1D191580008AB0A5 /* Map */,
+				185D96071D2E1F3A0058636A /* network */,
 				180262F21D13CBCE00949B15 /* AnimationResource */,
 				180262B51D0FE0E500949B15 /* CommonFunc */,
 				18685DCA1D0AED7500BCAE10 /* Setting */,
@@ -590,6 +604,9 @@
 		18685DB11D0AD0DE00BCAE10 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				1899F4721D47432B0086D3B1 /* wu.jpg */,
+				184301FC1D45EB8300F1CD24 /* jianTower.png */,
+				184301ED1D45EA5300F1CD24 /* bullet.png */,
 				18CA050D1D40FC6800C78B8B /* finishBackground.jpg */,
 				18B1CB8F1D3F48850065088C /* loading.png */,
 				18D810F11D37857E00551B00 /* wall.jpg */,
@@ -694,6 +711,7 @@
 			children = (
 				1868E7001D37DD2700C5876F /* Wall.swift */,
 				1868E7021D37DD4D00C5876F /* Building.swift */,
+				184301FA1D45EA9B00F1CD24 /* JianTower.swift */,
 			);
 			path = Building;
 			sourceTree = "<group>";
@@ -719,6 +737,9 @@
 				180796DB1D2FD44F0018CABC /* Boom.swift */,
 				18B62C921D30F89600C49EA3 /* BoomSystem.swift */,
 				1882BCF01D38BFF9003E1312 /* WallSystem.swift */,
+				184301FE1D45FCD700F1CD24 /* JianTowerSystem.swift */,
+				1899F47F1D4745AD0086D3B1 /* FogSystem.swift */,
+				1899F4811D4746320086D3B1 /* Fog.swift */,
 			);
 			path = Skill;
 			sourceTree = "<group>";
@@ -981,6 +1002,7 @@
 				18B086AC1D229D1300DBFBAD /* dingshen@2x.png in Resources */,
 				18B086B71D229D1300DBFBAD /* xitieshi@3x.png in Resources */,
 				18CE597C1D437EDC009D7930 /* huangdi_walk_right.atlas in Resources */,
+				184301EE1D45EA5300F1CD24 /* bullet.png in Resources */,
 				18B086C41D229D2900DBFBAD /* huiwudi@2x.png in Resources */,
 				18B086BF1D229D2900DBFBAD /* huibianda@2x.png in Resources */,
 				180262AF1D0FC4A700949B15 /* qian.png in Resources */,
@@ -1018,6 +1040,7 @@
 				18B086C01D229D2900DBFBAD /* huibianxiao@2x.png in Resources */,
 				18B086AE1D229D1300DBFBAD /* fenshen@2x.png in Resources */,
 				18CE597D1D437EDC009D7930 /* huangdi_walk_up.atlas in Resources */,
+				1899F4731D47432B0086D3B1 /* wu.jpg in Resources */,
 				1871DABB1D265365002B6479 /* fangkuai.png in Resources */,
 				18CE597B1D437EDC009D7930 /* huangdi_walk_left.atlas in Resources */,
 				18685DA01D0AD0A200BCAE10 /* Main.storyboard in Resources */,
@@ -1031,6 +1054,7 @@
 				18685DC31D0AD0DE00BCAE10 /* 嘟嘟.png in Resources */,
 				180262B01D0FC4A700949B15 /* zhujiao.png in Resources */,
 				18CE597A1D437EDC009D7930 /* huangdi_walk_down.atlas in Resources */,
+				184301FD1D45EB8300F1CD24 /* jianTower.png in Resources */,
 				18F5B6C61D21580700D28F1F /* Cooldown.png in Resources */,
 				18B086A81D229D1300DBFBAD /* bianda@2x.png in Resources */,
 				18B086B31D229D1300DBFBAD /* wudi@3x.png in Resources */,
@@ -1071,7 +1095,10 @@
 				18685DCC1D0AEDF500BCAE10 /* SetSpriteLevel.swift in Sources */,
 				18E6D8E31D4230B80032F399 /* FTSceneFinishState.swift in Sources */,
 				187E30721D192D3C008AB0A5 /* Sheep.swift in Sources */,
+				1899F4821D4746320086D3B1 /* Fog.swift in Sources */,
 				18685DC91D0AD0DE00BCAE10 /* MainScene.swift in Sources */,
+				184301FF1D45FCD700F1CD24 /* JianTowerSystem.swift in Sources */,
+				184301FB1D45EA9B00F1CD24 /* JianTower.swift in Sources */,
 				182302331D3DF09300355935 /* SLUser.swift in Sources */,
 				180262F11D13C77A00949B15 /* AnimationComponent.swift in Sources */,
 				1871DABD1D2659BE002B6479 /* FightPlayer.swift in Sources */,
@@ -1086,6 +1113,7 @@
 				1868E7011D37DD2700C5876F /* Wall.swift in Sources */,
 				180262AC1D0FC46500949B15 /* Player.swift in Sources */,
 				1894EFFB1D34CE3C00E7FAA9 /* Ball.swift in Sources */,
+				1899F4801D4745AD0086D3B1 /* FogSystem.swift in Sources */,
 				18685DC51D0AD0DE00BCAE10 /* SpriteButton.swift in Sources */,
 				18685DBF1D0AD0DE00BCAE10 /* SpriteComponent.swift in Sources */,
 				18B62C931D30F89600C49EA3 /* BoomSystem.swift in Sources */,

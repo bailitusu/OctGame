@@ -11,10 +11,13 @@ import SpriteKit
 
 enum SpriteLevel : CGFloat {
     case background = -100
-    case map = 50
-    case sprite = 100
     case prop = 200
     case dawuyun = 500
+    
+    case map = 50
+    case sprite = 100
     case fightBall = 150
     case fightStateUI = 300
+    case bullte = 250
+    case fog = 350
 }

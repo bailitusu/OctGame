@@ -14,6 +14,8 @@ enum SkillName: String {
     case fire = "fire"
     case boom = "boom"
     case wall = "wall"
+    case tower = "tower"
+    case fog = "fog"
 }
 class FightPlayer: Entity, FTCellStandAbleDelegate {
   //  var delegate: OnlineGameConvertable?
@@ -26,7 +28,11 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
 
     var configureSkill: ConfigureSkill!
     var fangxiang: FTDirection = FTDirection.none
-    var HP: Int = 10 {
+    
+    //zan shi  fix
+    
+    var over = false
+    var HP: Int = 20 {
         didSet {
             if self.HP <= 0 {
                 var temp: String = "loser"
@@ -43,7 +49,11 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
                     
                 }
                 self.scene?.sock.send(BTCommand.CStatusEnding, withParams: self.toResult(temp))
-                SuccessView.gameOver((self.scene?.view)!, isSuccess: nil)
+                if over == false {
+                    SuccessView.gameOver((self.scene?.view)!, isSuccess: nil)
+                    over = true
+                }
+                
             }
             
 
@@ -52,27 +62,12 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
     var configCurrentBallArray = [Ball]()
     var mapCellIndex: Int! = 4 {
         didSet {
-  
-        self.moveToCell(self.fightMap.mapArray.objectAtIndex(self.mapCellIndex) as! FTMapCell)
-            
+            self.stateMachine.getState(FTFightPlayerWalkState.self)!.toCell = self.fightMap.mapArray.objectAtIndex(self.mapCellIndex) as? FTMapCell
+            self.stateMachine.enterState(self.stateMachine.getState(FTFightPlayerWalkState.self)!)
         }
     }
     
-//    var isInitSkillSprite: Bool! = false {
-//        didSet {
-//            if self.isInitSkillSprite == true {
-//                self.fireSys.initSkill((enemy.sprite.physicsBody?.categoryBitMask)!)
-//               //self.fireSys.initSkill(self)
-//                
-//            }
-//        }
-//    }
-//    var isThrowFire: Bool = false
-//    var fireVector: CGVector! {
-//        didSet {
-//            self.fireSys.throwSkill(self, speed: fireVector)
-//        }
-//    }
+
     var sprite: SKSpriteNode {
         return (self.componentForClass(SpriteComponent.self)?.sprite)!
     }
@@ -101,7 +96,9 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
         self.initSkillSystemArray(BoomSystem())
         self.skillSystemForClass(BoomSystem.self)?.addHarmArea(SinglePointHarm())
         self.initSkillSystemArray(WallSystem())
-        
+        self.initSkillSystemArray(JianTowerSystem())
+        self.skillSystemForClass(JianTowerSystem.self)?.addHarmArea(SinglePointHarm())
+        self.initSkillSystemArray(FogSystem())
     
        // self.yidong = false
     }
@@ -132,45 +129,45 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
         return nil
     }
     
-    func moveToCell(locationSprite: FTMapCell) {
-        if abs(locationSprite.position.x - self.sprite.position.x) < locationSprite.size.width+1 && abs(locationSprite.position.y - self.sprite.position.y) < locationSprite.size.height+1 {
-            if locationSprite.obj == nil || ((locationSprite.obj as? Boom) != nil)  {
-                let beforePlayerStandCell = self.fightMap.mapArray.objectAtIndex(self.fightMap.getCurrentPointMapCell(self.sprite.position)!) as! FTMapCell
-                beforePlayerStandCell.obj = nil
-                
-                locationSprite.obj = self
-                
-                if locationSprite.position.x - self.sprite.position.x > 0 {
-                    self.fangxiang = FTDirection.right
-                    self.stateMachine.enterState(self.stateMachine.getState(FTFightPlayerWalkState.self)!)
-                }else if locationSprite.position.x - self.sprite.position.x < 0 {
-                    self.fangxiang = FTDirection.left
-                    self.stateMachine.enterState(self.stateMachine.getState(FTFightPlayerWalkState.self)!)
-                }else if locationSprite.position.y - self.sprite.position.y > 0 {
-                    self.fangxiang = FTDirection.up
-                    self.stateMachine.enterState(self.stateMachine.getState(FTFightPlayerWalkState.self)!)
-                }else if locationSprite.position.y - self.sprite.position.y < 0 {
-                    self.fangxiang = FTDirection.down
-                    self.stateMachine.enterState(self.stateMachine.getState(FTFightPlayerWalkState.self)!)
-                }
-                let nc = NSNotificationCenter.defaultCenter()
-                nc.postNotificationName("playerMove", object: self, userInfo: ["moveToMapCell" : locationSprite])
-                let move = SKAction.moveTo(locationSprite.position, duration: 0.3)
-                let block = SKAction.runBlock({
-                     self.stateMachine.enterState(self.stateMachine.getState(FTFightPlayerRestState.self)!)
-                })
-                self.sprite.runAction(SKAction.sequence([move,block]))
-            }
-
-//            self.yidong = true
-//            let formatter = NSDateFormatter()
-//            formatter.dateFormat = "yyy-MM-dd HH:mm:ss:SSS"
-//            let date = formatter.stringFromDate(NSDate())
-//            print("yidong begin    \(date)")
-//            print(<#T##items: Any...##Any#>, separator: <#T##String#>, terminator: <#T##String#>)
-        }
-
-    }
+//    func moveToCell(locationSprite: FTMapCell) {
+//        if abs(locationSprite.position.x - self.sprite.position.x) < locationSprite.size.width+1 && abs(locationSprite.position.y - self.sprite.position.y) < locationSprite.size.height+1 {
+//            if locationSprite.obj == nil || ((locationSprite.obj as? Boom) != nil)  {
+//                let beforePlayerStandCell = self.fightMap.mapArray.objectAtIndex(self.fightMap.getCurrentPointMapCell(self.sprite.position)!) as! FTMapCell
+//                beforePlayerStandCell.obj = nil
+//                
+//                locationSprite.obj = self
+//                
+//                if locationSprite.position.x - self.sprite.position.x > 0 {
+//                    self.fangxiang = FTDirection.right
+//                    self.stateMachine.enterState(self.stateMachine.getState(FTFightPlayerWalkState.self)!)
+//                }else if locationSprite.position.x - self.sprite.position.x < 0 {
+//                    self.fangxiang = FTDirection.left
+//                    self.stateMachine.enterState(self.stateMachine.getState(FTFightPlayerWalkState.self)!)
+//                }else if locationSprite.position.y - self.sprite.position.y > 0 {
+//                    self.fangxiang = FTDirection.up
+//                    self.stateMachine.enterState(self.stateMachine.getState(FTFightPlayerWalkState.self)!)
+//                }else if locationSprite.position.y - self.sprite.position.y < 0 {
+//                    self.fangxiang = FTDirection.down
+//                    self.stateMachine.enterState(self.stateMachine.getState(FTFightPlayerWalkState.self)!)
+//                }
+//                let nc = NSNotificationCenter.defaultCenter()
+//                nc.postNotificationName("playerMove", object: self, userInfo: ["moveToMapCell" : locationSprite])
+//                let move = SKAction.moveTo(locationSprite.position, duration: 0.3)
+//                let block = SKAction.runBlock({
+//                     self.stateMachine.enterState(self.stateMachine.getState(FTFightPlayerRestState.self)!)
+//                })
+//                self.sprite.runAction(SKAction.sequence([move,block]))
+//            }
+//
+////            self.yidong = true
+////            let formatter = NSDateFormatter()
+////            formatter.dateFormat = "yyy-MM-dd HH:mm:ss:SSS"
+////            let date = formatter.stringFromDate(NSDate())
+////            print("yidong begin    \(date)")
+////            print(<#T##items: Any...##Any#>, separator: <#T##String#>, terminator: <#T##String#>)
+//        }
+//
+//    }
     
     func checkState(time: NSTimeInterval) {
         for temp in self.skillSystemArray {
@@ -304,28 +301,31 @@ extension FightPlayer: OnlineGameObjectType {
         //dict.updateValue(SkillName.fire.rawValue, forKey: "initSkill")
         if json["initSkill"].stringValue == SkillName.fire.rawValue {
             self.createSkillSprite(FireSystem.self)
-        }
-        
-        if json["initSkill"].stringValue == SkillName.boom.rawValue {
+        }else if json["initSkill"].stringValue == SkillName.boom.rawValue {
             self.createSkillSprite(BoomSystem.self)
+        }else if json["initSkill"].stringValue == SkillName.wall.rawValue {
+            self.createSkillSprite(WallSystem.self)
+        }else if json["initSkill"].stringValue == SkillName.tower.rawValue {
+            self.createSkillSprite(JianTowerSystem.self)
+        }else if json["initSkill"].stringValue == SkillName.fog.rawValue {
+            self.createSkillSprite(FogSystem.self)
         }
         
-        if json["initSkill"].stringValue == SkillName.wall.rawValue {
-            self.createSkillSprite(WallSystem.self)
-        }
+        
     }
     
     func fromReleaseSkill(json: JSON) {
+        let percentX = CGFloat(json["percentX"].floatValue)
+        let percentY = CGFloat(json["percentY"].floatValue)
         if json["initSkill"].stringValue == SkillName.fire.rawValue {
-            let percentX = CGFloat(json["percentX"].floatValue)
-            let percentY = CGFloat(json["percentY"].floatValue)
+//            percentX = CGFloat(json["percentX"].floatValue)
+//            percentY = CGFloat(json["percentY"].floatValue)
             self.skillSystemForClass(FireSystem.self)?.throwSkill(SkillSystem.reversalVector(percentX, percentY: percentY))
           //  self.runCurrentSkill(FireSystem.self, speed: )
-        }
-        
-        if json["initSkill"].stringValue == SkillName.boom.rawValue {
-            let percentX = CGFloat(json["percentX"].floatValue)
-            let percentY = CGFloat(json["percentY"].floatValue)
+        }else if json["initSkill"].stringValue == SkillName.boom.rawValue {
+
+//            let percentX = CGFloat(json["percentX"].floatValue)
+//            let percentY = CGFloat(json["percentY"].floatValue)
             
             self.skillSystemForClass(BoomSystem.self)?.noLaunchBoom!.position = SkillSystem.reversalPoint(percentX, percentY: percentY)
             self.skillSystemForClass(BoomSystem.self)?.noLaunchBoom!.isControl = false
@@ -333,8 +333,7 @@ extension FightPlayer: OnlineGameObjectType {
             let tempBoom = (self.skillSystemForClass(BoomSystem.self)?.noLaunchBoom)!
             self.skillSystemForClass(BoomSystem.self)?.boomArray.addObject((self.skillSystemForClass(BoomSystem.self)?.noLaunchBoom)!)
             self.skillSystemForClass(BoomSystem.self)?.noLaunchBoom = nil
-            
-          //  print("set--\(self.skillSystemForClass(BoomSystem.self)?.currentBoom.BoomID)")
+
             self.skillSystemForClass(BoomSystem.self)?.bogusBoomRun({
                 let wait = SKAction.waitForDuration(7)
                 let appear = SKAction.fadeAlphaTo(1, duration: 0.3)
@@ -345,17 +344,18 @@ extension FightPlayer: OnlineGameObjectType {
 //                
             })
  
-        }
-        
-        if json["initSkill"].stringValue == SkillName.wall.rawValue {
-            let percentX = CGFloat(json["percentX"].floatValue)
-            let percentY = CGFloat(json["percentY"].floatValue)
+        }else if json["initSkill"].stringValue == SkillName.wall.rawValue {
             
-            self.skillSystemForClass(WallSystem.self)?.currentWall.wallSprite.position = SkillSystem.reversalPoint(percentX, percentY: percentY)
+            self.skillSystemForClass(WallSystem.self)?.currentWall.buildSprite.position = SkillSystem.reversalPoint(percentX, percentY: percentY)
             self.skillSystemForClass(WallSystem.self)?.currentWall.isControl = false
 
-            let wallMapCellNum = self.fightMap.getCurrentPointMapCell((self.skillSystemForClass(WallSystem.self)?.currentWall.wallSprite.position)!)
+            let wallMapCellNum = self.fightMap.getCurrentPointMapCell((self.skillSystemForClass(WallSystem.self)?.currentWall.buildSprite.position)!)
             (self.fightMap.mapArray.objectAtIndex(wallMapCellNum!) as! FTMapCell).obj = self.skillSystemForClass(WallSystem.self)?.currentWall
+            for temp in (self.skillSystemForClass(WallSystem.self)?.wallArray)! {
+                if (temp as! Wall).isControl == true {
+                    self.skillSystemForClass(WallSystem.self)?.currentWall = temp as! Wall
+                }
+            }
 //            self.skillSystemForClass(WallSystem.self)?.currentWall.wallSprite.physicsBody?.dynamic = true
          //   let tempBoom = (self.skillSystemForClass(BoomSystem.self)?.currentBoom)!
             //  print("set--\(self.skillSystemForClass(BoomSystem.self)?.currentBoom.BoomID)")
@@ -369,8 +369,36 @@ extension FightPlayer: OnlineGameObjectType {
 //                //
 //            })
             
+        }else if json["initSkill"].stringValue == SkillName.tower.rawValue {
+//            let percentX = CGFloat(json["percentX"].floatValue)
+//            let percentY = CGFloat(json["percentY"].floatValue)
+            
+            self.skillSystemForClass(JianTowerSystem.self)?.currentJianTower.buildSprite.position = SkillSystem.reversalPoint(percentX, percentY: percentY)
+            self.skillSystemForClass(JianTowerSystem.self)?.currentJianTower.isControl = false
+            
+            let towerMapCellNum = self.fightMap.getCurrentPointMapCell((self.skillSystemForClass(JianTowerSystem.self)?.currentJianTower.buildSprite.position)!)
+            (self.fightMap.mapArray.objectAtIndex(towerMapCellNum!) as! FTMapCell).obj = self.skillSystemForClass(JianTowerSystem.self)?.currentJianTower
+            self.skillSystemForClass(JianTowerSystem.self)?.shootCloseRange((self.skillSystemForClass(JianTowerSystem.self)?.currentJianTower)!, scene: self.scene!)
+            for temp in (self.skillSystemForClass(JianTowerSystem.self)?.towerArray)! {
+                if (temp as! JianTower).isControl == true {
+                    self.skillSystemForClass(JianTowerSystem.self)?.currentJianTower = temp as! JianTower
+                }
+            }
+        }else if json["initSkill"].stringValue == SkillName.fog.rawValue {
+//            let percentX = CGFloat(json["percentX"].floatValue)
+//            let percentY = CGFloat(json["percentY"].floatValue)
+            self.skillSystemForClass(FogSystem.self)?.currentFog.position = SkillSystem.reversalPoint(percentX, percentY: percentY)
+            
+            self.skillSystemForClass(FogSystem.self)?.currentFog.size = CGSize(width: fightMapCellSize.height*1.5, height: fightMapCellSize.height*1.5)
+            self.skillSystemForClass(FogSystem.self)?.currentFog.isControl = false
+            self.skillSystemForClass(FogSystem.self)?.reckonFogOccupyArea((self.skillSystemForClass(FogSystem.self)?.currentFog)!, disappear: false)
+            for temp in (self.skillSystemForClass(FogSystem.self)?.fogArray)! {
+                if (temp as! Fog).isControl == true {
+                    self.skillSystemForClass(FogSystem.self)?.currentFog = temp as! Fog
+                }
+            }
         }
-
+  
     }
 //    func moveToCell(index: Int) {
 //        

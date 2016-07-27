@@ -22,6 +22,7 @@ class WallSystem: SkillSystem {
         self.wallID = 0
         self.touchPointArray = NSMutableArray()
         self.bollGroup = BallCategory.fireBall.rawValue + BallCategory.fireBall.rawValue + BallCategory.waterBall.rawValue
+        self.isSilent = false
     }
     
     override func initSkill() {
@@ -32,14 +33,14 @@ class WallSystem: SkillSystem {
         let player = (self.entity as! FightPlayer)
         if self.entityName == "fightEnemy" {
         //    boom.alpha = 0
-            wall.wallSprite.position = CGPoint(x:player.fightMap.mapArray.objectAtIndex(0).position.x, y:player.fightMap.mapArray.objectAtIndex(0).position.y - fightMapCellSize.height)
+            wall.buildSprite.position = CGPoint(x:player.fightMap.mapArray.objectAtIndex(0).position.x, y:player.fightMap.mapArray.objectAtIndex(0).position.y - fightMapCellSize.height)
             
         }else {
-            wall.wallSprite.position = CGPoint(x:player.fightMap.mapArray.objectAtIndex(0).position.x, y:player.fightMap.mapArray.objectAtIndex(0).position.y + fightMapCellSize.height)
+            wall.buildSprite.position = CGPoint(x:player.fightMap.mapArray.objectAtIndex(0).position.x, y:player.fightMap.mapArray.objectAtIndex(0).position.y + fightMapCellSize.height)
             
         }
-        defaluePosition = wall.wallSprite.position
-        player.sprite.parent?.addChild(wall.wallSprite)
+        defaluePosition = wall.buildSprite.position
+        player.sprite.parent?.addChild(wall.buildSprite)
         self.wallArray.addObject(wall)
         self.currentWall = wall
     }
@@ -50,7 +51,7 @@ class WallSystem: SkillSystem {
         for i in 0 ..< selfMap.mapArray.count {
             if ((selfMap.mapArray.objectAtIndex(i) as! FTMapCell).obj == nil || ((selfMap.mapArray.objectAtIndex(i) as! FTMapCell).obj as? Boom) != nil) {
                 if CGRectContainsPoint(selfMap.mapArray.objectAtIndex(i).frame, point) {
-                    self.currentWall.wallSprite.position = selfMap.mapArray.objectAtIndex(i).position
+                    self.currentWall.buildSprite.position = selfMap.mapArray.objectAtIndex(i).position
                     return i
                 }
             }
@@ -63,7 +64,7 @@ class WallSystem: SkillSystem {
         self.touchPointArray.removeAllObjects()
         if self.currentWall != nil {
             if self.currentWall.isControl == true {
-                let rect = CGRect(origin: CGPoint(x: self.currentWall.wallSprite.position.x-SkillSize.wall.width, y: self.currentWall.wallSprite.position.y-SkillSize.wall.height), size: CGSize(width: self.currentWall.wallSprite.frame.width*2, height: self.currentWall.wallSprite.frame.height*2))
+                let rect = CGRect(origin: CGPoint(x: self.currentWall.buildSprite.position.x-SkillSize.building.width, y: self.currentWall.buildSprite.position.y-SkillSize.building.height), size: CGSize(width: self.currentWall.buildSprite.frame.width*2, height: self.currentWall.buildSprite.frame.height*2))
                 if CGRectContainsPoint(rect, touchLocation!) {
                     self.touchPointArray.addObject(NSValue.init(CGPoint: touchLocation!))
                 }
@@ -80,9 +81,9 @@ class WallSystem: SkillSystem {
             let oldPoint = (touches.first?.previousLocationInNode(scene))!
             let distance = CGPoint(x: point.x-oldPoint.x, y: point.y-oldPoint.y)
 
-            let newPoint = CGPoint(x: self.currentWall.wallSprite.position.x+distance.x, y: self.currentWall.wallSprite.position.y+distance.y)
+            let newPoint = CGPoint(x: self.currentWall.buildSprite.position.x+distance.x, y: self.currentWall.buildSprite.position.y+distance.y)
 
-            self.currentWall.wallSprite.position = newPoint
+            self.currentWall.buildSprite.position = newPoint
   
         }
     }
@@ -90,21 +91,21 @@ class WallSystem: SkillSystem {
     override func toucheEnded(touches: Set<UITouch>, withEvent event: UIEvent?, scene: FightScene) {
         if self.touchPointArray.count != 0 {
             let endPoint = (self.touchPointArray.lastObject!.CGPointValue)!
-            let wallMapCellNum = isSetWallSuccess(endPoint)
+            var wallMapCellNum: Int? = nil
+            if self.isSilent == false {
+                wallMapCellNum = isSetWallSuccess(endPoint)
+            }
+            
             if wallMapCellNum != nil{
-              //  self.currentWall.boomOnMapCellIndex = wallMapCellNum
                 let selfMap = (self.entity as! FightPlayer).fightMap
                 (selfMap.mapArray.objectAtIndex(wallMapCellNum!) as! FTMapCell).obj = self.currentWall
                 self.currentWall.isControl = false
                // self.setBoom()
-                
-                
-//                self.currentWall.wallSprite.physicsBody?.dynamic = true
-//                var dict = Dictionary<String, AnyObject>()
+
                 var dict = [String: AnyObject]()
                 dict.updateValue(SkillName.wall.rawValue, forKey: "initSkill")
-                let percentX = self.currentWall.wallSprite.position.x / screenSize.width
-                let percentY = self.currentWall.wallSprite.position.y / screenSize.height
+                let percentX = self.currentWall.buildSprite.position.x / screenSize.width
+                let percentY = self.currentWall.buildSprite.position.y / screenSize.height
                 dict.updateValue(percentX, forKey: "percentX")
                 dict.updateValue(percentY, forKey: "percentY")
                 
@@ -120,7 +121,7 @@ class WallSystem: SkillSystem {
                     }
                 }
             }else {
-                self.currentWall.wallSprite.position = defaluePosition!
+                self.currentWall.buildSprite.position = defaluePosition!
             }
         }
     }
@@ -151,7 +152,7 @@ class WallSystem: SkillSystem {
             if (temp as! Wall).removeWall() == true {
                 removeArray.addObject(temp)
                 let tempMap = (self.entity as! FightPlayer).fightMap
-                (tempMap.mapArray.objectAtIndex(tempMap.getCurrentPointMapCell((temp as! Wall).wallSprite.position)!) as! FTMapCell).obj = nil
+                (tempMap.mapArray.objectAtIndex(tempMap.getCurrentPointMapCell((temp as! Wall).buildSprite.position)!) as! FTMapCell).obj = nil
                 
             }
             

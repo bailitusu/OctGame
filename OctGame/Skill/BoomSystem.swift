@@ -9,7 +9,7 @@
 import SpriteKit
 import UIKit
 
-class BoomSystem: SkillSystem, AttackProtocal {
+class BoomSystem: SkillSystem, AttackProtocal,NoSaveSkillProtocal {
     
     var boomArray: NSMutableArray!
     var noLaunchBoom: Boom?
@@ -23,6 +23,7 @@ class BoomSystem: SkillSystem, AttackProtocal {
         self.boomID = 0
         self.touchPointArray = NSMutableArray()
         self.bollGroup = BallCategory.fireBall.rawValue + BallCategory.waterBall.rawValue + BallCategory.electricBoll.rawValue
+        self.isSilent = false
     }
     
     override func initSkill() {
@@ -157,7 +158,11 @@ class BoomSystem: SkillSystem, AttackProtocal {
     override func toucheEnded(touches: Set<UITouch>, withEvent event: UIEvent?, scene: FightScene) {
         if self.touchPointArray.count != 0 {
             let endPoint = (self.touchPointArray.lastObject!.CGPointValue)!
-            let boomMapCellNum = isSetBoomSuccess(endPoint)
+            var boomMapCellNum:Int? = nil
+            if isSilent == false {
+                boomMapCellNum = isSetBoomSuccess(endPoint)
+            }
+            
             if boomMapCellNum != nil{
                 self.noLaunchBoom!.boomOnMapCellIndex = boomMapCellNum
                 self.noLaunchBoom!.isControl = false
@@ -215,9 +220,21 @@ class BoomSystem: SkillSystem, AttackProtocal {
                         if wall.entityName == "fightEnemy" {
                             if wall.isControl == false {
                                 boom.isRemove = true
-                                self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+                                self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.buildSprite.position)
                             }
                             
+                        }
+                    }
+                }
+                
+                if nodeB.categoryBitMask == BitMaskType.ftJianTower {
+                    let tower = nodeB.node?.userData?.objectForKey("towerclass") as! JianTower
+                    if boom.entityName == "fightPlayer" {
+                        if tower.entityName == "fightEnemy" {
+                            if tower.isControl == false {
+                                boom.isRemove = true
+                                self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: tower.buildSprite.position)
+                            }
                         }
                     }
                 }
@@ -240,13 +257,26 @@ class BoomSystem: SkillSystem, AttackProtocal {
                         if wall.entityName == "fightEnemy" {
                             if wall.isControl == false {
                                 boom.isRemove = true
-                                self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+                                self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.buildSprite.position)
                             }
 
                         }
                     }
                 }
 
+                if nodeA.categoryBitMask == BitMaskType.ftJianTower {
+                    
+                    let tower = nodeA.node?.userData?.objectForKey("towerclass") as! JianTower
+                    if boom.entityName == "fightPlayer" {
+                        if tower.entityName == "fightEnemy" {
+                            if tower.isControl == false {
+                                boom.isRemove = true
+                                self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: tower.buildSprite.position)
+                            }
+                            
+                        }
+                    }
+                }
             }
         }else if self.entityName == "fightEnemy" {
             if nodeA.categoryBitMask == BitMaskType.boom {
@@ -304,32 +334,55 @@ class BoomSystem: SkillSystem, AttackProtocal {
         if self.entityName == "fightEnemy" {
             let nc = NSNotificationCenter.defaultCenter()
             nc.addObserver(self, selector: #selector(boomContactWall), name: "wallSetRight", object: (self.entity as! FightPlayer).enemy)
+            nc.addObserver(self, selector: #selector(boomContactJianTower), name: "jiantaSetRight", object: (self.entity as! FightPlayer).enemy)
         }
     }
     @objc func boomContactWall(note: NSNotification) {
         if let wall = note.userInfo?["playerSelfWall"] as? Wall {
             for tempBoom in self.boomArray {
                 if (tempBoom as! Boom).isControl == false {
-                    if CommonFunc.fightIsEqualPoint((tempBoom as! Boom).position, pointB: wall.wallSprite.position) == true {
+                    if CommonFunc.fightIsEqualPoint((tempBoom as! Boom).position, pointB: wall.buildSprite.position) == true {
                         (tempBoom as! Boom).isRemove = true
-                        self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+                        self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.buildSprite.position)
                     }
                 }
             }
         }
 
     }
+    @objc func boomContactJianTower(note: NSNotification) {
+        if let tower = note.userInfo?["playerSelfJianta"] as? JianTower {
+            for tempBoom in self.boomArray {
+                if (tempBoom as! Boom).isControl == false {
+                    if CommonFunc.fightIsEqualPoint((tempBoom as! Boom).position, pointB: tower.buildSprite.position) == true {
+                        (tempBoom as! Boom).isRemove = true
+                        self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: tower.buildSprite.position)
+                    }
+                }
+            }
+        }
+    }
+    
     override func checkState(time: NSTimeInterval) {
         let removeArray = NSMutableArray()
         
         for temp in self.boomArray {
             if (temp as! Boom).removeBoom() == true {
                 removeArray.addObject(temp)
+                let tempMap = (self.entity as! FightPlayer).enemy.fightMap
+                (tempMap.mapArray.objectAtIndex(tempMap.getCurrentPointMapCell((temp as! Boom).position)!) as! FTMapCell).obj = nil
             }
         }
         
         for removeTemp in removeArray {
             self.boomArray.removeObject(removeTemp)
+        }
+    }
+    
+    func removeSkillItem() {
+        if self.noLaunchBoom != nil {
+            self.noLaunchBoom?.removeFromParent()
+            self.noLaunchBoom = nil
         }
     }
 }

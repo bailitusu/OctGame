@@ -75,6 +75,7 @@ class ConfigureSkill {
     var scene: FightScene!
     var player: FightPlayer!
     var isConfigOK: Bool!
+    var removeItem: NoSaveSkillProtocal?
     
     func initOwnBoll(ball: BallCategory) {
         playerHasBallArray.append(ball)
@@ -172,22 +173,46 @@ class ConfigureSkill {
             self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
             break
         case BallCategory.fireBall.rawValue + BallCategory.waterBall.rawValue + BallCategory.electricBoll.rawValue:
+            if removeItem != nil {
+                removeItem?.removeSkillItem()
+            }
             self.scene.fightPlayer.createSkillSprite(BoomSystem.self)
-            //var dict = Dictionary<String, AnyObject>()
+
+            removeItem = self.scene.fightPlayer.skillSystemForClass(BoomSystem.self)
+  
             var dict = [String: AnyObject]()
             dict.updateValue(SkillName.boom.rawValue, forKey: "initSkill")
-          //  self.scene.websocket.writeMessage(BTMessage(command: BTCommand.CreateSpell, params: self.scene.fightPlayer.toInitSkill(dict)))
+    
             self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
             break
         case BallCategory.fireBall.rawValue + BallCategory.fireBall.rawValue + BallCategory.waterBall.rawValue:
+            if removeItem != nil {
+                removeItem?.removeSkillItem()
+                removeItem = nil
+            }
             self.scene.fightPlayer.createSkillSprite(WallSystem.self)
-            
-//            var dict = Dictionary<String, AnyObject>()
             var dict = [String: AnyObject]()
             dict.updateValue(SkillName.wall.rawValue, forKey: "initSkill")
-            //self.scene.websocket.writeMessage(BTMessage(command: BTCommand.CreateSpell, params: self.scene.fightPlayer.toInitSkill(dict)))
+      
             self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
+            break
+        case BallCategory.waterBall.rawValue + BallCategory.waterBall.rawValue + BallCategory.fireBall.rawValue:
+            self.scene.fightPlayer.createSkillSprite(JianTowerSystem.self)
+            var dict = [String: AnyObject]()
+            dict.updateValue(SkillName.tower.rawValue, forKey: "initSkill")
+            
+            self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
+            break
+            
+        case BallCategory.waterBall.rawValue + BallCategory.waterBall.rawValue + BallCategory.waterBall.rawValue:
+            self.scene.fightPlayer.createSkillSprite(FogSystem.self)
+            var dict = [String: AnyObject]()
+            dict.updateValue(SkillName.fog.rawValue, forKey: "initSkill")
+            
+            self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
+            break
         default:
+            
             print("configskill  error")
         }
         

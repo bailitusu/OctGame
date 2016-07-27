@@ -15,8 +15,7 @@ class FireSystem: SkillSystem,AttackProtocal {
     var huoqiuArray: NSMutableArray!
     var noLaunchHuoqiu: Fire?
     var fireId: UInt32!
-    var hitValue: Int = 3
-    var isSaveAble: Bool = false
+    var hitValue: Int = 15
 
     override init() {
         super.init()
@@ -24,6 +23,7 @@ class FireSystem: SkillSystem,AttackProtocal {
         self.fireId = 0
         self.touchPointArray = NSMutableArray()
         self.bollGroup = BallCategory.fireBall.rawValue + BallCategory.electricBoll.rawValue + BallCategory.fireBall.rawValue
+        self.isSilent = false
     }
     
     override func addSkillObserver() {
@@ -149,7 +149,7 @@ class FireSystem: SkillSystem,AttackProtocal {
                     if fire.entityName == "fightPlayer" {
                         if wall.entityName == "fightEnemy" {
                             fire.isRemove = true
-                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.buildSprite.position)
                         }
                     }
                 }
@@ -170,7 +170,7 @@ class FireSystem: SkillSystem,AttackProtocal {
                     if fire.entityName == "fightPlayer" {
                         if (wall as! Wall).entityName == "fightEnemy" {
                             fire.isRemove = true
-                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: (wall as! Wall).wallSprite.position)
+                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: (wall as! Wall).buildSprite.position)
                         }
                     }
                 }
@@ -191,7 +191,7 @@ class FireSystem: SkillSystem,AttackProtocal {
                     if fire.entityName == "fightEnemy" {
                         if wall.entityName == "fightPlayer" {
                             fire.isRemove = true
-                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.buildSprite.position)
                         }
                     }
                 }
@@ -210,7 +210,7 @@ class FireSystem: SkillSystem,AttackProtocal {
                     if fire.entityName == "fightEnemy" {
                         if wall.entityName == "fightPlayer" {
                             fire.isRemove = true
-                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
+                            self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.buildSprite.position)
                         }
                     }
                 }
@@ -244,26 +244,27 @@ class FireSystem: SkillSystem,AttackProtocal {
     
     override func toucheEnded(touches: Set<UITouch>, withEvent event: UIEvent?, scene: FightScene) {
         if self.touchPointArray.count != 0 {
-            let firstPoint = (self.noLaunchHuoqiu?.position)!
-            let endPoint = (self.touchPointArray.objectAtIndex(self.touchPointArray.count/2).CGPointValue)!
-            let distance = CGVector(dx: endPoint.x-firstPoint.x, dy: endPoint.y-firstPoint.y)
-            if distance != CGVector(dx: 0, dy: 0) {
-                self.throwSkill(SkillSystem.reckonSkillSpeed(distance))
-            }
-
-            var dict = [String: AnyObject]()
-            dict.updateValue(SkillName.fire.rawValue, forKey: "initSkill")
-            let percentX = SkillSystem.reckonSkillSpeed(distance).dx / screenSize.width
-            let percentY = SkillSystem.reckonSkillSpeed(distance).dy / screenSize.height
-            dict.updateValue(percentX, forKey: "percentX")
-            dict.updateValue(percentY, forKey: "percentY")
-           // scene.websocket.writeMessage(BTMessage(command: BTCommand.CCastSpell, params: (self.entity as! FightPlayer).toReleaseSkill(dict)))
-            scene.sock.send(BTCommand.CCastSpell, withParams: (self.entity as! FightPlayer).toReleaseSkill(dict))
-            for i in 0 ..< self.touchPointArray.count {
-                print("\(i)-----\(self.touchPointArray.objectAtIndex(i).CGPointValue)")
+            if self.isSilent == false {
+                let firstPoint = (self.noLaunchHuoqiu?.position)!
+                let endPoint = (self.touchPointArray.objectAtIndex(self.touchPointArray.count/2).CGPointValue)!
+                let distance = CGVector(dx: endPoint.x-firstPoint.x, dy: endPoint.y-firstPoint.y)
+                if distance != CGVector(dx: 0, dy: 0) {
+                    self.throwSkill(SkillSystem.reckonSkillSpeed(distance, skillSpeed: FightSkillSpeed.huoqiu))
+                }
+                
+                var dict = [String: AnyObject]()
+                dict.updateValue(SkillName.fire.rawValue, forKey: "initSkill")
+                let percentX = SkillSystem.reckonSkillSpeed(distance, skillSpeed: FightSkillSpeed.huoqiu).dx / screenSize.width
+                let percentY = SkillSystem.reckonSkillSpeed(distance, skillSpeed: FightSkillSpeed.huoqiu).dy / screenSize.height
+                dict.updateValue(percentX, forKey: "percentX")
+                dict.updateValue(percentY, forKey: "percentY")
+                // scene.websocket.writeMessage(BTMessage(command: BTCommand.CCastSpell, params: (self.entity as! FightPlayer).toReleaseSkill(dict)))
+                scene.sock.send(BTCommand.CCastSpell, withParams: (self.entity as! FightPlayer).toReleaseSkill(dict))
+                for i in 0 ..< self.touchPointArray.count {
+                    print("\(i)-----\(self.touchPointArray.objectAtIndex(i).CGPointValue)")
+                }
             }
         }
-
     }
     
 }

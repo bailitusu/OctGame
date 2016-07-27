@@ -10,5 +10,8 @@ import SpriteKit
 import UIKit
 
 class Building {
-    
+    var buildSprite: SKSpriteNode!
+    var entityName: String!
+    var buildID: UInt32!
+    var isControl: Bool!
 }
