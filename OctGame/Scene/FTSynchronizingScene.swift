@@ -29,14 +29,17 @@ class FTSynchronizingScene: BaseScene {
         
         fightPlayer = FightPlayer(roleName: "fightPlayer")
         fightPlayer.fightMap = FightMap()
-        fightPlayer.fightMap.initMap(5, verticalNum: 4, oneSize: fightMapCellSize, originalPointY: screenSize.height*0.299, isEnemy: false)
+        fightPlayer.fightMap.initMap(5, verticalNum: 4, oneSize: fightMapCellSize, originalPointY: screenSize.height*0.299+fightMapCellSize.height, isEnemy: false)
+//        fightPlayer.fightMap.initSaveSkillMap(5, originalPointY: fightPlayer.fightMap.mapArray.objectAtIndex(3).position.y-fightMapCellSize.height-5)
+        
         fightPlayer.sprite.position = fightPlayer.fightMap.mapArray.objectAtIndex(10).position
         (fightPlayer.fightMap.mapArray.objectAtIndex(10) as! FTMapCell).obj = fightPlayer
         fightPlayer.configureSkill = ConfigureSkill(player: fightPlayer)
         fightPlayer.initConfigureSkillBall()
         
         fightPlayer.playerStateUI = FTPlayerStateUI(player: fightPlayer)
-        fightPlayer.playerStateUI.hpLabel.position = CGPoint(x: screenSize.width-screenSize.width*0.146, y: screenSize.height*0.359)
+        fightPlayer.playerStateUI.hpLabel.position = CGPoint(x: screenSize.width-screenSize.width*0.146, y: screenSize.height*0.359+fightMapCellSize.height)
+        fightPlayer.playerStateUI.initSaveSkillUI(5, originalPointY: fightPlayer.fightMap.mapArray.objectAtIndex(3).position.y-fightMapCellSize.height-5)
         FTAnimation.addPlayerFTAnimationResource(nil)
         
         fightPlayer.stateMachine = StateMachine([FTFightPlayerRestState(player: fightPlayer),

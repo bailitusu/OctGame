@@ -9,9 +9,14 @@
 import SpriteKit
 import UIKit
 
-class  JianTower: Building, FTCellStandAbleDelegate {
+class  JianTower: Building, FTCellStandAbleDelegate,SaveSkillProtocal {
     var HP: Int = 3
-
+    var skillPosition: CGPoint?{
+        didSet{
+            self.buildSprite.position = skillPosition!
+        }
+    }
+    var isRemove: Bool!
     var hpLabel: SKLabelNode!
     init(entityName: String, collsionBitMask: UInt32, buildID: UInt32) {
         super.init()
@@ -44,7 +49,7 @@ class  JianTower: Building, FTCellStandAbleDelegate {
         self.isControl = true
         self.buildID = buildID
         self.entityName = entityName
-        //  self.isRemove = false
+        self.isRemove = false
         
     }
     func createZidan() -> SKSpriteNode {
@@ -73,6 +78,13 @@ class  JianTower: Building, FTCellStandAbleDelegate {
         return false
     }
     
+    func getEntityName() -> String {
+        return self.entityName
+    }
+    
+    func removeItem() {
+        self.isRemove = true
+    }
     func didBeHit(hitValue: Int) {
         self.HP  = self.HP - hitValue
         self.hpLabel.text = "\(HP)"

@@ -22,7 +22,7 @@ class BoomSystem: SkillSystem, AttackProtocal,NoSaveSkillProtocal {
         self.boomArray = NSMutableArray()
         self.boomID = 0
         self.touchPointArray = NSMutableArray()
-        self.bollGroup = BallCategory.fireBall.rawValue + BallCategory.waterBall.rawValue + BallCategory.electricBoll.rawValue
+        self.bollGroup = BallCategory.gongji.rawValue + BallCategory.jianzhu.rawValue + BallCategory.gongji.rawValue
         self.isSilent = false
     }
     
@@ -172,7 +172,7 @@ class BoomSystem: SkillSystem, AttackProtocal,NoSaveSkillProtocal {
                 var dict = [String: AnyObject]()
                 dict.updateValue(SkillName.boom.rawValue, forKey: "initSkill")
                 let percentX = self.noLaunchBoom!.position.x / screenSize.width
-                let percentY = self.noLaunchBoom!.position.y / screenSize.height
+                let percentY = (self.noLaunchBoom!.position.y-fightMapCellSize.height) / screenSize.height
                 dict.updateValue(percentX, forKey: "percentX")
                 dict.updateValue(percentY, forKey: "percentY")
                // scene.websocket.writeMessage(BTMessage(command: BTCommand.CastSpell, params: (self.entity as! FightPlayer).toReleaseSkill(dict)))
@@ -370,7 +370,10 @@ class BoomSystem: SkillSystem, AttackProtocal,NoSaveSkillProtocal {
             if (temp as! Boom).removeBoom() == true {
                 removeArray.addObject(temp)
                 let tempMap = (self.entity as! FightPlayer).enemy.fightMap
-                (tempMap.mapArray.objectAtIndex(tempMap.getCurrentPointMapCell((temp as! Boom).position)!) as! FTMapCell).obj = nil
+                if let boom = ((tempMap.mapArray.objectAtIndex(tempMap.getCurrentPointMapCell((temp as! Boom).position)!) as! FTMapCell).obj as? Boom) {
+                    (tempMap.mapArray.objectAtIndex(tempMap.getCurrentPointMapCell(boom.position)!) as! FTMapCell).obj = nil
+                }
+                
             }
         }
         

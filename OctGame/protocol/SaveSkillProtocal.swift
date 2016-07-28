@@ -17,6 +17,10 @@ protocol NoSaveSkillProtocal {
 //    var configRightSkillArray: NSMutableArray{ get set }
 }
 
+protocol SaveSkillProtocal {
+    var skillPosition: CGPoint? {set get}
+    func removeItem()
+}
 
 extension NoSaveSkillProtocal {
 //    func saveSkillItem(item: AnyObject) {

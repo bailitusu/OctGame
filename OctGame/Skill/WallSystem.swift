@@ -21,7 +21,7 @@ class WallSystem: SkillSystem {
         self.wallArray = NSMutableArray()
         self.wallID = 0
         self.touchPointArray = NSMutableArray()
-        self.bollGroup = BallCategory.fireBall.rawValue + BallCategory.fireBall.rawValue + BallCategory.waterBall.rawValue
+        self.bollGroup = BallCategory.jianzhu.rawValue + BallCategory.jianzhu.rawValue + BallCategory.jianzhu.rawValue
         self.isSilent = false
     }
     
@@ -31,18 +31,24 @@ class WallSystem: SkillSystem {
         let wall = Wall(entityName: self.entityName, collsionBitMask: wallBitMask, wallID: self.wallID)
         
         let player = (self.entity as! FightPlayer)
-        if self.entityName == "fightEnemy" {
-        //    boom.alpha = 0
-            wall.buildSprite.position = CGPoint(x:player.fightMap.mapArray.objectAtIndex(0).position.x, y:player.fightMap.mapArray.objectAtIndex(0).position.y - fightMapCellSize.height)
-            
-        }else {
-            wall.buildSprite.position = CGPoint(x:player.fightMap.mapArray.objectAtIndex(0).position.x, y:player.fightMap.mapArray.objectAtIndex(0).position.y + fightMapCellSize.height)
-            
+        if player.roleName == "fightPlayer" {
+            player.scene?.saveSkill.saveSkillArray.append(wall)
+            player.scene!.saveSkill.showCurrentSaveSkill()
+            defaluePosition = wall.buildSprite.position
+            player.sprite.parent?.addChild(wall.buildSprite)
         }
-        defaluePosition = wall.buildSprite.position
-        player.sprite.parent?.addChild(wall.buildSprite)
+//        if self.entityName == "fightEnemy" {
+//        //    boom.alpha = 0
+//            wall.buildSprite.position = CGPoint(x:player.fightMap.mapArray.objectAtIndex(0).position.x, y:player.fightMap.mapArray.objectAtIndex(0).position.y - fightMapCellSize.height)
+//            
+//        }else {
+//            wall.buildSprite.position = CGPoint(x:player.fightMap.mapArray.objectAtIndex(0).position.x, y:player.fightMap.mapArray.objectAtIndex(0).position.y + fightMapCellSize.height)
+//            
+//        }
+
         self.wallArray.addObject(wall)
         self.currentWall = wall
+
     }
     
     func isSetWallSuccess(point: CGPoint) -> Int? {
@@ -62,14 +68,25 @@ class WallSystem: SkillSystem {
     override func toucheBegan(touches: Set<UITouch>, withEvent event: UIEvent?, scene: FightScene) {
         let touchLocation = touches.first?.locationInNode(scene)
         self.touchPointArray.removeAllObjects()
-        if self.currentWall != nil {
-            if self.currentWall.isControl == true {
-                let rect = CGRect(origin: CGPoint(x: self.currentWall.buildSprite.position.x-SkillSize.building.width, y: self.currentWall.buildSprite.position.y-SkillSize.building.height), size: CGSize(width: self.currentWall.buildSprite.frame.width*2, height: self.currentWall.buildSprite.frame.height*2))
-                if CGRectContainsPoint(rect, touchLocation!) {
+        for temp in self.wallArray {
+            if (temp as! Wall).isControl == true {
+                if CGRectContainsPoint((temp as! Wall).buildSprite.frame, touchLocation!) {
                     self.touchPointArray.addObject(NSValue.init(CGPoint: touchLocation!))
+                    self.currentWall = temp as! Wall
+                    self.defaluePosition = self.currentWall.skillPosition
                 }
+                
             }
         }
+        
+//        if self.currentWall != nil {
+//            if self.currentWall.isControl == true {
+//                let rect = CGRect(origin: CGPoint(x: self.currentWall.buildSprite.position.x-SkillSize.building.width, y: self.currentWall.buildSprite.position.y-SkillSize.building.height), size: CGSize(width: self.currentWall.buildSprite.frame.width*2, height: self.currentWall.buildSprite.frame.height*2))
+//                if CGRectContainsPoint(rect, touchLocation!) {
+//                    self.touchPointArray.addObject(NSValue.init(CGPoint: touchLocation!))
+//                }
+//            }
+//        }
 
     }
     
@@ -105,7 +122,7 @@ class WallSystem: SkillSystem {
                 var dict = [String: AnyObject]()
                 dict.updateValue(SkillName.wall.rawValue, forKey: "initSkill")
                 let percentX = self.currentWall.buildSprite.position.x / screenSize.width
-                let percentY = self.currentWall.buildSprite.position.y / screenSize.height
+                let percentY = (self.currentWall.buildSprite.position.y-fightMapCellSize.height) / screenSize.height
                 dict.updateValue(percentX, forKey: "percentX")
                 dict.updateValue(percentY, forKey: "percentY")
                 
@@ -113,13 +130,18 @@ class WallSystem: SkillSystem {
                 scene.sock.send(BTCommand.CCastSpell, withParams: (self.entity as! FightPlayer).toReleaseSkill(dict))
                 let nc = NSNotificationCenter.defaultCenter()
                 nc.postNotificationName("wallSetRight", object: self, userInfo: ["playerSelfWall" : self.currentWall])
-                
-                
-                for temp in self.wallArray {
-                    if (temp as! Wall).isControl == true {
-                        self.currentWall = temp as! Wall
+                var removeObjNum = 0
+                for i in 0 ..< ((self.entity as! FightPlayer).scene?.saveSkill.saveSkillArray)!.count {
+                    if let wall = ((self.entity as! FightPlayer).scene?.saveSkill.saveSkillArray)![i] as? Wall {
+                        if wall.buildID == self.currentWall.buildID {
+                            removeObjNum = i
+                        }
                     }
                 }
+                (self.entity as! FightPlayer).scene?.saveSkill.saveSkillArray.removeAtIndex(removeObjNum)
+     
+                
+
             }else {
                 self.currentWall.buildSprite.position = defaluePosition!
             }
@@ -156,6 +178,12 @@ class WallSystem: SkillSystem {
                 
             }
             
+            if (temp as! Wall).isControl == true {
+                if (temp as! Wall).isRemove == true {
+                    (temp as! Wall).buildSprite.removeFromParent()
+                    removeArray.addObject(temp)
+                }
+            }
         }
         
         for removeTemp in removeArray {

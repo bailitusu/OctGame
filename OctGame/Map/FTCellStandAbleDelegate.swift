@@ -10,6 +10,8 @@ import SpriteKit
 import UIKit
 
 protocol FTCellStandAbleDelegate {
+    
     var HP: Int{set get}
     func didBeHit(hitValue: Int)
+    func getEntityName()->String
 }

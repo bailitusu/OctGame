@@ -22,7 +22,7 @@ class FireSystem: SkillSystem,AttackProtocal {
         self.huoqiuArray = NSMutableArray()
         self.fireId = 0
         self.touchPointArray = NSMutableArray()
-        self.bollGroup = BallCategory.fireBall.rawValue + BallCategory.electricBoll.rawValue + BallCategory.fireBall.rawValue
+        self.bollGroup = BallCategory.gongji.rawValue + BallCategory.fuzhu.rawValue + BallCategory.gongji.rawValue
         self.isSilent = false
     }
     
@@ -33,23 +33,24 @@ class FireSystem: SkillSystem,AttackProtocal {
     
     @objc func fireFollowPlayer(note: NSNotification) {
 
-    if let moveToPoint = note.userInfo?["moveToMapCell"] as? SKSpriteNode {
-       // print(moveToPoint.position)
-        
-        if CommonFunc.fightIsEqualPoint(moveToPoint.position, pointB: (self.entity as! FightPlayer).sprite.position)  == false {
-            for temp in self.huoqiuArray {
-                if (temp as! Fire).isControl == true {
-                    // (temp as! Fire).position = (self.entity as! FightPlayer).sprite.position
+        if let moveToPoint = note.userInfo?["moveToMapCell"] as? SKSpriteNode {
+           // print(moveToPoint.position)
+            
+            if CommonFunc.fightIsEqualPoint(moveToPoint.position, pointB: (self.entity as! FightPlayer).sprite.position)  == false {
+//                for temp in self.huoqiuArray {
+//                    if (temp as! Fire).isControl == true {
+//                        // (temp as! Fire).position = (self.entity as! FightPlayer).sprite.position
+//                        let move = SKAction.moveTo(moveToPoint.position, duration: 0.3)
+//                        (temp as! Fire).runAction(move)
+//                    }
+//                }
+                if self.noLaunchHuoqiu?.isControl == true {
                     let move = SKAction.moveTo(moveToPoint.position, duration: 0.3)
-                    (temp as! Fire).runAction(move)
+                    self.noLaunchHuoqiu!.runAction(move)
                 }
             }
+
         }
-
-    }
-        
-        
-
     }
     
     override func initSkill() {

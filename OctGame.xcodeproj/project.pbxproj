@@ -96,6 +96,7 @@
 		1878870C1D366AEF00F34F5A /* Starscream.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 187886F91D366ABE00F34F5A /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1878870F1D366AF200F34F5A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A617981D365F8C006581B4 /* SwiftyJSON.framework */; };
 		187887101D366AF200F34F5A /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18A617981D365F8C006581B4 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		187D61D91D48E7DE001C347F /* SaveSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187D61D81D48E7DE001C347F /* SaveSkill.swift */; };
 		187E306E1D191594008AB0A5 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E306D1D191594008AB0A5 /* Map.swift */; };
 		187E30701D192CA6008AB0A5 /* SecondGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E306F1D192CA6008AB0A5 /* SecondGame.swift */; };
 		187E30721D192D3C008AB0A5 /* Sheep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E30711D192D3C008AB0A5 /* Sheep.swift */; };
@@ -107,7 +108,6 @@
 		1894EFF61D34B89700E7FAA9 /* shuiqiu.png in Resources */ = {isa = PBXBuildFile; fileRef = 1894EFF31D34B89700E7FAA9 /* shuiqiu.png */; };
 		1894EFF71D34B89700E7FAA9 /* dianqiu.png in Resources */ = {isa = PBXBuildFile; fileRef = 1894EFF41D34B89700E7FAA9 /* dianqiu.png */; };
 		1894EFFB1D34CE3C00E7FAA9 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894EFFA1D34CE3C00E7FAA9 /* Ball.swift */; };
-		1899F4731D47432B0086D3B1 /* wu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1899F4721D47432B0086D3B1 /* wu.jpg */; };
 		1899F4801D4745AD0086D3B1 /* FogSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1899F47F1D4745AD0086D3B1 /* FogSystem.swift */; };
 		1899F4821D4746320086D3B1 /* Fog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1899F4811D4746320086D3B1 /* Fog.swift */; };
 		18B086A81D229D1300DBFBAD /* bianda@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B086981D229D1300DBFBAD /* bianda@2x.png */; };
@@ -142,6 +142,11 @@
 		18BA0D411D1BB50F00B0272A /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA0D401D1BB50F00B0272A /* Setting.swift */; };
 		18CA050C1D40FC6800C78B8B /* SmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CA050B1D40FC6800C78B8B /* SmallView.swift */; };
 		18CA050E1D40FC6800C78B8B /* finishBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18CA050D1D40FC6800C78B8B /* finishBackground.jpg */; };
+		18CD65C71D49CF6D00D7BFF7 /* wu.png in Resources */ = {isa = PBXBuildFile; fileRef = 18CD65C61D49CF6D00D7BFF7 /* wu.png */; };
+		18CD65C91D49D32400D7BFF7 /* LightningSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CD65C81D49D32400D7BFF7 /* LightningSystem.swift */; };
+		18CD65CB1D49D35100D7BFF7 /* Lightning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CD65CA1D49D35100D7BFF7 /* Lightning.swift */; };
+		18CD65D51D49D72A00D7BFF7 /* luolei.png in Resources */ = {isa = PBXBuildFile; fileRef = 18CD65D41D49D72A00D7BFF7 /* luolei.png */; };
+		18CD65D71D49DA0200D7BFF7 /* duqiu.png in Resources */ = {isa = PBXBuildFile; fileRef = 18CD65D61D49DA0200D7BFF7 /* duqiu.png */; };
 		18CE59771D437EDC009D7930 /* huangdi_dead_none.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 18CE59701D437EDC009D7930 /* huangdi_dead_none.atlas */; };
 		18CE59781D437EDC009D7930 /* huangdi_injured_none.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 18CE59711D437EDC009D7930 /* huangdi_injured_none.atlas */; };
 		18CE59791D437EDC009D7930 /* huangdi_rest_none.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 18CE59721D437EDC009D7930 /* huangdi_rest_none.atlas */; };
@@ -378,6 +383,7 @@
 		1871DACC1D2695FA002B6479 /* huoqiu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = huoqiu.jpg; sourceTree = "<group>"; };
 		1871DACE1D27ABF8002B6479 /* Fire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fire.swift; sourceTree = "<group>"; };
 		187886EF1D366ABE00F34F5A /* Starscream.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Starscream.xcodeproj; path = "Starscream-master/Starscream.xcodeproj"; sourceTree = "<group>"; };
+		187D61D81D48E7DE001C347F /* SaveSkill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveSkill.swift; sourceTree = "<group>"; };
 		187E306D1D191594008AB0A5 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		187E306F1D192CA6008AB0A5 /* SecondGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondGame.swift; sourceTree = "<group>"; };
 		187E30711D192D3C008AB0A5 /* Sheep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sheep.swift; sourceTree = "<group>"; };
@@ -389,7 +395,6 @@
 		1894EFF31D34B89700E7FAA9 /* shuiqiu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shuiqiu.png; sourceTree = "<group>"; };
 		1894EFF41D34B89700E7FAA9 /* dianqiu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dianqiu.png; sourceTree = "<group>"; };
 		1894EFFA1D34CE3C00E7FAA9 /* Ball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
-		1899F4721D47432B0086D3B1 /* wu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wu.jpg; sourceTree = "<group>"; };
 		1899F47F1D4745AD0086D3B1 /* FogSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FogSystem.swift; sourceTree = "<group>"; };
 		1899F4811D4746320086D3B1 /* Fog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fog.swift; sourceTree = "<group>"; };
 		18A6178D1D365F8C006581B4 /* SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyJSON.xcodeproj; path = "SwiftyJSON-master/SwiftyJSON.xcodeproj"; sourceTree = "<group>"; };
@@ -425,6 +430,11 @@
 		18BA0D401D1BB50F00B0272A /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		18CA050B1D40FC6800C78B8B /* SmallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallView.swift; sourceTree = "<group>"; };
 		18CA050D1D40FC6800C78B8B /* finishBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = finishBackground.jpg; sourceTree = "<group>"; };
+		18CD65C61D49CF6D00D7BFF7 /* wu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wu.png; sourceTree = "<group>"; };
+		18CD65C81D49D32400D7BFF7 /* LightningSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightningSystem.swift; sourceTree = "<group>"; };
+		18CD65CA1D49D35100D7BFF7 /* Lightning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lightning.swift; sourceTree = "<group>"; };
+		18CD65D41D49D72A00D7BFF7 /* luolei.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = luolei.png; sourceTree = "<group>"; };
+		18CD65D61D49DA0200D7BFF7 /* duqiu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = duqiu.png; sourceTree = "<group>"; };
 		18CE59701D437EDC009D7930 /* huangdi_dead_none.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = huangdi_dead_none.atlas; sourceTree = "<group>"; };
 		18CE59711D437EDC009D7930 /* huangdi_injured_none.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = huangdi_injured_none.atlas; sourceTree = "<group>"; };
 		18CE59721D437EDC009D7930 /* huangdi_rest_none.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = huangdi_rest_none.atlas; sourceTree = "<group>"; };
@@ -604,7 +614,9 @@
 		18685DB11D0AD0DE00BCAE10 /* image */ = {
 			isa = PBXGroup;
 			children = (
-				1899F4721D47432B0086D3B1 /* wu.jpg */,
+				18CD65D61D49DA0200D7BFF7 /* duqiu.png */,
+				18CD65D41D49D72A00D7BFF7 /* luolei.png */,
+				18CD65C61D49CF6D00D7BFF7 /* wu.png */,
 				184301FC1D45EB8300F1CD24 /* jianTower.png */,
 				184301ED1D45EA5300F1CD24 /* bullet.png */,
 				18CA050D1D40FC6800C78B8B /* finishBackground.jpg */,
@@ -740,6 +752,9 @@
 				184301FE1D45FCD700F1CD24 /* JianTowerSystem.swift */,
 				1899F47F1D4745AD0086D3B1 /* FogSystem.swift */,
 				1899F4811D4746320086D3B1 /* Fog.swift */,
+				187D61D81D48E7DE001C347F /* SaveSkill.swift */,
+				18CD65C81D49D32400D7BFF7 /* LightningSystem.swift */,
+				18CD65CA1D49D35100D7BFF7 /* Lightning.swift */,
 			);
 			path = Skill;
 			sourceTree = "<group>";
@@ -1033,6 +1048,7 @@
 				18E7AC101D17B2740040B3B9 /* citie.atlas in Resources */,
 				1871DAB71D264268002B6479 /* fightOne.jpg in Resources */,
 				18B086C11D229D2900DBFBAD /* huicitie@2x.png in Resources */,
+				18CD65D71D49DA0200D7BFF7 /* duqiu.png in Resources */,
 				18BA0D3F1D1B9D6600B0272A /* flash.png in Resources */,
 				18B086AF1D229D1300DBFBAD /* fenshen@3x.png in Resources */,
 				18B086C71D22AADC00DBFBAD /* zuanshi.png in Resources */,
@@ -1040,7 +1056,6 @@
 				18B086C01D229D2900DBFBAD /* huibianxiao@2x.png in Resources */,
 				18B086AE1D229D1300DBFBAD /* fenshen@2x.png in Resources */,
 				18CE597D1D437EDC009D7930 /* huangdi_walk_up.atlas in Resources */,
-				1899F4731D47432B0086D3B1 /* wu.jpg in Resources */,
 				1871DABB1D265365002B6479 /* fangkuai.png in Resources */,
 				18CE597B1D437EDC009D7930 /* huangdi_walk_left.atlas in Resources */,
 				18685DA01D0AD0A200BCAE10 /* Main.storyboard in Resources */,
@@ -1049,7 +1064,9 @@
 				1894EFF51D34B89700E7FAA9 /* huoqiu.png in Resources */,
 				18B086AB1D229D1300DBFBAD /* bianxiao@3x.png in Resources */,
 				1802630A1D1400C100949B15 /* walkLeft.atlas in Resources */,
+				18CD65C71D49CF6D00D7BFF7 /* wu.png in Resources */,
 				1894EFF71D34B89700E7FAA9 /* dianqiu.png in Resources */,
+				18CD65D51D49D72A00D7BFF7 /* luolei.png in Resources */,
 				180263041D13FF2500949B15 /* frozenLeft.atlas in Resources */,
 				18685DC31D0AD0DE00BCAE10 /* 嘟嘟.png in Resources */,
 				180262B01D0FC4A700949B15 /* zhujiao.png in Resources */,
@@ -1079,6 +1096,7 @@
 				187E30741D1986A0008AB0A5 /* MoveComponent.swift in Sources */,
 				1882BCF11D38BFF9003E1312 /* WallSystem.swift in Sources */,
 				180796DA1D2FC5E20018CABC /* SkillSprite.swift in Sources */,
+				18CD65CB1D49D35100D7BFF7 /* Lightning.swift in Sources */,
 				180262C71D114BC000949B15 /* BlackCloudComponent;.swift in Sources */,
 				187E306E1D191594008AB0A5 /* Map.swift in Sources */,
 				1868E7031D37DD4D00C5876F /* Building.swift in Sources */,
@@ -1109,6 +1127,7 @@
 				182302321D3DF09300355935 /* SLDataBaseNet.swift in Sources */,
 				18B1CB921D3F68A90065088C /* SaveSkillProtocal.swift in Sources */,
 				1871DACB1D269489002B6479 /* FireSystem.swift in Sources */,
+				18CD65C91D49D32400D7BFF7 /* LightningSystem.swift in Sources */,
 				180262EF1D1298E100949B15 /* AddResource.swift in Sources */,
 				1868E7011D37DD2700C5876F /* Wall.swift in Sources */,
 				180262AC1D0FC46500949B15 /* Player.swift in Sources */,
@@ -1125,6 +1144,7 @@
 				183003DF1D223B8900F66865 /* TextScene.swift in Sources */,
 				18CE598C1D43828C009D7930 /* FTFightPlayerWalkState.swift in Sources */,
 				185EBF3E1D3E367300E55747 /* AttackProtocal.swift in Sources */,
+				187D61D91D48E7DE001C347F /* SaveSkill.swift in Sources */,
 				182302311D3DF09300355935 /* SLBattleFieldNet.swift in Sources */,
 				18D810F71D378B7400551B00 /* FTPlayerStateUI.swift in Sources */,
 				18685DC01D0AD0DE00BCAE10 /* Entity.swift in Sources */,

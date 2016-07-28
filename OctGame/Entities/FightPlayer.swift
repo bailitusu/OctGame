@@ -16,6 +16,7 @@ enum SkillName: String {
     case wall = "wall"
     case tower = "tower"
     case fog = "fog"
+    case luolei = "luolei"
 }
 class FightPlayer: Entity, FTCellStandAbleDelegate {
   //  var delegate: OnlineGameConvertable?
@@ -25,14 +26,13 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
     var enemy: FightPlayer!
     var scene: FightScene?
     var skillSystemArray = [SkillSystem]()
-
     var configureSkill: ConfigureSkill!
     var fangxiang: FTDirection = FTDirection.none
     
     //zan shi  fix
     
     var over = false
-    var HP: Int = 20 {
+    var HP: Int = 1000 {
         didSet {
             if self.HP <= 0 {
                 var temp: String = "loser"
@@ -89,7 +89,6 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
         self.addComponent(SpriteComponent(sprite: sprite))
         self.roleName = roleName
      
-        
         self.initSkillSystemArray(FireSystem())
        // self.skillSystemForClass(FireSystem.self)?.addHarmArea(HengPaiHarm())
         self.skillSystemForClass(FireSystem.self)?.addHarmArea(SinglePointHarm())
@@ -99,18 +98,22 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
         self.initSkillSystemArray(JianTowerSystem())
         self.skillSystemForClass(JianTowerSystem.self)?.addHarmArea(SinglePointHarm())
         self.initSkillSystemArray(FogSystem())
-    
+        self.initSkillSystemArray(LightningSystem())
        // self.yidong = false
     }
 
+    func getEntityName() -> String {
+        return self.roleName
+    }
+    
     func initConfigureSkillBall() {
-        self.configureSkill.initOwnBoll(BallCategory.fireBall)
-        self.configureSkill.initOwnBoll(BallCategory.waterBall)
-        self.configureSkill.initOwnBoll(BallCategory.electricBoll)
+        self.configureSkill.initOwnBoll(BallCategory.gongji)
+        self.configureSkill.initOwnBoll(BallCategory.jianzhu)
+        self.configureSkill.initOwnBoll(BallCategory.fuzhu)
         
-        self.configureSkill.addTakeBoll(BallCategory.fireBall)
-        self.configureSkill.addTakeBoll(BallCategory.waterBall)
-        self.configureSkill.addTakeBoll(BallCategory.electricBoll)
+        self.configureSkill.addTakeBoll(BallCategory.gongji)
+        self.configureSkill.addTakeBoll(BallCategory.jianzhu)
+        self.configureSkill.addTakeBoll(BallCategory.fuzhu)
     }
     
     func initSkillSystemArray(skillSystem: SkillSystem) {
@@ -309,6 +312,8 @@ extension FightPlayer: OnlineGameObjectType {
             self.createSkillSprite(JianTowerSystem.self)
         }else if json["initSkill"].stringValue == SkillName.fog.rawValue {
             self.createSkillSprite(FogSystem.self)
+        }else if json["initSkill"].stringValue == SkillName.luolei.rawValue {
+            self.createSkillSprite(LightningSystem.self)
         }
         
         
@@ -332,6 +337,8 @@ extension FightPlayer: OnlineGameObjectType {
             self.skillSystemForClass(BoomSystem.self)?.noLaunchBoom!.physicsBody?.dynamic = true
             let tempBoom = (self.skillSystemForClass(BoomSystem.self)?.noLaunchBoom)!
             self.skillSystemForClass(BoomSystem.self)?.boomArray.addObject((self.skillSystemForClass(BoomSystem.self)?.noLaunchBoom)!)
+            let boomMapCellNum = self.enemy.fightMap.getCurrentPointMapCell((self.skillSystemForClass(BoomSystem.self)?.noLaunchBoom!.position)!)
+            (self.enemy.fightMap.mapArray.objectAtIndex(boomMapCellNum!) as! FTMapCell).obj = self.skillSystemForClass(BoomSystem.self)?.noLaunchBoom
             self.skillSystemForClass(BoomSystem.self)?.noLaunchBoom = nil
 
             self.skillSystemForClass(BoomSystem.self)?.bogusBoomRun({
@@ -345,7 +352,7 @@ extension FightPlayer: OnlineGameObjectType {
             })
  
         }else if json["initSkill"].stringValue == SkillName.wall.rawValue {
-            
+            self.scene?.addChild((self.skillSystemForClass(WallSystem.self)?.currentWall.buildSprite)!)
             self.skillSystemForClass(WallSystem.self)?.currentWall.buildSprite.position = SkillSystem.reversalPoint(percentX, percentY: percentY)
             self.skillSystemForClass(WallSystem.self)?.currentWall.isControl = false
 
@@ -356,23 +363,12 @@ extension FightPlayer: OnlineGameObjectType {
                     self.skillSystemForClass(WallSystem.self)?.currentWall = temp as! Wall
                 }
             }
-//            self.skillSystemForClass(WallSystem.self)?.currentWall.wallSprite.physicsBody?.dynamic = true
-         //   let tempBoom = (self.skillSystemForClass(BoomSystem.self)?.currentBoom)!
-            //  print("set--\(self.skillSystemForClass(BoomSystem.self)?.currentBoom.BoomID)")
-//            self.skillSystemForClass(BoomSystem.self)?.bogusBoomRun({
-//                let wait = SKAction.waitForDuration(7)
-//                let appear = SKAction.fadeAlphaTo(1, duration: 0.3)
-//                let block = SKAction.runBlock({
-//                    //         print("chuxian-----\(tempBoom.BoomID)")
-//                })
-//                tempBoom.runAction(SKAction.sequence([wait,appear,block]))
-//                //
-//            })
+
             
         }else if json["initSkill"].stringValue == SkillName.tower.rawValue {
 //            let percentX = CGFloat(json["percentX"].floatValue)
 //            let percentY = CGFloat(json["percentY"].floatValue)
-            
+            self.scene?.addChild((self.skillSystemForClass(JianTowerSystem.self)?.currentJianTower.buildSprite)!)
             self.skillSystemForClass(JianTowerSystem.self)?.currentJianTower.buildSprite.position = SkillSystem.reversalPoint(percentX, percentY: percentY)
             self.skillSystemForClass(JianTowerSystem.self)?.currentJianTower.isControl = false
             
@@ -385,13 +381,30 @@ extension FightPlayer: OnlineGameObjectType {
                 }
             }
         }else if json["initSkill"].stringValue == SkillName.fog.rawValue {
-//            let percentX = CGFloat(json["percentX"].floatValue)
-//            let percentY = CGFloat(json["percentY"].floatValue)
+            self.scene?.addChild((self.skillSystemForClass(FogSystem.self)?.currentFog)!)
             self.skillSystemForClass(FogSystem.self)?.currentFog.position = SkillSystem.reversalPoint(percentX, percentY: percentY)
             
             self.skillSystemForClass(FogSystem.self)?.currentFog.size = CGSize(width: fightMapCellSize.height*1.5, height: fightMapCellSize.height*1.5)
             self.skillSystemForClass(FogSystem.self)?.currentFog.isControl = false
             self.skillSystemForClass(FogSystem.self)?.reckonFogOccupyArea((self.skillSystemForClass(FogSystem.self)?.currentFog)!, disappear: false)
+            for temp in (self.skillSystemForClass(FogSystem.self)?.fogArray)! {
+                if (temp as! Fog).isControl == true {
+                    self.skillSystemForClass(FogSystem.self)?.currentFog = temp as! Fog
+                }
+            }
+        }else if json["initSkill"].stringValue == SkillName.luolei.rawValue {
+            self.scene?.addChild((self.skillSystemForClass(LightningSystem.self)?.currentLightning)!)
+            self.skillSystemForClass(LightningSystem.self)?.currentLightning.position = SkillSystem.reversalPoint(percentX, percentY: percentY)
+            
+            self.skillSystemForClass(LightningSystem.self)?.currentLightning.isControl = false
+            let cellNum = json["cellNum"].intValue
+            let playerName = json["setWhoMap"].stringValue
+            if playerName == "fightPlayer" {
+                self.skillSystemForClass(LightningSystem.self)?.lightningRun((cellNum,self), lightning: (self.skillSystemForClass(LightningSystem.self)?.currentLightning)!)
+            }else if playerName == "fightEnemy" {
+                self.skillSystemForClass(LightningSystem.self)?.lightningRun((cellNum,self.enemy), lightning: (self.skillSystemForClass(LightningSystem.self)?.currentLightning)!)
+            }
+            
             for temp in (self.skillSystemForClass(FogSystem.self)?.fogArray)! {
                 if (temp as! Fog).isControl == true {
                     self.skillSystemForClass(FogSystem.self)?.currentFog = temp as! Fog

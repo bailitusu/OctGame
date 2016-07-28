@@ -68,6 +68,7 @@ struct SkillSize {
     static let building = CGSize(width: screenSize.width*0.16, height: screenSize.width*0.16)
     static let zidan = CGSize(width: screenSize.width*0.053/4, height: screenSize.width*0.053/2)
     static let fog = CGSize(width: screenSize.width*0.16, height: screenSize.width*0.16)
+    static let lightning = CGSize(width: screenSize.width*0.05, height: screenSize.width*0.14)
 }
 
 //enum FightSkillSpeed {

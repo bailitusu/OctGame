@@ -13,6 +13,7 @@ class FTPlayerStateUI: NSObject {
     var player: FightPlayer!
     var hpLabel: SKLabelNode!
    // var  scene: SKScene!
+    var skillUIArray = NSMutableArray()
     init(player: FightPlayer) {
         super.init()
         self.player = player
@@ -31,5 +32,17 @@ class FTPlayerStateUI: NSObject {
     
     func changeHpUI(hp: Int) {
         self.hpLabel.text = "HP: \(hp)"
+    }
+    
+    func initSaveSkillUI(horizontalNum: Int,originalPointY: CGFloat) {
+        let oneSpriteRect = self.player.fightMap.initFirstSpriteRect(horizontalNum, size: fightMapCellSize, originalPointY: originalPointY)
+        oneSpriteRect.zPosition = SpriteLevel.map.rawValue
+        skillUIArray.addObject(oneSpriteRect)
+        for i in 1 ..< horizontalNum {
+            let newCell = self.player.fightMap.createOneSpriteRect(fightMapCellSize)
+            newCell.position = CGPoint(x:oneSpriteRect.position.x+CGFloat(i)*fightMapCellSize.width, y: oneSpriteRect.position.y)
+            newCell.zPosition = SpriteLevel.map.rawValue
+            skillUIArray.addObject(newCell)
+        }
     }
 }

@@ -17,7 +17,7 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
 //    var fightEnemyMap: FightMap!
     var gameStart: Bool = false
  //   var websocket: WebSocket!
-    
+    var saveSkill: SaveSkill!
     var sock: SLBattleFieldNet!
     
     
@@ -45,6 +45,9 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
         for mapTemp in fightPlayer.fightMap.mapArray {
             self.scene?.addChild((mapTemp as! FTMapCell))
         }
+        for saveSkliiMapTemp in fightPlayer.playerStateUI.skillUIArray {
+            self.scene?.addChild((saveSkliiMapTemp as! FTMapCell))
+        }
      //   fightPlayer = FightPlayer(roleName: "fightPlayer")
         addEntity(fightPlayer)
         fightPlayer.scene = self
@@ -59,7 +62,7 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
       //  fightPlayer.playerStateUI = FTPlayerStateUI(player: fightPlayer, scene: self)
         self.addChild(fightPlayer.playerStateUI.hpLabel)
       //  fightPlayer.playerStateUI.hpLabel.position = CGPoint(x: screenSize.width-screenSize.width*0.146, y: screenSize.height*0.359)
-
+        self.saveSkill = SaveSkill(player: fightPlayer)
         
         //zc fix!!
       //  fightEnemy = FightPlayer(roleName: "fightEnemy")
@@ -204,6 +207,10 @@ class FightScene: BaseScene, SKPhysicsContactDelegate {
             fightPlayer.configCurrentBallArray.removeAll()
             fightPlayer.configureSkill.isConfigOK = false
         }
+        if self.saveSkill.previousCount != self.saveSkill.saveSkillArray.count {
+            self.saveSkill.showCurrentSaveSkill()
+        }
+        
         
     }
     

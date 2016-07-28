@@ -10,16 +10,18 @@ import UIKit
 import SpriteKit
 
 class FightMap: NSObject{
-    var oneSpriteRect: FTMapCell!
+   // var oneSpriteRect: FTMapCell!
     var mapArray: NSMutableArray!
+    var skillMapArray: NSMutableArray!
     override init() {
         super.init()
         mapArray = NSMutableArray()
+        skillMapArray = NSMutableArray()
     }
-    func initFirstSpriteRect(horizontalNum: Int, size: CGSize,originalPointY: CGFloat) {
-        oneSpriteRect = FTMapCell(imageName: "fangkuai.png", size: size)
+    func initFirstSpriteRect(horizontalNum: Int, size: CGSize,originalPointY: CGFloat)-> FTMapCell {
+       let oneSpriteRect = FTMapCell(imageName: "fangkuai.png", size: size)
         oneSpriteRect.position = CGPoint(x: (screenSize.width-oneSpriteRect.size.width * CGFloat(horizontalNum))/2+oneSpriteRect.size.width/2, y: originalPointY)
-        
+        return oneSpriteRect
        // return oneSpriteRect
     }
 
@@ -40,7 +42,7 @@ class FightMap: NSObject{
     }
     
     func initMap(horizontalNum: Int, verticalNum: Int, oneSize: CGSize, originalPointY: CGFloat,isEnemy: Bool) {
-        self.initFirstSpriteRect(horizontalNum, size: oneSize, originalPointY: originalPointY)
+        let oneSpriteRect = self.initFirstSpriteRect(horizontalNum, size: oneSize, originalPointY: originalPointY)
         for i in 0 ..< horizontalNum {
             for j in 0 ..< verticalNum {
                 let newSpriteRect = self.createOneSpriteRect(oneSize)
@@ -56,7 +58,17 @@ class FightMap: NSObject{
         }
     }
     
-    
+//    func initSaveSkillMap(horizontalNum: Int,originalPointY: CGFloat) {
+//        let oneSpriteRect = self.initFirstSpriteRect(horizontalNum, size: fightMapCellSize, originalPointY: originalPointY)
+//        oneSpriteRect.zPosition = SpriteLevel.map.rawValue
+//        skillMapArray.addObject(oneSpriteRect)
+//        for i in 1 ..< horizontalNum {
+//            let newCell = self.createOneSpriteRect(fightMapCellSize)
+//            newCell.position = CGPoint(x:oneSpriteRect.position.x+CGFloat(i)*fightMapCellSize.width, y: oneSpriteRect.position.y)
+//            newCell.zPosition = SpriteLevel.map.rawValue
+//            skillMapArray.addObject(newCell)
+//        }
+//    }
 //    static func reversalPoint(point: CGPoint) -> CGPoint {
 //        return CGPoint(x: point.x, y: screenSize.height-point.y)
 //    }

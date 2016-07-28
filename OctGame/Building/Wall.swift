@@ -9,12 +9,19 @@
 import SpriteKit
 import UIKit
 
-class Wall: Building, FTCellStandAbleDelegate {
+class Wall: Building, FTCellStandAbleDelegate,SaveSkillProtocal {
     var HP: Int = 5
 //    var wallSprite: SKSpriteNode!
 //    var entityName: String!
 //    var wallID: UInt32!
 //    var isControl: Bool!
+    var isRemove: Bool!
+    
+    var skillPosition: CGPoint? {
+        didSet {
+            self.buildSprite.position = skillPosition!
+        }
+    }
     var hpLabel: SKLabelNode!
   //  var isRemove: Bool!
     init(entityName: String, collsionBitMask: UInt32, wallID: UInt32) {
@@ -48,8 +55,13 @@ class Wall: Building, FTCellStandAbleDelegate {
         self.isControl = true
         self.buildID = wallID
         self.entityName = entityName
+        self.isRemove = false
       //  self.isRemove = false
         
+    }
+    
+    func getEntityName() -> String {
+        return self.entityName
     }
     
     func removeWall() -> Bool {
@@ -59,7 +71,9 @@ class Wall: Building, FTCellStandAbleDelegate {
         }
         return false
     }
-    
+    func removeItem() {
+        self.isRemove = true
+    }
     func didBeHit(hitValue: Int) {
         self.HP  = self.HP - hitValue
         self.hpLabel.text = "\(HP)"

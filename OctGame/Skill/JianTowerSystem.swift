@@ -20,7 +20,7 @@ class JianTowerSystem: SkillSystem {
         self.towerArray = NSMutableArray()
         self.towerID = 0
         self.touchPointArray = NSMutableArray()
-        self.bollGroup = BallCategory.waterBall.rawValue + BallCategory.waterBall.rawValue + BallCategory.fireBall.rawValue
+        self.bollGroup = BallCategory.jianzhu.rawValue + BallCategory.jianzhu.rawValue + BallCategory.gongji.rawValue
         self.isSilent = false
     }
     
@@ -29,17 +29,21 @@ class JianTowerSystem: SkillSystem {
         let towerBitMask = BitMaskType.fire | BitMaskType.boom | BitMaskType.bullet
         let tower = JianTower(entityName: self.entityName, collsionBitMask: towerBitMask, buildID: self.towerID)
         let player = (self.entity as! FightPlayer)
-        if self.entityName == "fightEnemy" {
-            //    boom.alpha = 0
-            tower.buildSprite.position = CGPoint(x:player.fightMap.mapArray.objectAtIndex(0).position.x, y:player.fightMap.mapArray.objectAtIndex(0).position.y - fightMapCellSize.height)
-            
-        }else {
-            tower.buildSprite.position = CGPoint(x:player.fightMap.mapArray.objectAtIndex(0).position.x, y:player.fightMap.mapArray.objectAtIndex(0).position.y + fightMapCellSize.height)
-            
+//        if player.roleName == "fightEnemy" {
+//            //    boom.alpha = 0
+//            tower.buildSprite.position = CGPoint(x:player.fightMap.mapArray.objectAtIndex(0).position.x, y:player.fightMap.mapArray.objectAtIndex(0).position.y - fightMapCellSize.height)
+//            
+//        }else {
+//            tower.buildSprite.position = CGPoint(x:player.fightMap.mapArray.objectAtIndex(0).position.x, y:player.fightMap.mapArray.objectAtIndex(0).position.y + fightMapCellSize.height)
+//            
+//        }
+        if player.roleName == "fightPlayer" {
+             (self.entity as! FightPlayer).scene?.saveSkill.saveSkillArray.append(tower)
+            player.scene!.saveSkill.showCurrentSaveSkill()
+            defaluePosition = tower.buildSprite.position
+            player.sprite.parent?.addChild(tower.buildSprite)
         }
-        
-        defaluePosition = tower.buildSprite.position
-        player.sprite.parent?.addChild(tower.buildSprite)
+
         self.towerArray.addObject(tower)
         self.currentJianTower = tower
     }
@@ -60,14 +64,26 @@ class JianTowerSystem: SkillSystem {
     override func toucheBegan(touches: Set<UITouch>, withEvent event: UIEvent?, scene: FightScene) {
         let touchLocation = touches.first?.locationInNode(scene)
         self.touchPointArray.removeAllObjects()
-        if self.currentJianTower != nil {
-            if self.currentJianTower.isControl == true {
-                let rect = CGRect(origin: CGPoint(x: self.currentJianTower.buildSprite.position.x-SkillSize.building.width, y: self.currentJianTower.buildSprite.position.y-SkillSize.building.height), size: CGSize(width: self.currentJianTower.buildSprite.frame.width*2, height: self.currentJianTower.buildSprite.frame.height*2))
-                if CGRectContainsPoint(rect, touchLocation!) {
+        for temp in self.towerArray {
+            if (temp as! JianTower).isControl == true {
+//                let rect = CGRect(origin: CGPoint(x: (temp as! JianTower).buildSprite.position.x-SkillSize.building.width, y: (temp as! JianTower).buildSprite.position.y-SkillSize.building.height), size: CGSize(width: (temp as! JianTower).buildSprite.frame.width*2, height: (temp as! JianTower).buildSprite.frame.height*2))
+                if CGRectContainsPoint((temp as! JianTower).buildSprite.frame, touchLocation!) {
                     self.touchPointArray.addObject(NSValue.init(CGPoint: touchLocation!))
+                    self.currentJianTower = temp as! JianTower
+                    self.defaluePosition = self.currentJianTower.skillPosition
                 }
+                
             }
         }
+        
+//        if self.currentJianTower != nil {
+//            if self.currentJianTower.isControl == true {
+//                let rect = CGRect(origin: CGPoint(x: self.currentJianTower.buildSprite.position.x-SkillSize.building.width, y: self.currentJianTower.buildSprite.position.y-SkillSize.building.height), size: CGSize(width: self.currentJianTower.buildSprite.frame.width*2, height: self.currentJianTower.buildSprite.frame.height*2))
+//                if CGRectContainsPoint(rect, touchLocation!) {
+//                    self.touchPointArray.addObject(NSValue.init(CGPoint: touchLocation!))
+//                }
+//            }
+//        }
     }
     
     override func toucheMoved(touches: Set<UITouch>, withEvent event: UIEvent?, scene: FightScene) {
@@ -102,7 +118,7 @@ class JianTowerSystem: SkillSystem {
                 var dict = [String: AnyObject]()
                 dict.updateValue(SkillName.tower.rawValue, forKey: "initSkill")
                 let percentX = self.currentJianTower.buildSprite.position.x / screenSize.width
-                let percentY = self.currentJianTower.buildSprite.position.y / screenSize.height
+                let percentY = (self.currentJianTower.buildSprite.position.y-fightMapCellSize.height) / screenSize.height
                 dict.updateValue(percentX, forKey: "percentX")
                 dict.updateValue(percentY, forKey: "percentY")
                 self.shootCloseRange(self.currentJianTower, scene: scene)
@@ -111,12 +127,15 @@ class JianTowerSystem: SkillSystem {
                 let nc = NSNotificationCenter.defaultCenter()
                 nc.postNotificationName("jiantaSetRight", object: self, userInfo: ["playerSelfJianta" : self.currentJianTower])//用于tower和dilei的碰撞
                 
-                
-                for temp in self.towerArray {
-                    if (temp as! JianTower).isControl == true {
-                        self.currentJianTower = temp as! JianTower
+                var removeObjNum = 0
+                for i in 0 ..< ((self.entity as! FightPlayer).scene?.saveSkill.saveSkillArray)!.count {
+                    if let tower = ((self.entity as! FightPlayer).scene?.saveSkill.saveSkillArray)![i] as? JianTower {
+                        if tower.buildID == self.currentJianTower.buildID {
+                            removeObjNum = i
+                        }
                     }
                 }
+                (self.entity as! FightPlayer).scene?.saveSkill.saveSkillArray.removeAtIndex(removeObjNum)
             }else {
                 self.currentJianTower.buildSprite.position = defaluePosition!
             }
@@ -165,6 +184,12 @@ class JianTowerSystem: SkillSystem {
                 
             }
             
+            if (temp as! JianTower).isControl == true {
+                if (temp as! JianTower).isRemove == true {
+                    (temp as! JianTower).buildSprite.removeFromParent()
+                    removeArray.addObject(temp)
+                }
+            }
         }
         
         for removeTemp in removeArray {

@@ -17,17 +17,17 @@ import UIKit
 //    
 //}
 enum BallCategory: Int {
-    case fireBall = 1
-    case waterBall = 10
-    case electricBoll = 100
+    case gongji = 1
+    case jianzhu = 10
+    case fuzhu = 100
     var imageName: String {
         switch  self {
-        case .fireBall:
+        case .gongji:
             return "huoqiu.png"
-        case .waterBall:
+        case .jianzhu:
             return "shuiqiu.png"
-        case .electricBoll:
-            return "dianqiu.png"
+        case .fuzhu:
+            return "duqiu.png"
         }
     }
     
@@ -36,12 +36,12 @@ enum BallCategory: Int {
     
     var name: String {
         switch self {
-        case .fireBall:
-            return "fireBall"
-        case .waterBall:
-            return "waterBall"
-        case .electricBoll:
-            return "electricBoll"
+        case .gongji:
+            return "gongji"
+        case .jianzhu:
+            return "jianzhu"
+        case .fuzhu:
+            return "fuzhu"
         }
     }
     
@@ -49,12 +49,12 @@ enum BallCategory: Int {
     
     static func decode(name: String) -> BallCategory? {
         switch name {
-        case "fireBall":
-            return .fireBall
-        case "waterBall":
-            return .waterBall
-        case "electricBoll":
-            return .electricBoll
+        case "gongji":
+            return .gongji
+        case "jianzhu":
+            return .jianzhu
+        case "fuzhu":
+            return .fuzhu
         default:
             print("ERROR \(name)")
             return nil
@@ -149,7 +149,10 @@ class ConfigureSkill {
         var pointX = screenSize.width*0.113 + screenSize.width*0.133/2
         for temp in currentBallArray {
             let ball = temp as! Ball
-            let pointY = CGFloat(arc4random()%100) + screenSize.height*0.42
+            let pointY = CGFloat(arc4random()%100) + screenSize.height*0.457
+//            if pointY-25 < 280 {
+//                print("-------------")
+//            }
             ball.sprite.position = CGPoint(x: pointX, y: pointY)
             pointX += (10 + screenSize.width*0.133)
             self.scene.addChild(ball.sprite)
@@ -164,7 +167,7 @@ class ConfigureSkill {
             skillNum = temp.ballID + skillNum
         }
         switch skillNum {
-        case BallCategory.fireBall.rawValue + BallCategory.electricBoll.rawValue + BallCategory.fireBall.rawValue:
+        case BallCategory.gongji.rawValue + BallCategory.fuzhu.rawValue + BallCategory.gongji.rawValue:
             self.scene.fightPlayer.createSkillSprite(FireSystem.self)
             
             var dict = [String: AnyObject]()
@@ -172,7 +175,7 @@ class ConfigureSkill {
            // self.scene.websocket.writeMessage(BTMessage(command: BTCommand.CreateSpell, params: self.scene.fightPlayer.toInitSkill(dict)))
             self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
             break
-        case BallCategory.fireBall.rawValue + BallCategory.waterBall.rawValue + BallCategory.electricBoll.rawValue:
+        case BallCategory.gongji.rawValue + BallCategory.jianzhu.rawValue + BallCategory.gongji.rawValue:
             if removeItem != nil {
                 removeItem?.removeSkillItem()
             }
@@ -185,7 +188,7 @@ class ConfigureSkill {
     
             self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
             break
-        case BallCategory.fireBall.rawValue + BallCategory.fireBall.rawValue + BallCategory.waterBall.rawValue:
+        case BallCategory.jianzhu.rawValue + BallCategory.jianzhu.rawValue + BallCategory.jianzhu.rawValue:
             if removeItem != nil {
                 removeItem?.removeSkillItem()
                 removeItem = nil
@@ -196,7 +199,7 @@ class ConfigureSkill {
       
             self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
             break
-        case BallCategory.waterBall.rawValue + BallCategory.waterBall.rawValue + BallCategory.fireBall.rawValue:
+        case BallCategory.jianzhu.rawValue + BallCategory.jianzhu.rawValue + BallCategory.gongji.rawValue:
             self.scene.fightPlayer.createSkillSprite(JianTowerSystem.self)
             var dict = [String: AnyObject]()
             dict.updateValue(SkillName.tower.rawValue, forKey: "initSkill")
@@ -204,15 +207,27 @@ class ConfigureSkill {
             self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
             break
             
-        case BallCategory.waterBall.rawValue + BallCategory.waterBall.rawValue + BallCategory.waterBall.rawValue:
+        case BallCategory.fuzhu.rawValue + BallCategory.fuzhu.rawValue + BallCategory.jianzhu.rawValue:
             self.scene.fightPlayer.createSkillSprite(FogSystem.self)
             var dict = [String: AnyObject]()
             dict.updateValue(SkillName.fog.rawValue, forKey: "initSkill")
             
             self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
             break
-        default:
             
+        case BallCategory.gongji.rawValue+BallCategory.jianzhu.rawValue+BallCategory.fuzhu.rawValue:
+            self.scene.fightPlayer.createSkillSprite(LightningSystem.self)
+            var dict = [String: AnyObject]()
+            dict.updateValue(SkillName.luolei.rawValue, forKey: "initSkill")
+            
+            self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
+            break
+        default:
+            self.scene.fightPlayer.createSkillSprite(LightningSystem.self)
+            var dict = [String: AnyObject]()
+            dict.updateValue(SkillName.luolei.rawValue, forKey: "initSkill")
+            
+            self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
             print("configskill  error")
         }
         
