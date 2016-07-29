@@ -312,19 +312,6 @@ class BoomSystem: SkillSystem, AttackProtocal,NoSaveSkillProtocal {
                         }
                     }
                 }
-                
-//                if nodeA.categoryBitMask == BitMaskType.ftWall {
-//                    let wall = nodeA.node?.userData?.objectForKey("wallclass") as! Wall
-//                    if boom.entityName == "fightEnemy" {
-//                        if wall.entityName == "fightPlayer" {
-//                            if wall.isControl == false {
-//                                boom.isRemove = true
-//                                self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.wallSprite.position)
-//                            }
-//
-//                        }
-//                    }
-//                }
 
             }
         }

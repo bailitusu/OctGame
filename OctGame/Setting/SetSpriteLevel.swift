@@ -20,4 +20,5 @@ enum SpriteLevel : CGFloat {
     case fightStateUI = 300
     case bullte = 250
     case fog = 350
+    case catapult = 400
 }

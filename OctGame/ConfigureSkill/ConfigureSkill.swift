@@ -222,12 +222,20 @@ class ConfigureSkill {
             
             self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
             break
-        default:
-            self.scene.fightPlayer.createSkillSprite(LightningSystem.self)
+        case BallCategory.gongji.rawValue + BallCategory.gongji.rawValue + BallCategory.gongji.rawValue:
+            self.scene.fightPlayer.createSkillSprite(CatapultSystem.self)
             var dict = [String: AnyObject]()
-            dict.updateValue(SkillName.luolei.rawValue, forKey: "initSkill")
+            dict.updateValue(SkillName.catapult.rawValue, forKey: "initSkill")
             
             self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
+            break
+        default:
+            self.scene.fightPlayer.createSkillSprite(CatapultSystem.self)
+            var dict = [String: AnyObject]()
+            dict.updateValue(SkillName.catapult.rawValue, forKey: "initSkill")
+            
+            self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
+
             print("configskill  error")
         }
         

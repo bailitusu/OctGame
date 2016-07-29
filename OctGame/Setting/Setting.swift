@@ -69,6 +69,7 @@ struct SkillSize {
     static let zidan = CGSize(width: screenSize.width*0.053/4, height: screenSize.width*0.053/2)
     static let fog = CGSize(width: screenSize.width*0.16, height: screenSize.width*0.16)
     static let lightning = CGSize(width: screenSize.width*0.05, height: screenSize.width*0.14)
+    static let catapult = CGSize(width: screenSize.width*0.12, height: screenSize.width*0.12)
 }
 
 //enum FightSkillSpeed {
@@ -79,6 +80,7 @@ struct SkillSize {
 enum FightSkillSpeed: CGFloat {
     case huoqiu = 500.0
     case bullet = 600.0
+    case toushiche = 200.0
 }
 
 struct FightSkillCollideMaxCount {

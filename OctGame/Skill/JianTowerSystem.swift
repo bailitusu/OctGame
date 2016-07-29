@@ -66,7 +66,7 @@ class JianTowerSystem: SkillSystem {
         self.touchPointArray.removeAllObjects()
         for temp in self.towerArray {
             if (temp as! JianTower).isControl == true {
-//                let rect = CGRect(origin: CGPoint(x: (temp as! JianTower).buildSprite.position.x-SkillSize.building.width, y: (temp as! JianTower).buildSprite.position.y-SkillSize.building.height), size: CGSize(width: (temp as! JianTower).buildSprite.frame.width*2, height: (temp as! JianTower).buildSprite.frame.height*2))
+
                 if CGRectContainsPoint((temp as! JianTower).buildSprite.frame, touchLocation!) {
                     self.touchPointArray.addObject(NSValue.init(CGPoint: touchLocation!))
                     self.currentJianTower = temp as! JianTower
@@ -76,14 +76,7 @@ class JianTowerSystem: SkillSystem {
             }
         }
         
-//        if self.currentJianTower != nil {
-//            if self.currentJianTower.isControl == true {
-//                let rect = CGRect(origin: CGPoint(x: self.currentJianTower.buildSprite.position.x-SkillSize.building.width, y: self.currentJianTower.buildSprite.position.y-SkillSize.building.height), size: CGSize(width: self.currentJianTower.buildSprite.frame.width*2, height: self.currentJianTower.buildSprite.frame.height*2))
-//                if CGRectContainsPoint(rect, touchLocation!) {
-//                    self.touchPointArray.addObject(NSValue.init(CGPoint: touchLocation!))
-//                }
-//            }
-//        }
+
     }
     
     override func toucheMoved(touches: Set<UITouch>, withEvent event: UIEvent?, scene: FightScene) {
@@ -143,7 +136,7 @@ class JianTowerSystem: SkillSystem {
     }
 
     func shootCloseRange(tower: JianTower, scene: FightScene) {
-        let wait = SKAction.waitForDuration(0.5)
+        let wait = SKAction.waitForDuration(2)
         let block = SKAction.runBlock { 
             let zidan = tower.createZidan()
             if self.entityName == "fightEnemy"{

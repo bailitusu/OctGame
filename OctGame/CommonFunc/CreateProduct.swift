@@ -33,6 +33,7 @@ struct BitMaskType{
     static var ftWall = UInt32(1 << 17)
     static var ftJianTower = UInt32(1 << 18)
     static var bullet = UInt32(1 << 19)
+    static var toushiche = UInt32(1 << 20)
    // static var
 }
 enum ProductType:String {

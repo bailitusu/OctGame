@@ -10,12 +10,12 @@
 import SpriteKit
 import UIKit
 
-class FireSystem: SkillSystem,AttackProtocal {
+class FireSystem: SkillSystem,AttackProtocal, NoSaveSkillProtocal {
 
     var huoqiuArray: NSMutableArray!
     var noLaunchHuoqiu: Fire?
     var fireId: UInt32!
-    var hitValue: Int = 15
+    var hitValue: Int = 5
 
     override init() {
         super.init()
@@ -69,9 +69,7 @@ class FireSystem: SkillSystem,AttackProtocal {
         self.noLaunchHuoqiu = fire
     }
     
-//    func initHarmArea(harmArea: HarmArea) {
-//        self.addHarmArea(harmArea)
-//    }
+
     
     func throwSkill(speed: CGVector) {
 
@@ -84,16 +82,16 @@ class FireSystem: SkillSystem,AttackProtocal {
             }
 
         }
-//        whoPlayer.currentHuoqiu = self.getCurrentTouchFire(whoPlayer)
-//        whoPlayer.currentHuoqiu.dircspeed = speed
-//        whoPlayer.currentHuoqiu.isControl = false
-//        for temp in huoqiuArray {
-//            if (temp as! Fire).isControl == true{
-//                self.currentHuoqiu = (temp as! Fire)
-//                break
-//            }
-//        }
-        
+
+    }
+    
+    func removeSkillItem() {
+        if self.noLaunchHuoqiu != nil {
+            if self.noLaunchHuoqiu?.isControl == true {
+                self.noLaunchHuoqiu?.removeFromParent()
+                self.noLaunchHuoqiu = nil
+            }
+        }
     }
     
     override func reckonHarmArea(toHarmPlayer: FightPlayer, originalConterPoint: CGPoint) {
@@ -261,9 +259,9 @@ class FireSystem: SkillSystem,AttackProtocal {
                 dict.updateValue(percentY, forKey: "percentY")
                 // scene.websocket.writeMessage(BTMessage(command: BTCommand.CCastSpell, params: (self.entity as! FightPlayer).toReleaseSkill(dict)))
                 scene.sock.send(BTCommand.CCastSpell, withParams: (self.entity as! FightPlayer).toReleaseSkill(dict))
-                for i in 0 ..< self.touchPointArray.count {
-                    print("\(i)-----\(self.touchPointArray.objectAtIndex(i).CGPointValue)")
-                }
+//                for i in 0 ..< self.touchPointArray.count {
+//                    print("\(i)-----\(self.touchPointArray.objectAtIndex(i).CGPointValue)")
+//                }
             }
         }
     }

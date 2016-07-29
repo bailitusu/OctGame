@@ -17,6 +17,7 @@ enum SkillName: String {
     case tower = "tower"
     case fog = "fog"
     case luolei = "luolei"
+    case catapult = "catapult"
 }
 class FightPlayer: Entity, FTCellStandAbleDelegate {
   //  var delegate: OnlineGameConvertable?
@@ -99,6 +100,8 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
         self.skillSystemForClass(JianTowerSystem.self)?.addHarmArea(SinglePointHarm())
         self.initSkillSystemArray(FogSystem())
         self.initSkillSystemArray(LightningSystem())
+        self.initSkillSystemArray(CatapultSystem())
+        self.skillSystemForClass(CatapultSystem.self)?.addHarmArea(HengPaiHarm())
        // self.yidong = false
     }
 
@@ -314,6 +317,8 @@ extension FightPlayer: OnlineGameObjectType {
             self.createSkillSprite(FogSystem.self)
         }else if json["initSkill"].stringValue == SkillName.luolei.rawValue {
             self.createSkillSprite(LightningSystem.self)
+        }else if json["initSkill"].stringValue == SkillName.catapult.rawValue {
+            self.createSkillSprite(CatapultSystem.self)
         }
         
         
@@ -410,6 +415,10 @@ extension FightPlayer: OnlineGameObjectType {
                     self.skillSystemForClass(FogSystem.self)?.currentFog = temp as! Fog
                 }
             }
+        }else if json["initSkill"].stringValue == SkillName.catapult.rawValue {
+            self.scene?.addChild((self.skillSystemForClass(CatapultSystem.self)?.noLaunchCatapult)!)
+            (self.skillSystemForClass(CatapultSystem.self)?.noLaunchCatapult)?.tagartPoint = SkillSystem.reversalPoint(percentX, percentY: percentY)
+            self.skillSystemForClass(CatapultSystem.self)?.sendTouShiChe()
         }
   
     }
