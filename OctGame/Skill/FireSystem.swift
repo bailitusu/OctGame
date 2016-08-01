@@ -76,6 +76,7 @@ class FireSystem: SkillSystem,AttackProtocal, NoSaveSkillProtocal {
         if self.noLaunchHuoqiu!.isControl == true {
             if speed != CGVector(dx: 0, dy: 0) {
                 self.noLaunchHuoqiu!.dircspeed = speed
+                self.noLaunchHuoqiu?.fireDefalutSpeed = speed
                 self.noLaunchHuoqiu!.isControl = false
                 self.huoqiuArray.addObject(self.noLaunchHuoqiu!)
                 self.noLaunchHuoqiu = nil
@@ -153,6 +154,21 @@ class FireSystem: SkillSystem,AttackProtocal, NoSaveSkillProtocal {
                     }
                 }
                 
+                if nodeB.categoryBitMask == BitMaskType.ftJianTower {
+                    let tower = nodeB.node?.userData?.objectForKey("towerclass") as! JianTower
+                    if tower.entityName == "fightPlayer" {
+                        fire.isRemove = true
+                        self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: tower.buildSprite.position)
+                    }
+                }
+                
+                if nodeB.categoryBitMask == BitMaskType.ftSlow {
+                    let slow = nodeB.node?.userData?.objectForKey("towerclass") as! SlowTower
+                    if slow.entityName == "fightPlayer" {
+                        fire.isRemove = true
+                        self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: slow.buildSprite.position)
+                    }
+                }
             }else if nodeB.categoryBitMask == BitMaskType.fire {
                 let fire = nodeB.node as! Fire
                 
@@ -173,7 +189,22 @@ class FireSystem: SkillSystem,AttackProtocal, NoSaveSkillProtocal {
                         }
                     }
                 }
+                
+                if nodeA.categoryBitMask == BitMaskType.ftJianTower {
+                    let tower = nodeA.node?.userData?.objectForKey("towerclass") as! JianTower
+                    if tower.entityName == "fightPlayer" {
+                        fire.isRemove = true
+                        self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: tower.buildSprite.position)
+                    }
+                }
 
+                if nodeA.categoryBitMask == BitMaskType.ftSlow {
+                    let slow = nodeA.node?.userData?.objectForKey("towerclass") as! SlowTower
+                    if slow.entityName == "fightPlayer" {
+                        fire.isRemove = true
+                        self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: slow.buildSprite.position)
+                    }
+                }
             }
         }else if self.entityName == "fightEnemy" {
             if nodeA.categoryBitMask == BitMaskType.fire {
@@ -192,6 +223,21 @@ class FireSystem: SkillSystem,AttackProtocal, NoSaveSkillProtocal {
                             fire.isRemove = true
                             self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: wall.buildSprite.position)
                         }
+                    }
+                }
+                if nodeB.categoryBitMask == BitMaskType.ftJianTower {
+                    let tower = nodeB.node?.userData?.objectForKey("towerclass") as! JianTower
+                    if tower.entityName == "fightPlayer" {
+                        fire.isRemove = true
+                        self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: tower.buildSprite.position)
+                    }
+                }
+                
+                if nodeB.categoryBitMask == BitMaskType.ftSlow {
+                    let slow = nodeB.node?.userData?.objectForKey("towerclass") as! SlowTower
+                    if slow.entityName == "fightPlayer" {
+                        fire.isRemove = true
+                        self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: slow.buildSprite.position)
                     }
                 }
             }else if nodeB.categoryBitMask == BitMaskType.fire {
@@ -214,6 +260,21 @@ class FireSystem: SkillSystem,AttackProtocal, NoSaveSkillProtocal {
                     }
                 }
                 
+                if nodeA.categoryBitMask == BitMaskType.ftJianTower {
+                    let tower = nodeA.node?.userData?.objectForKey("towerclass") as! JianTower
+                    if tower.entityName == "fightPlayer" {
+                        fire.isRemove = true
+                        self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: tower.buildSprite.position)
+                    }
+                }
+                
+                if nodeA.categoryBitMask == BitMaskType.ftSlow {
+                    let slow = nodeA.node?.userData?.objectForKey("towerclass") as! SlowTower
+                    if slow.entityName == "fightPlayer" {
+                        fire.isRemove = true
+                        self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: slow.buildSprite.position)
+                    }
+                }
             }
         }
 

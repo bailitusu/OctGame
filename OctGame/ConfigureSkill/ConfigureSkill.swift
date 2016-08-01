@@ -229,11 +229,17 @@ class ConfigureSkill {
             
             self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
             break
-        default:
-            self.scene.fightPlayer.createSkillSprite(CatapultSystem.self)
+        case BallCategory.jianzhu.rawValue+BallCategory.jianzhu.rawValue+BallCategory.fuzhu.rawValue:
+            self.scene.fightPlayer.createSkillSprite(SlowTowerSystem.self)
             var dict = [String: AnyObject]()
-            dict.updateValue(SkillName.catapult.rawValue, forKey: "initSkill")
+            dict.updateValue(SkillName.slow.rawValue, forKey: "initSkill")
             
+            self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
+            break
+        default:
+            self.scene.fightPlayer.createSkillSprite(SlowTowerSystem.self)
+            var dict = [String: AnyObject]()
+            dict.updateValue(SkillName.slow.rawValue, forKey: "initSkill")
             self.scene.sock.send(BTCommand.CCreateSpell, withParams: self.scene.fightPlayer.toInitSkill(dict))
 
             print("configskill  error")

@@ -29,14 +29,7 @@ class JianTowerSystem: SkillSystem {
         let towerBitMask = BitMaskType.fire | BitMaskType.boom | BitMaskType.bullet
         let tower = JianTower(entityName: self.entityName, collsionBitMask: towerBitMask, buildID: self.towerID)
         let player = (self.entity as! FightPlayer)
-//        if player.roleName == "fightEnemy" {
-//            //    boom.alpha = 0
-//            tower.buildSprite.position = CGPoint(x:player.fightMap.mapArray.objectAtIndex(0).position.x, y:player.fightMap.mapArray.objectAtIndex(0).position.y - fightMapCellSize.height)
-//            
-//        }else {
-//            tower.buildSprite.position = CGPoint(x:player.fightMap.mapArray.objectAtIndex(0).position.x, y:player.fightMap.mapArray.objectAtIndex(0).position.y + fightMapCellSize.height)
-//            
-//        }
+
         if player.roleName == "fightPlayer" {
              (self.entity as! FightPlayer).scene?.saveSkill.saveSkillArray.append(tower)
             player.scene!.saveSkill.showCurrentSaveSkill()
@@ -146,6 +139,7 @@ class JianTowerSystem: SkillSystem {
             }
             scene.addChild(zidan)
             zidan.physicsBody?.velocity = SkillSystem.reckonSkillSpeed(self.getCloseMubiao(zidan), skillSpeed: FightSkillSpeed.bullet)
+            zidan.defaulVelocity = zidan.physicsBody?.velocity
           //  tempPlayer.mapArray.objectAtIndex(tempPlayer.getCurrentPointMapCell(<#T##currentPoint: CGPoint##CGPoint#>))
         }
         tower.buildSprite.runAction(SKAction.repeatActionForever(SKAction.sequence([wait,block])),withKey: "zidan")

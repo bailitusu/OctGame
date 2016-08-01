@@ -141,6 +141,10 @@ class CommonFunc: NSObject {
         return false
     }
     
+    static func fightPointDistance(pointA: CGPoint, pointB: CGPoint) -> UInt32 {
+        let distance = (pointA.x-pointB.x)*(pointA.x-pointB.x)+(pointA.y-pointB.y)*(pointA.y-pointB.y)
+        return UInt32(distance)
+    }
 }
 
 

@@ -18,7 +18,7 @@ class Fire: SKSpriteNode {
     var fireID:String!
     var collideCount: UInt32!
     var isRemove: Bool!
-    
+    var fireDefalutSpeed: CGVector?
     var dircspeed: CGVector! {
 //        if self.player.roleName == "fightplayer" {
 //            
@@ -47,7 +47,8 @@ class Fire: SKSpriteNode {
         self.physicsBody?.contactTestBitMask = collsionBitMask
         self.physicsBody?.linearDamping = 0
         self.physicsBody?.usesPreciseCollisionDetection = true
-
+        self.name = "fire"
+       // self.userData = NSMutableDictionary()
         self.zPosition = SpriteLevel.sprite.rawValue+1
         self.fireID = fireID
         self.isControl = true

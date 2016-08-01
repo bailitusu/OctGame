@@ -322,8 +322,23 @@ class BoomSystem: SkillSystem, AttackProtocal,NoSaveSkillProtocal {
             let nc = NSNotificationCenter.defaultCenter()
             nc.addObserver(self, selector: #selector(boomContactWall), name: "wallSetRight", object: (self.entity as! FightPlayer).enemy)
             nc.addObserver(self, selector: #selector(boomContactJianTower), name: "jiantaSetRight", object: (self.entity as! FightPlayer).enemy)
+            nc.addObserver(self, selector: #selector(boomContactSlow), name: "slowSetRight", object: (self.entity as! FightPlayer).enemy)
         }
     }
+    
+    @objc func boomContactSlow(note: NSNotification) {
+        if let tower = note.userInfo?["playerSelfslow"] as? SlowTower {
+            for tempBoom in self.boomArray {
+                if (tempBoom as! Boom).isControl == false {
+                    if CommonFunc.fightIsEqualPoint((tempBoom as! Boom).position, pointB: tower.buildSprite.position) == true {
+                        (tempBoom as! Boom).isRemove = true
+                        self.reckonHarmArea((self.entity as! FightPlayer).enemy, originalConterPoint: tower.buildSprite.position)
+                    }
+                }
+            }
+        }
+    }
+    
     @objc func boomContactWall(note: NSNotification) {
         if let wall = note.userInfo?["playerSelfWall"] as? Wall {
             for tempBoom in self.boomArray {

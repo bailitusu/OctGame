@@ -18,6 +18,7 @@ enum SkillName: String {
     case fog = "fog"
     case luolei = "luolei"
     case catapult = "catapult"
+    case slow = "slow"
 }
 class FightPlayer: Entity, FTCellStandAbleDelegate {
   //  var delegate: OnlineGameConvertable?
@@ -102,6 +103,7 @@ class FightPlayer: Entity, FTCellStandAbleDelegate {
         self.initSkillSystemArray(LightningSystem())
         self.initSkillSystemArray(CatapultSystem())
         self.skillSystemForClass(CatapultSystem.self)?.addHarmArea(HengPaiHarm())
+        self.initSkillSystemArray(SlowTowerSystem())
        // self.yidong = false
     }
 
