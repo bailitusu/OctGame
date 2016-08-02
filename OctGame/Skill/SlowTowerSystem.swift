@@ -134,11 +134,17 @@ class SlowTowerSystem: SkillSystem {
                 removeArray.addObject(temp)
                 let tempMap = (self.entity as! FightPlayer).fightMap
                 (tempMap.mapArray.objectAtIndex(tempMap.getCurrentPointMapCell((temp as! SlowTower).buildSprite.position)!) as! FTMapCell).obj = nil
+                if (temp as! SlowTower).buildID == self.currentSlowTower.buildID {
+                    self.currentSlowTower = nil
+                }
                 
             }
             
             if (temp as! SlowTower).isControl == true {
                 if (temp as! SlowTower).isRemove == true {
+                    if (temp as! SlowTower).buildID == self.currentSlowTower.buildID {
+                        self.currentSlowTower = nil
+                    }
                     (temp as! SlowTower).buildSprite.removeFromParent()
                     removeArray.addObject(temp)
                 }

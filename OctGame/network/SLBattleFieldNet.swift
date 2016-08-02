@@ -28,6 +28,8 @@ public class SLBattleFieldNet: WebSocketDelegate {
     
     let socket: WebSocket
     
+    var heartBeatTimer: NSTimer?
+    
     weak var delegate: SLBattleFieldNetDelegate?
     
     init() {
@@ -40,6 +42,7 @@ public class SLBattleFieldNet: WebSocketDelegate {
     
     deinit {
         self.socket.disconnect()
+        self.heartBeatTimer?.invalidate()
         print("---------------web socket deinit")
     }
     
@@ -55,6 +58,7 @@ public class SLBattleFieldNet: WebSocketDelegate {
     
     public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         self.delegate?.websocketDidDisconnected(self, error: error)
+        self.heartBeatTimer?.invalidate()
     }
     
     

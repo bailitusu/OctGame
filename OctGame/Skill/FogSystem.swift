@@ -67,8 +67,8 @@ class FogSystem: SkillSystem {
         
         if self.currentFog != nil {
             //if self.noLaunchBoom!.isControl == true {
-            let rect = CGRect(origin: CGPoint(x: self.currentFog!.position.x-SkillSize.fog.width, y: self.currentFog!.position.y-SkillSize.fog.height), size: CGSize(width: self.currentFog!.frame.width*2, height: self.currentFog!.frame.height*2))
-            if CGRectContainsPoint(rect, touchLocation!) {
+//            let rect = CGRect(origin: CGPoint(x: self.currentFog!.position.x-SkillSize.fog.width, y: self.currentFog!.position.y-SkillSize.fog.height), size: CGSize(width: self.currentFog!.frame.width*2, height: self.currentFog!.frame.height*2))
+            if CGRectContainsPoint(self.currentFog.frame, touchLocation!) {
                 self.touchPointArray.addObject(NSValue.init(CGPoint: touchLocation!))
                 self.currentFog.size = CGSize(width: fightMapCellSize.height*1.5, height: fightMapCellSize.height*1.5)
             }

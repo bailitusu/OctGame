@@ -720,10 +720,10 @@
 				18685DBD1D0AD0DE00BCAE10 /* MainScene.swift */,
 				187E306F1D192CA6008AB0A5 /* SecondGame.swift */,
 				183003DE1D223B8900F66865 /* TextScene.swift */,
-				1871DAB41D263C8F002B6479 /* FightScene.swift */,
-				186066A71D2A7010004163D3 /* FightSceneWSDelegate.swift */,
 				182301F51D3CB1FB00355935 /* FTMatchScene.swift */,
 				18B1CB821D3F3FEE0065088C /* FTSynchronizingScene.swift */,
+				1871DAB41D263C8F002B6479 /* FightScene.swift */,
+				186066A71D2A7010004163D3 /* FightSceneWSDelegate.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";

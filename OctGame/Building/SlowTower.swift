@@ -56,7 +56,6 @@ class SlowTower: Building, FTCellStandAbleDelegate, SaveSkillProtocal{
 
     func removeTower() -> Bool {
         if self.HP <= 0 {
-            self.buildSprite.removeActionForKey("zidan")
             self.buildSprite.removeFromParent()
             
             return true

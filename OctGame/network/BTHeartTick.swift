@@ -31,6 +31,15 @@ extension SLBattleFieldNet {
 //            
 //        }
         
+        self.heartBeatTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(sendPing), userInfo: nil, repeats: true)
+        
+        
+    }
+    
+    
+   @objc func sendPing() {
+        print("send ping")
+        self.socket.writePing(UserID.dataUsingEncoding(NSUTF8StringEncoding)!)
     }
     
 }

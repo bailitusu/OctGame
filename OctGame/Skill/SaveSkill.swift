@@ -17,17 +17,28 @@ class SaveSkill {
         self.player = player
     }
     func showCurrentSaveSkill() {
+//        if saveSkillArray.count > 5 {
+//            saveSkillArray.first?.removeItem()
+//            saveSkillArray.removeFirst()
+//            for var i = saveSkillArray.count-1; i >= 0; i -= 1 {
+//                saveSkillArray[i].skillPosition = (player.playerStateUI.skillUIArray.objectAtIndex(player.playerStateUI.skillUIArray.count-1-i) as! FTMapCell).position
+//            }
+//        }else {
+//            for i in 0 ..< saveSkillArray.count {
+//                saveSkillArray[i].skillPosition = (player.playerStateUI.skillUIArray.objectAtIndex(i) as! FTMapCell).position
+//            }
+//        }
         if saveSkillArray.count > 5 {
-            saveSkillArray.first?.removeItem()
-            saveSkillArray.removeFirst()
-            for var i = saveSkillArray.count-1; i >= 0; i -= 1 {
-                saveSkillArray[i].skillPosition = (player.playerStateUI.skillUIArray.objectAtIndex(player.playerStateUI.skillUIArray.count-1-i) as! FTMapCell).position
-            }
-        }else {
-            for i in 0 ..< saveSkillArray.count {
-                saveSkillArray[i].skillPosition = (player.playerStateUI.skillUIArray.objectAtIndex(i) as! FTMapCell).position
-            }
+//                        saveSkillArray[4].removeItem()
+//                        saveSkillArray.removeAtIndex(4)
+                        saveSkillArray.first?.removeItem()
+                        saveSkillArray.removeFirst()
         }
+
+        for i in 0 ..< saveSkillArray.count {
+            saveSkillArray[i].skillPosition = (player.playerStateUI.skillUIArray.objectAtIndex(i) as! FTMapCell).position
+        }
+        
         self.previousCount = saveSkillArray.count
     }
 }

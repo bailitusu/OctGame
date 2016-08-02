@@ -22,13 +22,13 @@ class Bullte: SKSpriteNode {
         self.physicsBody?.mass = 1
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.categoryBitMask = BitMaskType.bullet
-        self.physicsBody?.collisionBitMask = BitMaskType.ftWall | BitMaskType.ftJianTower | BitMaskType.fightEnemy | BitMaskType.fightSelf | BitMaskType.ftSlow
-        self.physicsBody?.contactTestBitMask = BitMaskType.ftWall | BitMaskType.ftJianTower | BitMaskType.fightEnemy | BitMaskType.fightSelf | BitMaskType.ftSlow
+        self.physicsBody?.collisionBitMask = BitMaskType.fightEnemy | BitMaskType.fightSelf
+        self.physicsBody?.contactTestBitMask = BitMaskType.fightEnemy | BitMaskType.fightSelf
         self.physicsBody?.usesPreciseCollisionDetection = true
         self.zPosition = SpriteLevel.bullte.rawValue
         self.name = "zidan"
         // zidan.physicsBody?.dynamic = true
-        
+      //  BitMaskType.ftSlow | BitMaskType.ftWall | BitMaskType.ftJianTower |
     }
     
     required init?(coder aDecoder: NSCoder) {

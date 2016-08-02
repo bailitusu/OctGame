@@ -27,7 +27,7 @@ class WallSystem: SkillSystem {
     
     override func initSkill() {
         self.wallID = self.wallID+1
-        let wallBitMask = BitMaskType.fire | BitMaskType.boom 
+        let wallBitMask = BitMaskType.fire | BitMaskType.boom | BitMaskType.bullet
         let wall = Wall(entityName: self.entityName, collsionBitMask: wallBitMask, wallID: self.wallID)
         
         let player = (self.entity as! FightPlayer)

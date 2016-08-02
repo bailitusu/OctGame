@@ -102,6 +102,10 @@ extension FTSynchronizingScene: SLBattleFieldNetDelegate {
             nextScene.sock = self.sock
             let transtion = SKTransition.crossFadeWithDuration(2.0)
             self.view?.presentScene(nextScene, transition: transtion)
+            break
+     //   case .SPlayerDisconnected:
+            
+            
             
         default:
             print("stare fighting error")

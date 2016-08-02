@@ -168,11 +168,16 @@ class JianTowerSystem: SkillSystem {
                 removeArray.addObject(temp)
                 let tempMap = (self.entity as! FightPlayer).fightMap
                 (tempMap.mapArray.objectAtIndex(tempMap.getCurrentPointMapCell((temp as! JianTower).buildSprite.position)!) as! FTMapCell).obj = nil
-                
+                if (temp as! JianTower).buildID == self.currentJianTower.buildID {
+                    self.currentJianTower = nil
+                }
             }
             
             if (temp as! JianTower).isControl == true {
                 if (temp as! JianTower).isRemove == true {
+                    if (temp as! JianTower).buildID == self.currentJianTower.buildID {
+                        self.currentJianTower = nil
+                    }
                     (temp as! JianTower).buildSprite.removeFromParent()
                     removeArray.addObject(temp)
                 }
@@ -188,20 +193,20 @@ class JianTowerSystem: SkillSystem {
         let nodeA = contact.bodyA
         let nodeB = contact.bodyB
         if self.entityName == "fightPlayer" {
-            var bullet: SKSpriteNode?
+            var bullet: Bullte?
             var other: SKSpriteNode?
         
             if nodeA.categoryBitMask == BitMaskType.bullet {
-                bullet = nodeA.node as? SKSpriteNode
+                bullet = nodeA.node as? Bullte
                 other = nodeB.node as? SKSpriteNode
             } else if nodeB.categoryBitMask == BitMaskType.bullet {
-                bullet = nodeB.node as? SKSpriteNode
+                bullet = nodeB.node as? Bullte
                 other = nodeA.node as? SKSpriteNode
             }
         
             var isContact = false
             
-            if bullet?.name == "fightPlayer" {
+            if bullet?.entityName == "fightPlayer" {
                 
                 if let tower = other?.userData?.objectForKey("towerclass") as? JianTower {
   
@@ -218,6 +223,11 @@ class JianTowerSystem: SkillSystem {
                 } else if other?.physicsBody!.categoryBitMask == BitMaskType.fightEnemy {
 
                     isContact = true
+                } else if let slow = other?.userData?.objectForKey("towerclass") as? SlowTower {
+                    if slow.entityName == "fightEnemy" {
+                        
+                        isContact = true
+                    }
                 }
                 if isContact {
                     if other != nil {
@@ -228,20 +238,20 @@ class JianTowerSystem: SkillSystem {
   
             }
         }else if self.entityName == "fightEnemy" {
-                var bullet: SKSpriteNode?
+                var bullet: Bullte?
                 var other: SKSpriteNode?
                 
                 if nodeA.categoryBitMask == BitMaskType.bullet {
-                    bullet = nodeA.node as? SKSpriteNode
+                    bullet = nodeA.node as? Bullte
                     other = nodeB.node as? SKSpriteNode
                 } else if nodeB.categoryBitMask == BitMaskType.bullet {
-                    bullet = nodeB.node as? SKSpriteNode
+                    bullet = nodeB.node as? Bullte
                     other = nodeA.node as? SKSpriteNode
                 }
                 
                 var isContact = false
                 
-                if bullet?.name == "fightEnemy" {
+                if bullet?.entityName == "fightEnemy" {
                     
                     if let tower = other?.userData?.objectForKey("towerclass") as? JianTower {
                         
@@ -258,6 +268,11 @@ class JianTowerSystem: SkillSystem {
                     } else if other?.physicsBody!.categoryBitMask == BitMaskType.fightSelf {
                         
                         isContact = true
+                    } else if let slow = other?.userData?.objectForKey("towerclass") as? SlowTower {
+                        if slow.entityName == "fightPlayer" {
+                            
+                            isContact = true
+                        }
                     }
                     if isContact {
                         if other != nil {

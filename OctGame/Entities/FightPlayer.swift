@@ -321,6 +321,8 @@ extension FightPlayer: OnlineGameObjectType {
             self.createSkillSprite(LightningSystem.self)
         }else if json["initSkill"].stringValue == SkillName.catapult.rawValue {
             self.createSkillSprite(CatapultSystem.self)
+        }else if json["initSkill"].stringValue == SkillName.slow.rawValue {
+            self.createSkillSprite(SlowTowerSystem.self)
         }
         
         
@@ -421,8 +423,23 @@ extension FightPlayer: OnlineGameObjectType {
             self.scene?.addChild((self.skillSystemForClass(CatapultSystem.self)?.noLaunchCatapult)!)
             (self.skillSystemForClass(CatapultSystem.self)?.noLaunchCatapult)?.tagartPoint = SkillSystem.reversalPoint(percentX, percentY: percentY)
             self.skillSystemForClass(CatapultSystem.self)?.sendTouShiChe()
+        }else if json["initSkill"].stringValue == SkillName.slow.rawValue {
+            self.scene?.addChild((self.skillSystemForClass(SlowTowerSystem.self)?.currentSlowTower.buildSprite)!)
+            
+            self.skillSystemForClass(SlowTowerSystem.self)?.currentSlowTower.buildSprite.position = SkillSystem.reversalPoint(percentX, percentY: percentY)
+            
+            
+            let towerMapCellNum = self.fightMap.getCurrentPointMapCell((self.skillSystemForClass(SlowTowerSystem.self)?.currentSlowTower.buildSprite.position)!)
+            (self.fightMap.mapArray.objectAtIndex(towerMapCellNum!) as! FTMapCell).obj = self.skillSystemForClass(SlowTowerSystem.self)?.currentSlowTower
+            self.skillSystemForClass(SlowTowerSystem.self)?.currentSlowTower.isControl = false
+
+            for temp in (self.skillSystemForClass(SlowTowerSystem.self)?.towerArray)! {
+                if (temp as! SlowTower).isControl == true {
+                    self.skillSystemForClass(SlowTowerSystem.self)?.currentSlowTower = temp as! SlowTower
+                }
+
+            }
         }
-  
     }
 //    func moveToCell(index: Int) {
 //        
